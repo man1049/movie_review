@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="resources/css/main/main.css">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src='resources/js/main/mousewheel.min.js'></script>
+    <script src='resources/js/main/dragScroll.min.js'></script>
+    <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l31splb5gq"></script>
+</head>
+<body>
+<!-- 네이게이션 시작 -->
+<div class="nav-button-o">
+    <!-- 네비게이션 버튼 시작 -->
+    <div>
+        <img class="nav-button-open"
+             src="resources/images/navigationbar/navopenbutton.png">
+    </div>
+</div>
+<div class="nav-button-c">
+    <div>
+        <img class="nav-button-close"
+             src="resources/images/navigationbar/navclosebutton.png">
+    </div>
+</div>
+<!-- 네비게이션 버튼 끝 -->
+<!-- 네비게이션 시작 -->
+<nav class="nav">
+    <ul class="nav-menus">
+        <li class="nav-menus-menu">메뉴</li>
+        <li class="nav-menus-menu">메뉴</li>
+        <li class="nav-menus-menu">메뉴</li>
+        <li class="nav-menus-menu">메뉴</li>
+    </ul>
+</nav>
+<!-- 네비게이션 끝 -->
+<!-- 메인화면 시작 -->
+<main class="main">
+    <!-- 왼쪽화면 시작 -->
+    <div class="main-leftcontainer">
+        <div class="main-leftcontainer-title">
+            <span>오늘의 추천 점심</span>
+        </div>
+        <div class="main-leftcontaioner-ressearch">
+            <form method="get">
+                <input type="text" placeholder="음식점 검색">
+                <input type="submit" value="찾기" />
+            </form>
+        </div>
+        <div class="main-leftcontainer-reslist">
+            <!--
+            <c:forEach var="res_list" begin="" end="" items="받아올 음식점 목록 데이터">
+                <div class="rescontent">
+                    <img src="음식점 사진 1번" />
+                    <img src="음식 사진 1번" />
+                    <div class="rescontent-title">
+                        <span>음식점 이름</span>
+                        <span>대표음식</span>
+                </div>
+                    <div class="rescontent-info">
+                        <span>평점 : 평점</span>
+                        <span>댓글수 : 댓글수</span>
+                        <span>거리 : 거리계산</span>
+                    </div>
+                </div>
+            </c:forEach>
+            -->
+
+            <!--
+            <c:forEach begin="1" end="50">
+                <div class="rescontent">
+                    <img src="resources/images/mainimage/res/1_1.jpg" />
+                    <img src="resources/images/mainimage/foods/1_1_1.jpg" />
+                    <div class="rescontent-title">
+                        <span>도스타코스</span>
+                        <span>닭고기타코</span>
+                    </div>
+                    <div class="rescontent-info">
+                        <span>평점 : 4.3</span>
+                        <span>댓글수 : 5만</span>
+                        <span>거리 : 4500km</span>
+                    </div>
+                </div>
+            </c:forEach>
+            -->
+
+        </div>
+    </div>
+    <!-- 왼쪽화면 끝 -->
+    <!-- 지도 시작 -->
+    <div class="main-right" id="mainboard_map">
+        <!-- 팝업 시작 -->
+        <div class="res-popup">
+            <div class="res-popup-inner-container">
+                <div class="res-popup-inner-container-photos">
+                    <!--
+                    <c:forEach begin="1" end="10">
+                        <img src="resources/images/mainimage/res/1_1.jpg">
+                        <img src="resources/images/mainimage/res/1_2.jpg">
+                        <img src="resources/images/mainimage/res/1_3.jpg">
+                    </c:forEach>
+                </div>
+                <div class="res-popup-inner-container-resmenu">
+                    <div class="res-popup-inner-container-resmenu-content">
+                        <div>
+                            <c:forEach begin="1" end="50">
+                                <div>
+                                    <div>
+                                        <img src="resources/images/mainimage/foods/1_1_1.jpg">
+                                        <div>
+                                            <span>9900원</span>
+                                            <span>맛있는타코</span>
+                                            <span>채소류</span>
+                                            <span>기타등등</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <img src="resources/images/mainimage/foods/1_2_1.jpg">
+                                        <div>
+                                            <span>11000원</span>
+                                            <span>멋진타코</span>
+                                            <span>고기류</span>
+                                            <span>기타등등</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <img src="resources/images/mainimage/foods/1_3_1.jpg">
+                                        <div>
+                                            <span>10900원</span>
+                                            <span>타코볼</span>
+                                            <span>고기류</span>
+                                            <span>이것저것</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            -->
+                        </div>
+                    </div>
+                    <div class="res-popup-inner-container-resmenu-buttons">
+                        <div>
+                            <span>식사완료</span>
+                        </div>
+                        <div>
+                            <span>길찾기</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="res-popup-inner-container-resinfo">
+                    <div>
+                        <!-- 안에 뭘 넣어야 할지 잘 모르겠습니다. -->
+                    </div>
+                </div>
+                <div class="res-popup-inner-container-reply">
+                    <div class="inputcontainer">
+                        <form method="get">
+                            <input type="text" placeholder="내용을 입력해주세요." name="">
+                            <input type="submit" value="작성">
+                        </form>
+                    </div>
+
+                    <div class="userreplys">
+                        <!--
+                        <c:forEach begin="1" end="50">
+                            <div>
+
+                            </div>
+                        </c:forEach>
+                        -->
+                    </div>
+                    <div class="res-popup-close">
+                        <div class="res-popup-close-inner">
+                            <span>창닫기</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 팝업 끝 -->
+    </div>
+    <!-- 지도 끝 -->
+</main>
+<!-- 메인화면 끝 -->
+</body>
+<script src="resources/js/main/mainmap.js"></script>
+<script src="resources/js/main/mainnav.js"></script>
+<script type="text/javascript">
+
+    /* 드래그스크롤 입니다. */
+    var $container = $(".res-popup-inner-container-photos");
+    var $scroller = $(".res-popup-inner-container-photos");
+    bindDragScroll($container, $scroller);
+
+    var $container = $(".main-leftcontainer");
+    var $scroller = $(".main-leftcontainer");
+    bindDragScroll($container, $scroller);
+
+    var $container = $(".res-popup-inner-container-resmenu-content > div");
+    var $scroller = $(".res-popup-inner-container-resmenu-content > div");
+    bindDragScroll($container, $scroller);
+
+    var $container = $(".userreplys");
+    var $scroller = $(".userreplys");
+    bindDragScroll($container, $scroller);
+
+    /* 드래그 스크롤을 주었을 때 input창이 클릭이 안되어서 추가했습니다. */
+    $('.main-leftcontaioner-ressearch > form > input[type="text"]').click(function() {
+        this.focus();
+    })
+
+    /* 좌우 스크롤입니다*/
+    $(function() {
+        $(".res-popup-inner-container-photos").mousewheel(function(event, delta) {
+            this.scrollLeft -= (delta * 100);
+            event.preventDefault();
+        });
+    });
+
+    $(function() {
+        $(".res-popup-inner-container-resmenu-content > div").mousewheel(function(event, delta) {
+            this.scrollLeft -= (delta * 100);
+            event.preventDefault();
+        });
+    });
+
+    /* 그림 클릭시 팝업입니다. */
+    $('.rescontent > img').click(function() {
+        $('.res-popup').css('display', 'flex');
+    });
+
+    /* 팝업의 창닫기 클릭시 팝업을 닫습니다. */
+    $('.res-popup-close-inner > span').click(function() {
+        $('.res-popup').css('display', 'none');
+    })
+
+</script>
+</html>

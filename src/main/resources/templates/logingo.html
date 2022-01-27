@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="resources/css/login/login.css">
+    <title>점심은? 도전 점심!</title>
+    <title>Title</title>
+</head>
+
+<body>
+<video muted="muted" autoplay="autoplay" loop="loop" preload="auto" class="background-video">
+    <!-- 영상을 여러개 돌려서 로그인창에 올 때 마다 바뀌면 좋을 것 같아요 -->
+    <source src="resources/video/LoginVideo2.mp4" type="video/mp4">
+</video>
+<div class="video-screen"></div>
+<div class="login">
+    <div class="login-border">
+        <div class="login-border-contents">
+            <!-- <div class="login-border-contents-screen"></div> -->
+            <div class="login-border-contents-title">도전 점심</div><br/>
+            <!-- 로그인창에 올 때 마다 문구가 바뀌면 재밌을 것 같아요 -->
+            <div class="login-border-contents-subtitle">점심 시간을 아름답게!</div>
+            <form th:action="@{/login}" class="login-border-contents-form" method="post">
+                <input class="login-border-contents-input" type="email" placeholder="이메일" autofocus="autofocus" name="email"/><br/>
+                <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="password"/><br/>
+                <div class="login-border-contents-input-checkbox-container">
+                    <input type="submit" value="로그인"/>
+                    <label for="autologin" class="login-border-contents-input-label">
+                        <input class="login-border-contents-input-autologin" type="checkbox" id="autologin">
+                        <span>자동로그인</span>
+                    </label>
+                </div>
+            </form>
+            <div class="login-border-contents-links">
+                <span class="user-join">회원가입</span>
+                <span class="user-findid">아이디 찾기</span>
+                <span class="user-findpw">비밀번호 찾기</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="join">
+    <div class="join-border">
+        <div class="join-border-contents">
+            <div class="join-border-contents-title">회원 가입</div>
+            <div class="login-border-contents-subtitle">가입하고 맛집가자!</div>
+            <form th:action="@{/user/join}" class="join-border-contents-form" method="post">
+                <input class="join-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus" id="join_user_email"><br/>
+                <div class="input-warning-email"></div><br/>
+                <input class="join-border-contents-input" type="password" name="user_password1" placeholder="비밀번호" id="join_user_password1"/><br/>
+                <div class="input-warning-userpassword1"></div><br/>
+                <input class="join-border-contents-input" type="password" name="user_password2" placeholder="비밀번호 체크" id="join_user_password2"/><br/>
+                <div class="input-warning-userpassword2"></div><br/>
+                <input class="join-border-contents-input" type="text" name="user_nickname" placeholder="닉네임" id="user_nickname"/><br/>
+                <div class="input-warning-nickname"></div><br/>
+                <div class="join-border-contents-input-radio-container">
+                    <input class="join-border-contents-input-year" type="text" name="user_year" placeholder="생년" id="user_year"/>
+                    <select name="user_month" class="join-border-contents-input-month" id="user_month">
+                        <option>월</option>
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                        <option value="05">5</option>
+                        <option value="06">6</option>
+                        <option value="07">7</option>
+                        <option value="08">8</option>
+                        <option value="09">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <!--
+                    <input class="join-border-contents-input-month" type="text" name="user_month" placeholder="월"/>
+                    -->
+                    <input class="join-border-contents-input-day" type="text" name="user_day" placeholder="일" id="user_day"/>
+
+                    <label for="gender_man" class="join-border-contents-input-gender">
+                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_man" name="user_gender" value="false"/>
+                        <span class="gender-man-span">남자</span>
+                    </label>
+                    <label for="gender_woman" class="join-border-contents-input-gender">
+                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_woman" name="user_gender" value="true"/>
+                        <span class="gender-woman-span">여자</span>
+                    </label>
+                </div><br/>
+                <input class="join-border-contents-input-question" type="text" name="user_question" placeholder="질문" id="user_question"/>
+                <input class="join-border-contents-input-answer" type="text" name="user_answer" placeholder="답변" id="user_answer"/>
+                <input type="submit" value="가입하기"/>
+            </form>
+            <div class="join-border-contents-links">
+                <span class="join-close">생각이 바꼈어요!</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="findid">
+    <div class="findid-border">
+        <div class="findid-border-contents">
+            <div class="findid-border-contents-title">아이디 찾기</div>
+            <div class="login-border-contents-subtitle">내가 가입을 했었나?</div>
+            <form action="/user/findid" class="findid-border-contents-form">
+                <input class="findid-border-contents-input" type="text" placeholder="질문" name="user_question" autofocus="autofocus"/><br/>
+                <input class="findid-border-contents-input" type="text" placeholder="답변" name="user_answer" /><br/>
+                <input type="submit" value="찾기"/>
+            </form>
+            <div class="join-border-contents-links">
+                <span class="findid-close">갑자기 생각났어요!</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="findpw">
+    <div class="findpw-border">
+        <div class="findpw-border-contents">
+            <div class="findpw-border-contents-title">비밀번호 찾기</div>
+            <div class="login-border-contents-subtitle">아.. 뭐였지?</div>
+            <form action="/user/findpw" class="findpw-border-contents-form">
+                <input class="findpw-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus"/><br/>
+                <input class="findid-border-contents-input" type="text" placeholder="질문" name="user_question"/><br/>
+                <input class="findid-border-contents-input" type="text" placeholder="답변" name="user_answer" /><br/>
+                <input type="submit" value="찾기"/>
+            </form>
+            <div class="join-border-contents-links">
+                <span class="findpw-close">갑자기 생각났어요!</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="resources/js/login/login.js"></script>
+</html>
