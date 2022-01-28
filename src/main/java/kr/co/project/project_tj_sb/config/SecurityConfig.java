@@ -1,17 +1,24 @@
 package kr.co.project.project_tj_sb.config;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 
 @Configuration
 @Log4j2
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final LoginFilureHandler loginFilureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -21,16 +28,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/font/**","/images/**","/video/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity httpSecurity)throws Exception{
         httpSecurity
-                .authorizeRequests().antMatchers("/logingo").permitAll()
+                .authorizeRequests().antMatchers("/logingo").anonymous()
                 .antMatchers("/main").hasRole("USER")
                 .and()
-                .formLogin().loginPage("/logingo").loginProcessingUrl("/login")
-                .and()
-                .formLogin().usernameParameter("email").defaultSuccessUrl("/main")
+                .formLogin().loginPage("/logingo").permitAll().loginProcessingUrl("/login")
+                .usernameParameter("email").defaultSuccessUrl("/main").passwordParameter("password")
+                .failureHandler(loginFilureHandler)
                 .and()
                 .csrf().disable();
+
     }
 }
 

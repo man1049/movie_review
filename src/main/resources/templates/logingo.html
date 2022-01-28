@@ -22,8 +22,9 @@
             <!-- 로그인창에 올 때 마다 문구가 바뀌면 재밌을 것 같아요 -->
             <div class="login-border-contents-subtitle">점심 시간을 아름답게!</div>
             <form th:action="@{/login}" class="login-border-contents-form" method="post">
-                <input class="login-border-contents-input" type="email" placeholder="이메일" autofocus="autofocus" name="email"/><br/>
-                <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="password"/><br/>
+                <input class="login-border-contents-input" type="text" placeholder="이메일" autofocus="autofocus" name="email" id="login_user_email"/><br/>
+                <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="login_user_password"/><br/>
+                <div class="login-border-contents-warning" th:text="${exception}"></div>
                 <div class="login-border-contents-input-checkbox-container">
                     <input type="submit" value="로그인"/>
                     <label for="autologin" class="login-border-contents-input-label">
@@ -45,39 +46,33 @@
         <div class="join-border-contents">
             <div class="join-border-contents-title">회원 가입</div>
             <div class="login-border-contents-subtitle">가입하고 맛집가자!</div>
-            <form th:action="@{/user/join}" class="join-border-contents-form" method="post">
+            <form th:action="@{join}" class="join-border-contents-form" method="post">
                 <input class="join-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus" id="join_user_email"><br/>
                 <div class="input-warning-email"></div><br/>
                 <input class="join-border-contents-input" type="password" name="user_password1" placeholder="비밀번호" id="join_user_password1"/><br/>
                 <div class="input-warning-userpassword1"></div><br/>
                 <input class="join-border-contents-input" type="password" name="user_password2" placeholder="비밀번호 체크" id="join_user_password2"/><br/>
                 <div class="input-warning-userpassword2"></div><br/>
-                <input class="join-border-contents-input" type="text" name="user_nickname" placeholder="닉네임" id="user_nickname"/><br/>
+                <input class="join-border-contents-input" type="text" name="user_nickname" placeholder="닉네임" id="join_user_nickname"/><br/>
                 <div class="input-warning-nickname"></div><br/>
+                <div class="join-border-contents-input-rrn-container">
+                    <input class="join-border-contents-input-rrn" type="text" maxlength="6" name="user_yearmonthday" placeholder="주민번호 앞자리" id="join_user_yearmonthday"/>
+                    <input class="join-border-contents-input-rrn" type="text" maxlength="1" name="user_gender" placeholder="1" id="join_user_gender"/>
+                </div>
+                <br/>
+                <div class="input-warning-yandg">
+                    <div class="input-warning-yearmonthday"></div>
+                    <div class="input-warning-gender"></div>
+                </div>
+                <!--
                 <div class="join-border-contents-input-radio-container">
-                    <input class="join-border-contents-input-year" type="text" name="user_year" placeholder="생년" id="user_year"/>
-                    <select name="user_month" class="join-border-contents-input-month" id="user_month">
-                        <option>월</option>
-                        <option value="01">1</option>
-                        <option value="02">2</option>
-                        <option value="03">3</option>
-                        <option value="04">4</option>
-                        <option value="05">5</option>
-                        <option value="06">6</option>
-                        <option value="07">7</option>
-                        <option value="08">8</option>
-                        <option value="09">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <!--
-                    <input class="join-border-contents-input-month" type="text" name="user_month" placeholder="월"/>
-                    -->
-                    <input class="join-border-contents-input-day" type="text" name="user_day" placeholder="일" id="user_day"/>
+                    <input class="join-border-contents-input-year" type="text" maxlength="4" name="user_year" placeholder="생년" id="join_user_year"/>
+
+                    <input class="join-border-contents-input-month" type="text" maxlength="2" name="user_month" placeholder="월" id="join_user_month"/>
+                    <input class="join-border-contents-input-day" type="text" maxlength="2" name="user_day" placeholder="일" id="join_user_day"/>
 
                     <label for="gender_man" class="join-border-contents-input-gender">
-                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_man" name="user_gender" value="false"/>
+                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_man" name="user_gender" value="false" checked="checked"/>
                         <span class="gender-man-span">남자</span>
                     </label>
                     <label for="gender_woman" class="join-border-contents-input-gender">
@@ -85,12 +80,21 @@
                         <span class="gender-woman-span">여자</span>
                     </label>
                 </div><br/>
-                <input class="join-border-contents-input-question" type="text" name="user_question" placeholder="질문" id="user_question"/>
-                <input class="join-border-contents-input-answer" type="text" name="user_answer" placeholder="답변" id="user_answer"/>
-                <input type="submit" value="가입하기"/>
+                <div class="input-warning-yearmonthday"></div><br/>
+                -->
+                <div class="join-border-contents-input-qanda-container">
+                    <input class="join-border-contents-input-question" type="text" name="user_question" placeholder="질문" id="join_user_question"/>
+                    <input class="join-border-contents-input-answer" type="text" name="user_answer" placeholder="답변" id="join_user_answer"/>
+                </div><br/>
+                <div class="input-warning-qanda">
+                    <div class="input-warning-question"></div>
+                    <div class="input-warning-answer"></div>
+                </div>
+                <input type="submit" value="가입하기" id="join_submit_ready"/>
+                <input type="button" value="가입하기" id="join_submit_notready" onclick="join_submit_notready_alert();" />
             </form>
             <div class="join-border-contents-links">
-                <span class="join-close">생각이 바꼈어요!</span>
+                <span class="join-close" onclick="joinReturnToLogin()">생각이 바꼈어요!</span>
             </div>
         </div>
     </div>

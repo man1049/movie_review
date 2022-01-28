@@ -24,6 +24,11 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             log.info("아이디 : "+username);
         UsersRequired required = usersRequiredRepository.findByEmail(username);
+
+        if(required==null) {
+            throw new UsernameNotFoundException(username);
+        }
+
         log.info("=============");
         log.info(required);
 
@@ -42,4 +47,6 @@ public class UserDetailsService implements org.springframework.security.core.use
         usersAuthDTO.setUser_email_check(required.isUser_email_check());
         return usersAuthDTO;
     }
+
+
 }
