@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 
 @Configuration
@@ -35,12 +37,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity)throws Exception{
         httpSecurity
-                .authorizeRequests().antMatchers("/logingo").anonymous()
+                .authorizeRequests()
+                .antMatchers("/logingo").permitAll()
+                .antMatchers("/join/authentication").permitAll()
                 .antMatchers("/main").hasRole("USER")
                 .and()
                 .formLogin().loginPage("/logingo").permitAll().loginProcessingUrl("/login")
-                .usernameParameter("email").defaultSuccessUrl("/main").passwordParameter("password")
-                .failureHandler(loginFilureHandler)
+                .usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/main")
+                .failureHandler(loginFilureHandler) // 로그인 실패 시 진행될 Handler
+                //.successHandler() // 로그인 성공 시 진행될 Handler
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
                 .and()
                 .csrf().disable();
 

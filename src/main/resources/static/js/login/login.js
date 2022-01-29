@@ -2,6 +2,12 @@
 /*여기부터 페이지 이동버튼입니다*/
 window.addEventListener('load', function(e) {
 	$('.login').fadeIn(1000);
+	let auth = new URLSearchParams(location.search).get("authentication");
+	if(auth === "true"){
+		alert("이미 인증이 완료되었습니다.")
+	}else if(auth === "false"){
+		alert("인증이 완료되었습니다.")
+	}
 });
 
 $('.user-join').on('click',function(){
@@ -59,6 +65,10 @@ $('.join-close').on('click',function(){
 ////////////////////////////////////////////////////////////////////////////
 /*여기서부터 회원가입 페이지입니다*/
 let password
+let join_user_yearmonthday
+
+let nowDate = new Date()
+let nowYear = nowDate.getFullYear()
 
 let email_check = false
 let password1_check = false
@@ -214,8 +224,9 @@ function nicknameChecking() {
 	}
 }
 
+//주민번호 왼쪽
 function rrnLeftChecking() {
-	let join_user_yearmonthday = document.getElementById("join_user_yearmonthday").value
+	join_user_yearmonthday = document.getElementById("join_user_yearmonthday").value
 	let pattern = "^[0-9]*$"
 	if(join_user_yearmonthday === ""){
 		yearmonthday_check = false
@@ -235,9 +246,24 @@ function rrnLeftChecking() {
 			join_submit_button_return()
 		}else{
 			if(join_user_yearmonthday.match(pattern)){
-				yearmonthday_check = true
-				$('.input-warning-yearmonthday').html("")
-				join_submit_button()
+				let join_user_month = parseInt(join_user_yearmonthday.substr(2,2))
+				if(join_user_month > 0 && join_user_month < 13){
+					let join_user_day = parseInt(join_user_yearmonthday.substr(4,2))
+					if(join_user_day > 0 && join_user_day < 32){
+						yearmonthday_check = true
+						$('.input-warning-yearmonthday').html("")
+						join_submit_button()
+					}else{
+						yearmonthday_check = false
+						$('.input-warning-yearmonthday').html("올바르지 않은 주민번호입니다")
+						join_submit_button_return()
+					}
+				}else{
+					yearmonthday_check = false
+					$('.input-warning-yearmonthday').html("올바르지 않은 주민번호입니다")
+					join_submit_button_return()
+				}
+
 			}else{
 				yearmonthday_check = false
 				$('.input-warning-yearmonthday').html("숫자를 입력해주세요")
@@ -247,6 +273,7 @@ function rrnLeftChecking() {
 	}
 }
 
+//주민번호 오른쪽
 function rrnRightChecking() {
 	let join_user_gender = document.getElementById("join_user_gender").value
 	let pattern = "^[1-4]*$"
@@ -254,9 +281,25 @@ function rrnRightChecking() {
 		$('.input-warning-gender').html("주민번호 뒷자리 첫째자리를 입력해주세요")
 	}else{
 		if(join_user_gender.match(pattern)){
-			gender_check = true
-			$('.input-warning-gender').html("")
-			join_submit_button()
+			let join_user_year = parseInt(join_user_yearmonthday.substr(0,2))
+			join_user_gender = parseInt(join_user_gender)
+
+			if(((join_user_year+1900) > nowYear-100) && (join_user_gender === 1 || join_user_gender === 2))
+			{
+				gender_check = true
+				$('.input-warning-gender').html("")
+				join_submit_button()
+			}else{
+				if(((join_user_year+2000) < nowYear) && (join_user_gender === 3 || join_user_gender === 4)){
+					gender_check = true
+					$('.input-warning-gender').html("")
+					join_submit_button()
+				}else{
+					gender_check = false
+					$('.input-warning-gender').html("올바르지 않은 주민번호입니다")
+					join_submit_button_return()
+				}
+			}
 		}else{
 			gender_check = false
 			$('.input-warning-gender').html("1~4만 입력 가능합니다")

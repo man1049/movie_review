@@ -27,8 +27,4 @@ public class PageController {
     @GetMapping("/main")
     public void main(){}
 
-    @GetMapping("/logout")
-    public void logout(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.logout();
-    }
 }
