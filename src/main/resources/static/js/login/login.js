@@ -1,14 +1,51 @@
 ////////////////////////////////////////////////////////////////////////////
 /*여기부터 페이지 이동버튼입니다*/
-window.addEventListener('load', function(e) {
+$(document).ready(function (){
 	$('.login').fadeIn(1000);
+	/*
 	let auth = new URLSearchParams(location.search).get("authentication");
-	if(auth === "true"){
-		alert("이미 인증이 완료되었습니다.")
-	}else if(auth === "false"){
-		alert("인증이 완료되었습니다.")
+	let join = new URLSearchParams(location.search).get("join");
+	let findpw = new URLSearchParams(location.search).get("findpw");
+	*/
+	setTimeout(function () {
+		let auth = $('#alert_auth').text();
+		let join = $('#alert_join').text();
+		let findpw = $('#alert_findpw').text();
+		let pwchange = $('#alert_pwchange').text();
+
+		if(auth === "true"){
+			alert("이미 인증이 완료되었습니다.")
+		}else if(auth === "false"){
+			alert("인증이 완료되었습니다.")
+		}
+
+		if(join === "true"){
+			alert("회원가입이 완료되었습니다. 인증메일을 확인해주세요.")
+		}else if(join === "false"){
+			alert("알 수 없는 이유로 가입에 실패하였습니다.")
+		}
+		if(findpw === "true"){
+			alert("비밀번호 변경을 메일이 발송되었습니다.")
+		}else if(findpw === "false"){
+			alert("이메일또는 질문또는 답변이 잘못되었습니다.")
+		}
+		if(pwchange === "true"){
+			alert("비밀번호 변경이 완료되었습니다.")
+		}else if(pwchange === "false"){
+			alert("알 수 없는 이유로 비밀번호 변경에 실패하였습니다.")
+		}
+	},1000)
+	// 로컬스토리지에 해당 키가 있다면
+	// 불러옵니다.(자동로그인)
+	let user_email = localStorage.getItem("user_email")
+	let user_password = localStorage.getItem("user_password")
+
+	if(localStorage.getItem("user_autologin") == "true"){
+		$("#autologin").prop("checked",true)
+		$("#login_user_email").prop("value",user_email)
+		$("#login_user_password").prop("value",user_password)
 	}
-});
+})
 
 $('.user-join').on('click',function(){
 	$('.login').fadeOut(500);
@@ -57,7 +94,21 @@ $('.join-close').on('click',function(){
 ////////////////////////////////////////////////////////////////////////////
 /*여기서 부터 로그인 페이지입니다*/
 
+//자동 로그인
+$(".login-border-contents-form").submit(function () {
+	let user_email = document.getElementById("login_user_email").value
+	let user_password = document.getElementById("login_user_password").value
 
+	if($("#autologin").is(":checked")){
+		localStorage.setItem("user_email",user_email)
+		localStorage.setItem("user_password",user_password)
+		localStorage.setItem("user_autologin","true")
+	}else{
+		localStorage.removeItem("user_email")
+		localStorage.removeItem("user_password")
+		localStorage.removeItem("user_autologin")
+	}
+})
 
 /*여기까지 로그인 페이지입니다*/
 ////////////////////////////////////////////////////////////////////////////
@@ -102,6 +153,7 @@ function emailChecking() {
 					success:function (flag) {
 						if(flag){
 							$('.input-warning-email').html("이미 가입 된 이메일입니다")
+							$('#join_user_email').prop("value","").focus()
 							email_check = false
 							join_submit_button_return()
 						}else{
@@ -205,6 +257,7 @@ function nicknameChecking() {
 						if(flag){
 							nickname_check = false
 							$('.input-warning-nickname').html("중복 된 닉네임입니다")
+							$('#join_user_nickname').prop("value","").focus()
 							join_submit_button_return()
 						}else{
 							nickname_check = true
@@ -370,16 +423,14 @@ $('#join_user_answer').on('focusout',function (event) {
 function join_submit_button(){
 	if(email_check == true && password1_check == true && password2_check == true && nickname_check == true &&
 	gender_check == true && yearmonthday_check == true && user_question_check == true && user_answer_check == true){
-		$('#join_submit_ready').css('display','inline')
-		$('#join_submit_notready').css('display','none')
+		$('#join_submit_notready_div').html("<input type=\"submit\" value=\"가입하기\" id=\"join_submit_ready\"/>")
 	}else{
 		join_submit_button_return()
 	}
 }
 
 function join_submit_button_return() {
-	$('#join_submit_ready').css('display','none')
-	$('#join_submit_notready').css('display','inline')
+	$('#join_submit_notready_div').html("<input type=\"button\" value=\"가입하기\" id=\"join_submit_notready\" onclick=\"join_submit_notready_alert();\" />")
 }
 
 function join_submit_notready_alert() {

@@ -2,7 +2,7 @@
 /* 폰트설정 */
 @font-face {
 	font-family: "BMJUA";
-	src: url("../resources/static/font/BMJUA.ttf") format("truetype");
+	src: url("../font/BMJUA.ttf") format("truetype");
 	font-style: normal;
 	font-weight: normal;
 }

@@ -1,15 +1,17 @@
 @charset "UTF-8";
 
 @font-face {
-	font-family: "BMJUA";
-	src: url("../resources/static/font/BMJUA.ttf") format("truetype") ;
+	font-family: "font";
+	src: url("../font/NanumGothic.eot") format("embedded-opentype");
+	src: url("../font/NanumGothic.woff") format("woff");
+	src: url("../font/BMJUA.ttf") format("opentype");
 	font-style: normal;
 	font-weight: normal;
 }
 
 
 html, body{
-	font-family: BMJUA;
+	font-family: font;
 	font-style: normal;
 	font-weight: normal;
 	height: 90%;
@@ -96,15 +98,9 @@ html, body{
 .findpw-border-contents-form input[type=email]::placeholder,
 .findpw-border-contents-form input[type=password]::placeholder{
 	color:#ffc50f;
-
+	font-family: font;
 	opacity: 0.5;
 }
-/*
-.login-border-contents-form input[type=text]::focus,
-.login-border-contents-form input[type=password]::focus{
-	border: none;
-}
-*/
 .login-border-contents-form,
 .join-border-contents-form,
 .findid-border-contents-form,
@@ -216,26 +212,6 @@ html, body{
 	padding: 0;
 	float: left;
 }
-
-/*
-.join-border-contents-input-year,
-.join-border-contents-input-month,
-.join-border-contents-input-day{
-	width: 25%;
-	height: 75px;
-	margin: 10px auto;
-	box-sizing: border-box;
-	border:none;
-	border-bottom: solid 2px #ffffff;
-	// border-radius: 8px;
-	font-size: 50px;
-	background-color:transparent;
-	-webkit-appearance: none;
-	color: #ffffff;
-	padding: 0;
-	float: left;
-}
-*/
 .join-border-contents-input-rrn-container{
 	height: 80px;
 	padding-left: 100px;
@@ -273,19 +249,6 @@ html, body{
   	float: left;
 	color: #ffffff;
 	padding-top: 30px;
-
-	/*
-	width:9.3%;
-	height:80px;
-  	background-color:#ffe90f;
-  	border-radius: 5px 5px 5px 5px;
-  	text-align:center;
-  	cursor:pointer;
-  	margin:0;
-  	transition: 0.5s;
-  	position: relative;
-  	margin: 10px 0;
-  	*/
 } 
 
 .join-border-contents-input-gender-radio:checked + span{

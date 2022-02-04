@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/font/**","/images/**","/video/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/font/**","/images/**","/video/**","/resources/**","/static/**","resources/**","static/**");
     }
 
     @Override
@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/logingo").permitAll()
                 .antMatchers("/join/authentication").permitAll()
+                .antMatchers("/pwchange").permitAll()
                 .antMatchers("/main").hasRole("USER")
                 .and()
                 .formLogin().loginPage("/logingo").permitAll().loginProcessingUrl("/login")

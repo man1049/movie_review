@@ -9,6 +9,10 @@
 </head>
 
 <body>
+<div style="display: none" th:text="${auth}" id="alert_auth"></div>
+<div style="display: none" th:text="${join}" id="alert_join"></div>
+<div style="display: none" th:text="${findpw}" id="alert_findpw"></div>
+<div style="display: none" th:text="${pwchange}" id="alert_pwchange"></div>
 <video muted="muted" autoplay="autoplay" loop="loop" preload="auto" class="background-video">
     <!-- 영상을 여러개 돌려서 로그인창에 올 때 마다 바뀌면 좋을 것 같아요 -->
     <source src="resources/video/LoginVideo2.mp4" type="video/mp4">
@@ -24,7 +28,7 @@
             <form th:action="@{/login}" class="login-border-contents-form" method="post">
                 <input class="login-border-contents-input" type="text" placeholder="이메일" autofocus="autofocus" name="email" id="login_user_email"/><br/>
                 <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="login_user_password"/><br/>
-                <div class="login-border-contents-warning" th:text="${exception}"></div>
+                <div class="login-border-contents-warning" th:text="${loginexception}"></div>
                 <div class="login-border-contents-input-checkbox-container">
                     <input type="submit" value="로그인"/>
                     <label for="autologin" class="login-border-contents-input-label">
@@ -35,7 +39,7 @@
             </form>
             <div class="login-border-contents-links">
                 <span class="user-join">회원가입</span>
-                <span class="user-findid">아이디 찾기</span>
+                <!--<span class="user-findid">아이디 찾기</span>-->
                 <span class="user-findpw">비밀번호 찾기</span>
             </div>
         </div>
@@ -64,24 +68,6 @@
                     <div class="input-warning-yearmonthday"></div>
                     <div class="input-warning-gender"></div>
                 </div>
-                <!--
-                <div class="join-border-contents-input-radio-container">
-                    <input class="join-border-contents-input-year" type="text" maxlength="4" name="user_year" placeholder="생년" id="join_user_year"/>
-
-                    <input class="join-border-contents-input-month" type="text" maxlength="2" name="user_month" placeholder="월" id="join_user_month"/>
-                    <input class="join-border-contents-input-day" type="text" maxlength="2" name="user_day" placeholder="일" id="join_user_day"/>
-
-                    <label for="gender_man" class="join-border-contents-input-gender">
-                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_man" name="user_gender" value="false" checked="checked"/>
-                        <span class="gender-man-span">남자</span>
-                    </label>
-                    <label for="gender_woman" class="join-border-contents-input-gender">
-                        <input class="join-border-contents-input-gender-radio" type="radio" id="gender_woman" name="user_gender" value="true"/>
-                        <span class="gender-woman-span">여자</span>
-                    </label>
-                </div><br/>
-                <div class="input-warning-yearmonthday"></div><br/>
-                -->
                 <div class="join-border-contents-input-qanda-container">
                     <input class="join-border-contents-input-question" type="text" name="user_question" placeholder="질문" id="join_user_question"/>
                     <input class="join-border-contents-input-answer" type="text" name="user_answer" placeholder="답변" id="join_user_answer"/>
@@ -90,8 +76,7 @@
                     <div class="input-warning-question"></div>
                     <div class="input-warning-answer"></div>
                 </div>
-                <input type="submit" value="가입하기" id="join_submit_ready"/>
-                <input type="button" value="가입하기" id="join_submit_notready" onclick="join_submit_notready_alert();" />
+                <div id="join_submit_notready_div"><input type="button" value="가입하기" id="join_submit_notready" onclick="join_submit_notready_alert();" /></div>
             </form>
             <div class="join-border-contents-links">
                 <span class="join-close" onclick="joinReturnToLogin()">생각이 바꼈어요!</span>
@@ -99,6 +84,7 @@
         </div>
     </div>
 </div>
+<!--
 <div class="findid">
     <div class="findid-border">
         <div class="findid-border-contents">
@@ -115,12 +101,13 @@
         </div>
     </div>
 </div>
+-->
 <div class="findpw">
     <div class="findpw-border">
         <div class="findpw-border-contents">
             <div class="findpw-border-contents-title">비밀번호 찾기</div>
             <div class="login-border-contents-subtitle">아.. 뭐였지?</div>
-            <form action="/user/findpw" class="findpw-border-contents-form">
+            <form action="/findpw" class="findpw-border-contents-form" method="post">
                 <input class="findpw-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus"/><br/>
                 <input class="findid-border-contents-input" type="text" placeholder="질문" name="user_question"/><br/>
                 <input class="findid-border-contents-input" type="text" placeholder="답변" name="user_answer" /><br/>
