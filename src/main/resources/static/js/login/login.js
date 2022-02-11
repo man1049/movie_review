@@ -424,6 +424,22 @@ function join_submit_button(){
 	if(email_check == true && password1_check == true && password2_check == true && nickname_check == true &&
 	gender_check == true && yearmonthday_check == true && user_question_check == true && user_answer_check == true){
 		$('#join_submit_notready_div').html("<input type=\"submit\" value=\"가입하기\" id=\"join_submit_ready\"/>")
+		/*
+		$('#join_submit_ready').css({
+			'width': '80%',
+			'height': '75px',
+			'font-size': '50px',
+			'-webkit-appearance': 'none',
+			'background-color': '#ffe90f',
+			'border': 'none',
+			'color': 'white',
+			'text-decoration': 'none',
+			'margin': '4px 2px',
+			'cursor': 'pointer',
+			'border-radius': '5px 5px 5px 5px'
+
+		});
+		*/
 	}else{
 		join_submit_button_return()
 	}

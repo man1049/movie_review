@@ -156,19 +156,19 @@ html, body{
 .join-border-contents-form input[type=submit],
 .findid-border-contents-form input[type=submit],
 .findpw-border-contents-form input[type=submit],
-#join_submit_notready{
+#join_submit_notready,
+#join_submit_ready{
 	width: 80%;
 	height: 75px;
-	// margin: 10px auto;
 	font-size: 50px;
 	-webkit-appearance: none;
 	background-color: #ffe90f;
- 	border: none;
-  	color: white;
-  	text-decoration: none;
-  	margin: 4px 2px;
-  	cursor: pointer;
-  	border-radius: 5px 5px 5px 5px;
+	border: none;
+	color: white;
+	text-decoration: none;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px 5px 5px 5px;
 }
 
 .login-border-contents-links span,
@@ -341,10 +341,6 @@ video {
 .input-warning-yearmonthday,.input-warning-gender,
 .input-warning-question,.input-warning-answer,.login-border-contents-warning{
 	color: white;
-}
-
-#join_submit_ready{
-	display: none;
 }
 
 .input-warning-yearmonthday,.input-warning-question{
