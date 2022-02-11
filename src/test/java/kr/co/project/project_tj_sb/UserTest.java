@@ -26,7 +26,7 @@ public class UserTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Test
+    //@Test
     public void insertUsers(){
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -93,7 +93,7 @@ public class UserTest {
         }
     }
 
-    @Test
+    //@Test
     public void testRead(){
         //Optional<UsersRequired> urRes = usersRequiredRepository.findByEmail("man_2@go.com");
         //Optional<UsersOptional> uoRes = usersOptionalRepository.findByEmail("man_2@go.com");

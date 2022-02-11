@@ -1,514 +1,74 @@
-
-/* 폰트설정 */
-@font-face {
-	font-family: "BMJUA";
-	src: url("../font/BMJUA.ttf") format("truetype");
-	font-style: normal;
-	font-weight: normal;
+h1 {
+	text-align: center;
 }
 
-/* 이미지 드래그 잔상방지 */
-img{
-	-webkit-user-drag: none;
-}
+/* Navigation Section*/
 
-/* html , body태그 설정 (폰트와 상하좌우 여백) */
-html, body {
+html, body{
 	padding: 0;
 	border: 0;
 	margin: 0;
 	background-color: #ffffff;
-	font-family: BMJUA;
 	-ms-user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
-	height: 100%;
+	height: 800px;
 	width: 100%;
-	min-width: 1400px;
-	min-height: 1100px;
-}
-/* 네비게이션바 시작 */
-.nav {
-	height: 100px;
-	width: 100%;
-	background-color: #00a2ff;
-	display: none;
-	justify-content: center;
-	flex-flow: row wrap;
-	align-content: center;
-	position: absolute;
-	z-index: 5000;
-	min-width: 1400px;
 }
 
-.nav-menus {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-flow: row wrap;
-	width: 200vw;
-	align-content: center;
-	min-width: 1400px;
-}
-
-.nav-menus-menu {
-	list-style-type: none;
-	font-size: 30px;
-	color: #ffffff;
-	cursor: pointer;
-	margin: 0 5vw;
-}
-
-/* 네비게이션 버튼 시작 */
-.nav-button-o {
-	position: absolute;
-	float: right;
-	right: 3vw;
-	top: 25px;
-	cursor: pointer;
-	z-index: 5100;
-}
-
-.nav-button-c {
-	display: none;
-	position: absolute;
-	float: right;
-	right: 3vw;
-	top: 25px;
-	cursor: pointer;
-	z-index: 5100;
-}
-
-.nav-button-o>div, .nav-button-c>div {
-	width: 45px;
-	height: 45px;
-	border: 45px;
-	border-radius: 45px;
-	background-color: #00a2ff;
-	display: flex;
-	align-content: center;
-	justify-content: space-around;
-	flex-flow: row wrap;
-}
-
-.nav-button-o>div>img, .nav-button-c>div>img {
-	width: 25px;
-	height: 25px;
-	border: 5px;
-	border-radius: 3px;
-}
-/* 네비게이션 버튼 끝 */
-/* 네비게이션 바 끝 */
-
-/* 메인페이지 시작 */
-.main {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	align-content: center;
-	align-items: stretch;
-	width: 100%;
-	height: 100%;
-	background-color: green;
-}
-
-/* 지도 시작 */
-.main-right {
-	width: 70%;
-	height: 100%;
-	display:flex;
-	flex-flow: row wrap;
-	overflow: hidden;
-	justify-content: center;
-	align-items: center;
-}
-/* 지도 끝 */
-
-/* 음식점 목록 시작 */
-
-.main-leftcontainer {
-	overflow: auto;
-	width: 30%;
-	height: 100%;
-	background-color: #ffffff;
-	display: flex;
-	justify-content: center;
-	flex-flow: row wrap;
-	align-content: flex-start;
-}
-
-.main-leftcontainer::-webkit-scrollbar {
-	display: none;
-}
-
-.main-leftcontainer-title {
-	width: 100%;
-	height:120px;
-	background-color: #f8ba00;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-flow: row wrap;
-	margin: 0 0 5px 0;
-}
-.main-leftcontainer-title > span{
-	color: #ffffff;
-	font-size: 40px;
-}
-
-/* 음식점 검색 시작 */
-
-.main-leftcontaioner-ressearch{
-	width: 100%;
-	height: 50px;
-	margin: 0;
-	position: sticky;
-	top:0;
-}
-
-.main-leftcontaioner-ressearch > form{
-	width: 100%;
-	height: 50px; 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-flow: row wrap;
-	background-color: #ffffff;
-}
-input[type="text"]:focus::-webkit-input-placeholder{
-	color:transparent;
-}
-
-.main-leftcontaioner-ressearch > form > input[type="text"]{
-	text-align:left;
-	width: 75%;
-	height: 50px;
-	padding: 0 0 0 3%;
-	border: 0;
-	margin: 0 2% 0 0;
-	font-size: 25px;
-	background-color: #ffffff;
-	font-family: BMJUA;
-}
-
-.main-leftcontaioner-ressearch > form > input[type="submit"]{
-	font-family: BMJUA;
-	width: 20%;
-	height: 50px;
-	padding: 0;
-	border: 0;
-	margin: 0;
-	font-size: 25px;
-	background-color: #f8ba00;
-	cursor: pointer;
-	border-radius: 10px;
-}
-
-/* 음식점 검색 끝 */
-
-.main-leftcontainer-reslist{
-	width: 100%;
-	height: auto;
-	display: block;
-}
-
-.rescontent{
-	width: 100%;
-	height: 120px;
-	display: flex;
-	flex-flow: row wrap;
-	overflow: hidden;
-	background-color: #f8ba00;
-	margin: 5px 0;
-	cursor: default;
-}
-
-.rescontent > img {
-	width: 20%;
-	height: 100%;
-	border-radius: 10px;
-	overflow: hidden;
-	cursor: pointer;
-}
-
-.rescontent-title{
-	width: 20%;
-	height: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	overflow: hidden;
-	justify-content: center;
-	align-items: center;
-}
-
-.rescontent-title > span{
-	font-size: 100%;
-	overflow: hidden;
-	flex: 1 1 100%;
+.container {
+	float: left;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	background: #f8ba00;
+	padding: 1px;
 	text-align: center;
+	height: 800px;
 }
 
-.rescontent-info{
-	width: 40%;
-	height: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	overflow: hidden;
-	justify-content: center;
-	align-items: center;
+.wrapper {
+	height: 800px;
 }
-.rescontent-info  > span{
-	font-size: 100%;
-	overflow: hidden;
-	flex: 1 1 100%;
+
+div{
+	padding: 10px;
+}
+
+
+footer{
+	background-color: #777;
+	padding: 10px;
 	text-align: center;
-}
-
-/* 음식점 목록 끝 */
-
-/* 음식점 팝업 시작 */
-.res-popup{
-	width: 900px;
-	height: 900px;
-	background-color: #00a2ff;
-	z-index: 4000;
-	border-color: #00a2ff;
-	border-radius: 10px;
-	overflow: hidden;
-	display: none;
-	flex-flow: row wrap;
-	justify-content: center;
-	align-items: center;
-}
-
-.res-popup-inner-container{
-	width: 98%;
-	height: 98%;
-	flex-flow: row wrap;
-	overflow: hidden;
-	justify-content: center;
-	background-color: #ffffff;
-	border-radius: 5px;
-}
-
-.res-popup-inner-container-photos{
-	margin: 10px 10px 0;
-	overflow: auto;
-	display: flex;
-	flex-flow: row nowrap;
-	height: 100px;
-	width: 98%;
-}
-
-.res-popup-inner-container-photos::-webkit-scrollbar {
-	display: none;
-}
-
-.res-popup-inner-container-photos > img{
-	width: 100px;
-	height: 100%;
-	margin: 0 5px 0 0;
-}
-
-.res-popup-inner-container-resmenu{
-	margin: 10px 10px 0;
-	overflow: hidden;
-	display: flex;
-	flex-flow: row wrap;
-	height: 200px;
-	width: 98%;
-	background-color: #00a2ff;
-}
-
-.res-popup-inner-container-resmenu-content{
-	height: 100%;
-	width: 85%;
-	overflow: hidden;
-	display: flex;
-	background-color: #ffffff;
-	align-items: center;
-}
-
-.res-popup-inner-container-resmenu-content > div{
-	height: 100%;
-	width: 5000%;
-	background-color: #00a2ff;
-	overflow: auto;
-	display: flex;
-	flex-flow: row nowrap;
-}
-
-.res-popup-inner-container-resmenu-content > div::-webkit-scrollbar {
-	display: none;
-}
-
-.res-popup-inner-container-resmenu-content > div > div{
-	width: 200px;
-	height: 100%;
-	background-color: #ffffff;
-	display: flex;
-	flex-flow: row wrap;
-	flex: 1 1 100%;
-}
-
-.res-popup-inner-container-resmenu-content > div > div > div{
-	margin: 0 5px 0 0;
-	height: 100%;
-	width: 150px;
-	background-color: maroon;
-	display: flex;
-	flex-flow: row wrap;
-	flex: 1 1 100%;
-	justify-content: center;
-	align-items: center;
-}
-
-.res-popup-inner-container-resmenu-content > div > div > div > img{
-	height: 50%;
-	width: 100%;
-	background-color: #00a2ff;
-}
-
-.res-popup-inner-container-resmenu-content > div > div > div > div{
-	height:50%;
-	width: 100%;
-	background-color: #00a2ff;
-	display: flex;
-	flex-flow: row wrap;
-}
-
-.res-popup-inner-container-resmenu-content > div > div > div > div > span{
-	justify-content: center;
-	text-align: center;
-	flex: 1 1 100%;
-}
-
-.res-popup-inner-container-resmenu-buttons{
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
-	align-items: center;
-	width: 15%;
-}
-
-.res-popup-inner-container-resmenu-buttons > div{
-	flex: 1 1 100%;
-	text-align: center;
-	font-size: 25px;
-	display: flex;
-	flex-flow: row wrap;
-	height: 50px;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	background-color: #00a2ff;
-}
-
-.res-popup-inner-container-resmenu-buttons > div > span{
-	flex: 1 1 100%;
-	text-align: center;
-	font-size: 25px;
-}
-
-.res-popup-inner-container-resinfo{
-	margin: 10px 10px 0;
-	overflow: hidden;
-	display: flex;
-	flex-flow: row wrap;
-	height: 200px;
-	width: 98%;
-	background-color: #00a2ff;
-}
-
-.res-popup-inner-container-reply{
-	margin: 10px 10px 0;
-	overflow: hidden;
-	display: flex;
-	flex-flow: row wrap;
-	height: 330px;
-	width: 98%;
-	background-color: #00a2ff;
-}
-
-.inputcontainer{
-	width: 100%;
-	height: 50px;
-	overflow: auto;
-	position: sticky;
-}
-
-.inputcontainer::-webkit-scrollbar {
-	display: none;
-}
-
-.inputcontainer > form{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
-	align-items: center;
-}
-
-.inputcontainer > form > input[type='text']{
-	width: 80%;
-	height: 100%;
-	border: 0;
-	padding: 0;
-}
-
-.inputcontainer > form > input[type='submit']{
-	width: 20%;
-	height: 100%;
-	border: 0;
-	padding: 0;
-	margin: 0;
-}
-
-.userreplys{
-	width: 100%;
-	height: 250px;
-	background-color: #00a2ff;
-	display: flex;
-	flex-flow: row wrap;
-	flex: 1 1 100%;
-	overflow: auto;
-}
-
-.userreplys::-webkit-scrollbar {
-	display: none;
-}
-
-.userreplys > div{
-	height: 30px;
-	width: 100%;
-	background-color: #ffffff;
-	margin: 0 0 5px 0;
-	display: flex;
-	flex-flow: row nowrap;
-}
-
-.res-popup-close{
-	width:100%;
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: center;
-}
-
-.res-popup-close-inner{
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: center;
-}
-
-.res-popup-close-inner > span{
-	flex: 1 1 100%;
 	color: white;
-	cursor: pointer;
+	float: bottom;
+}
+
+
+/* Navigation bar section*/
+.navigation ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #0066ff;
+}
+.navigation form{
+	float: none;
+}
+
+.navigation li {
+	display: inline;
+	float: left;
+}
+a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li a:hover {
+	background-color: #00a2ff;
 }
