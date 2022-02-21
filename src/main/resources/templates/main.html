@@ -1,108 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" type='text/css' href="/resources/static/css/main/main.css"/>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>도전점심</title>
-
+    <link rel="stylesheet" href="resources/css/main/default.css">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=gitm670wxt&callback=initMap"></script>
-    <script type="text/javascript">
-        var map = null;
-
-        function initMap(){
-            map = new naver.maps.Map('map', mapOptions);
-
-        }
-    </script>
-
-    <link rel="stylesheet" href="../static/css/main/main.css">
-
-    <script src="https://code.jquery.com/jquery-latest.js"></script>
-    <script src='../resources/static/js/main/mousewheel.min.js'></script>
-    <script src='../resources/static/js/main/dragScroll.min.js'></script>
+    <title>영화는 영화다</title>
 </head>
 
-<body>
-<header>
-    <h1>도전 점심</h1>
-</header>
-<!--
-<div>
-    <form method="get">
-        <input type="text" placeholder="식당, 음식 검색"/>
-        <input type="button" value="검색"/>
-    </form>
-</div>
--->
-<!-- main contents -->
-<nav class="navigation">
-    <ul>
-        <li><a href="main.html">홈</a></li>
-        <li><a href="memberinfo.html">회원정보</a></li>
-        <li><a href="more.html">기타</a></li>
-        <li style="float:right"><a class="active" href="logingo.html">로그아웃</a></li>
-    </ul>
-</nav>
+<STYLE>
 
-    <div class="container">
-        <div class="scroller">
-            <input type="text" class="search"/>
-            <input type="button" value="검색"/>
-            <div class="wrapper">
-                <div>점심추천 목록 1</div>
-                <div>점심추천 목록 2</div>
-                <div>점심추천 목록 3</div>
-                <div>점심추천 목록 4</div>
-                <div>점심추천 목록 5</div>
-                <div>점심추천 목록 6</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
-                <div>점심추천 목록 7</div>
+    main{
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .div-list{
+        border: 1px solid #bbbbbb;
+        border-bottom: 1px solid black;
+        width: 90%;
+        height: 120px;
+        margin: 0px 5% 10px;
+        text-align: center;
+    }
+    .div-list-container{
+        display: flex;
+        width: 100%;
+        height: 90%;
+        overflow: hidden;
+    }
+    .div-list-container-item{
+        width: 200px;
+        height: 90%;
+        border: 1px solid black;
+        overflow: hidden;
+    }
+
+    .div-list-container-item>img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .div-reviews{
+        display: flex;
+        width: 100%;
+        height: 200px;
+    }
+    .div-reviews-best{
+        margin-left: 5%;
+        margin-right: 1%;
+    }
+    .div-reviews-worst{
+        margin-right: 5%;
+        margin-left: 1%;
+    }
+    .div-reviews-best, .div-reviews-worst{
+        width: 44%;
+        height: 100%;
+        display: flex;
+        flex-flow: row;
+        border: 1px solid #bbbbbb;
+    }
+    .div-reviews-best-image, .div-reviews-worst-image{
+        width: 40%;
+        height: 100%;
+    }
+    .div-reviews-best-image > a > img, .div-reviews-worst-image > a > img{
+        width: 100%;
+        height: 100%;
+    }
+    .div-reviews-best-comment, .div-reviews-worst-comment{
+        font-size: medium;
+        overflow: hidden;
+        height: 90%;
+        width: 100%;
+    }
+
+    .div-reviews-best-star, .div-reviews-worst-star{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-flow: row;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #bbbbbb;
+        width: 100%;
+        height: 10%;
+    }
+
+    .div-reviews-starbest-star, .div-reviews-starworst-star{
+        width: 100%;
+        height: 90%;
+        margin-left: 1%;
+    }
+</STYLE>
+<body>
+    <header th:replace="/header.html">
+    </header>
+    <nav>
+        <div class="nav-rinks">
+            <a href="">홈</a>
+            <a href="#">한국영화</a>
+            <a href="#">해외영화</a>
+            <a href="#">장르별</a>
+        </div>
+    </nav>
+    <main>
+        <div class="div-list">
+            <a href="#">상영중인 영화</a>
+            <div class="div-list-container">
+                <div th:each="num : ${#numbers.sequence(1,12)}" class="div-list-container-item">
+                    <img th:src="@{resources/images/movieposter/{i}.jpg(i=${num})}">
+                </div>
             </div>
         </div>
-    </div>
+        <div class="div-list">
+            <a href="#">요즘 뜨는 영화</a>
+            <div class="div-list-container">
+                <div th:each="num : ${#numbers.sequence(1,12)}" class="div-list-container-item">
+                    <img th:src="@{resources/images/movieposter/{i}.jpg(i=${num})}">
+                </div>
+            </div>
+        </div>
+        <div class="div-list">
+            <a href="#">새로운 영화</a>
+            <div class="div-list-container">
+                <div th:each="num : ${#numbers.sequence(1,12)}" class="div-list-container-item">
+                    <img th:src="@{resources/images/movieposter/{i}.jpg(i=${num})}">
+                </div>
+            </div>
+        </div>
 
-    <div class="map" id="map" style="width:70%;height:100%;"></div>
+        <div class="div-reviews">
+            <div class="div-reviews-best">
+                <div class="div-reviews-best-image">
+                    <a href="#"><img th:src="@{resources/images/movieposter/1.jpg}"></a>
+                </div>
+                <div class="div-reviews-starbest-star">
+                    <div class="div-reviews-best-star">
+                        <div>
+                            평점
+                        </div>
+                        <div>
+                            *****
+                        </div>
+                    </div>
+                    <div class="div-reviews-best-comment">
+                        개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
+                    </div>
+                </div>
+            </div>
+            <div class="div-reviews-worst">
+                <div class="div-reviews-worst-image">
+                    <a href="#"><img th:src="@{resources/images/movieposter/1.jpg}"></a>
+                </div>
+                <div class="div-reviews-starworst-star">
+                    <div class="div-reviews-worst-star">
+                        <div>
+                            평점
+                        </div>
+                        <div>
+                            *
+                        </div>
 
-<footer>
-    <address>
-        도전점심<br>
-        팀원 : 권구달, 김재호, 김준영, 전재민 <br> 더조은 컴퓨터학원, Seoul, Jongno-gu, Supyo-ro, 105 육의전빌딩
-    </address>
-    <small>Copyright &copy; 2022</small>
-</footer>
+                    </div>
+                    <div class="div-reviews-worst-comment">
+                        개노잼
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
 
+    </footer>
 </body>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-        crossorigin="anonymous">
-</script>
-<script src="dragScroll.js"></script>
-<script src="../resources/static/js/main/dragScroll.min.js"></script>
-
-<script src="dragScroll.js"></script>
-
-<script type="text/javascript">
-    var $container = $(".container");
-    var $scroller = $(".scroller");
-    bindDragScroll($container, $scroller);
-</script>
-
-<!-- map script -->
-
 <script>
-    var mapOptions = {
-        center: new naver.maps.LatLng(37.5702, 126.9832),
-        zoom: 10
-    };
-    var map = new naver.maps.Map('map', mapOptions);
+    $(document).load(function () {
+        $.ajax({
+            type: "GET"
+            url: "main/hotmovie"
+        })
+    })
 </script>
-
 </html>

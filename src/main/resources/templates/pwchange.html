@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 변경</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="resources/css/login/login.css">
+</head>
+<body>
+<form method="post" action="/pwchange/change">
+    <input type="hidden" name="code" id="code">
+    변경 할 비밀번호 <input type="password" name="user_password" id="user_password"></br>
+    비밀번호 확인 <input type="password" id="user_password_check"></br>
+    <input type="submit" value="변경하기">
+</form>
+</body>
+<script>
+$(document).ready(function () {
+    let findpw = new URLSearchParams(location.search).get("code");
+
+    if(findpw == null){
+        alert("잘못된 접근입니다.")
+        $(location).attr("href","/")
+    }else{
+        $.ajax({
+            type:"POST",
+            url:"/pwchange",
+            data: findpw,
+            success:function (checkUrl) {
+                if(!checkUrl){
+                    alert("잘못된 접근입니다.")
+                    $(location).attr("href","/")
+                }else{
+                    $('#code').prop("value",findpw)
+                }
+            }
+        })
+    }
+})
+</script>
+</html>

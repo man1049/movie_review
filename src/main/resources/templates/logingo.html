@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -14,17 +14,16 @@
 <div style="display: none" th:text="${findpw}" id="alert_findpw"></div>
 <div style="display: none" th:text="${pwchange}" id="alert_pwchange"></div>
 <video muted="muted" autoplay="autoplay" loop="loop" preload="auto" class="background-video">
-    <!-- 영상을 여러개 돌려서 로그인창에 올 때 마다 바뀌면 좋을 것 같아요 -->
-    <source src="resources/video/LoginVideo2.mp4" type="video/mp4">
+    <source src="resources/video/LoginVideo1.mp4" type="video/mp4">
 </video>
 <div class="video-screen"></div>
 <div class="login">
     <div class="login-border">
         <div class="login-border-contents">
             <!-- <div class="login-border-contents-screen"></div> -->
-            <div class="login-border-contents-title">도전 점심</div><br/>
+            <div class="login-border-contents-title">영화는 영화다</div><br/>
             <!-- 로그인창에 올 때 마다 문구가 바뀌면 재밌을 것 같아요 -->
-            <div class="login-border-contents-subtitle">점심 시간을 아름답게!</div>
+            <div class="login-border-contents-subtitle">오늘은 이거다!</div>
             <form th:action="@{/login}" class="login-border-contents-form" method="post">
                 <input class="login-border-contents-input" type="text" placeholder="이메일" autofocus="autofocus" name="email" id="login_user_email"/><br/>
                 <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="login_user_password"/><br/>
@@ -49,7 +48,7 @@
     <div class="join-border">
         <div class="join-border-contents">
             <div class="join-border-contents-title">회원 가입</div>
-            <div class="login-border-contents-subtitle">가입하고 맛집가자!</div>
+            <div class="login-border-contents-subtitle"></div>
             <form th:action="@{join}" class="join-border-contents-form" method="post">
                 <input class="join-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus" id="join_user_email"><br/>
                 <div class="input-warning-email"></div><br/>
@@ -84,24 +83,6 @@
         </div>
     </div>
 </div>
-<!--
-<div class="findid">
-    <div class="findid-border">
-        <div class="findid-border-contents">
-            <div class="findid-border-contents-title">아이디 찾기</div>
-            <div class="login-border-contents-subtitle">내가 가입을 했었나?</div>
-            <form action="/user/findid" class="findid-border-contents-form">
-                <input class="findid-border-contents-input" type="text" placeholder="질문" name="user_question" autofocus="autofocus"/><br/>
-                <input class="findid-border-contents-input" type="text" placeholder="답변" name="user_answer" /><br/>
-                <input type="submit" value="찾기"/>
-            </form>
-            <div class="join-border-contents-links">
-                <span class="findid-close">갑자기 생각났어요!</span>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <div class="findpw">
     <div class="findpw-border">
         <div class="findpw-border-contents">

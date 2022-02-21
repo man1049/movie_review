@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "font";
+    src: url("../font/NanumGothic.eot") format("embedded-opentype");
+    src: url("../font/NanumGothic.woff") format("woff");
+    src: url("../font/BMJUA.ttf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+html{
+    font-family: font;
+    font-style: normal;
+    font-weight: normal;
+    height: 100%;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    min-width: 1250px;
+    min-height: 850px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+body{
+    margin: 0px 5%;
+    width: 1050px;
+    height: 850px;
+}
