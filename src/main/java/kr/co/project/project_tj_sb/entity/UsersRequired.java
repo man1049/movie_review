@@ -59,8 +59,11 @@ public class UsersRequired{
     private List<UsersResHistory> usersResHistory;
 */
 
+    /*
     @OneToOne(mappedBy = "required", fetch = FetchType.LAZY)
     private UsersOptional usersOptional;
+    */
+
 
     @Builder.Default
     @ElementCollection(fetch = FetchType.LAZY)

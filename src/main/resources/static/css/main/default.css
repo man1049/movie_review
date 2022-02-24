@@ -21,7 +21,7 @@ html{
     padding: 0;
     border: 0;
     width: 100%;
-    min-width: 1250px;
+    min-width: 1050px;
     min-height: 850px;
     display: flex;
     justify-content: center;
@@ -31,4 +31,6 @@ body{
     margin: 0px 5%;
     width: 1050px;
     height: 850px;
+    min-width: 1050px;
+    min-height: 850px;
 }

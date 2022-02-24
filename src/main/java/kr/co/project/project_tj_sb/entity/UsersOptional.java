@@ -1,3 +1,4 @@
+/*
 package kr.co.project.project_tj_sb.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,12 +32,6 @@ public class UsersOptional extends BaseEntity {
 
     @Column(name = "user_photo", length = 100)
     private String user_photo;
-    @Column(name = "user_area1", length = 30)
-    private String user_area1;
-    @Column(name = "user_area2", length = 30)
-    private String user_area2;
-    @Column(name = "user_area3", length = 30)
-    private String user_area3;
     @Column(name = "user_like1", length = 30)
     private String user_like1;
     @Column(name = "user_like2", length = 30)
@@ -52,3 +47,4 @@ public class UsersOptional extends BaseEntity {
 
 
 }
+*/

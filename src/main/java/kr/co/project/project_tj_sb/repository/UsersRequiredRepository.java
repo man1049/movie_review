@@ -1,6 +1,6 @@
 package kr.co.project.project_tj_sb.repository;
 
-import kr.co.project.project_tj_sb.entity.UsersOptional;
+//import kr.co.project.project_tj_sb.entity.UsersOptional;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

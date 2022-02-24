@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="resources/css/main/header.css">
+<link rel="stylesheet" href="/resources/css/main/header.css">
 <header>
     <div class="header-userinfo">
-        <a href="/mypage" target="_blank" >내정보</a>
-        <a href="/masage" target="_blank">메세지</a>
+        <span th:text="${#authentication.principal.user_nickname}"></span><span>님 반갑습니다.</span>
+        <a href="/masage" target="_blank">쪽지</a>
         <a href="/logout">로그아웃</a>
     </div>
     <div class="header-title">

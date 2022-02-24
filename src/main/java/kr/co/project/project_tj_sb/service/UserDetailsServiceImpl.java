@@ -36,13 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         usersAuthDTO.setUser_email(required.getUser_email());
         usersAuthDTO.setUser_gender(required.isUser_gender());
         usersAuthDTO.setUser_birthday(required.getUser_birthday());
-        usersAuthDTO.setUser_photo(required.getUsersOptional().getUser_photo());
-        usersAuthDTO.setUser_area1(required.getUsersOptional().getUser_area1());
-        usersAuthDTO.setUser_area2(required.getUsersOptional().getUser_area2());
-        usersAuthDTO.setUser_area3(required.getUsersOptional().getUser_area3());
-        usersAuthDTO.setUser_area1(required.getUsersOptional().getUser_area1());
-        usersAuthDTO.setUser_area2(required.getUsersOptional().getUser_area2());
-        usersAuthDTO.setUser_area3(required.getUsersOptional().getUser_area3());
+        //usersAuthDTO.setUser_photo(required.getUsersOptional().getUser_photo());
         usersAuthDTO.setUser_email_check(required.isUser_email_check());
         return usersAuthDTO;
     }

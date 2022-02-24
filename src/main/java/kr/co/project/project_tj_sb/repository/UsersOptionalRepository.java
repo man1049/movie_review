@@ -1,3 +1,4 @@
+/*
 package kr.co.project.project_tj_sb.repository;
 
 import kr.co.project.project_tj_sb.entity.UsersOptional;
@@ -16,3 +17,4 @@ public interface UsersOptionalRepository extends JpaRepository<UsersOptional, St
     Optional<UsersOptional> findByEmail(String email);
 
 }
+*/

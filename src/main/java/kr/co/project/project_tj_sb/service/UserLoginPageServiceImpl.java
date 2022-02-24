@@ -2,9 +2,9 @@ package kr.co.project.project_tj_sb.service;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import kr.co.project.project_tj_sb.dto.UserDTO;
-import kr.co.project.project_tj_sb.entity.UsersOptional;
+//import kr.co.project.project_tj_sb.entity.UsersOptional;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
-import kr.co.project.project_tj_sb.repository.UsersOptionalRepository;
+//import kr.co.project.project_tj_sb.repository.UsersOptionalRepository;
 import kr.co.project.project_tj_sb.repository.UsersRequiredRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +16,6 @@ import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Base64;
 
@@ -26,7 +25,6 @@ import java.util.Base64;
 public class UserLoginPageServiceImpl implements UserLoginPageService {
 
     private final UsersRequiredRepository usersRequiredRepository;
-    private final UsersOptionalRepository usersOptionalRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender emailSender;
     
@@ -217,26 +215,15 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
 
         UsersRequired usersRequired = dtoToEntity(userDTO);
 
-        UsersOptional usersOptional = UsersOptional
-                .builder()
-                .user_area1(null)
-                .user_area2(null)
-                .user_area3(null)
-                .user_like1(null)
-                .user_like2(null)
-                .user_like3(null)
-                .required(usersRequired)
-                .build();
-
         try{
             MimeMessage message = emailSender.createMimeMessage();
 
             message.addRecipients(Message.RecipientType.TO, usersRequired.getUser_email());//받는사람
-            message.setSubject("도전점심 회원가입 이메일 인증");//제목
+            message.setSubject("영화는 영화다 회원가입 이메일 인증");//제목
 
             String msgg="";
             msgg+= "<div style='margin:100px;'>";
-            msgg+= "<h1> 안녕하세요"+usersRequired.getUser_nickname()+"님 도전점심입니다. </h1>";
+            msgg+= "<h1> 안녕하세요"+usersRequired.getUser_nickname()+"님 영화는 영화다입니다. </h1>";
             msgg+= "<br>";
             msgg+= "<p>아래 버튼을 클릭하여 이메일 인증을 해주세요<p>";
             msgg+= "<br>";
@@ -247,7 +234,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
 
             msgg+= "<br>";
             message.setText(msgg, "utf-8", "html");//내용
-            message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","도전점심"));//보내는 사람
+            message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","영화는 영화다"));//보내는 사람
 
             emailSender.send(message);
 
@@ -256,6 +243,5 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
             throw new IllegalArgumentException();
         }
         usersRequiredRepository.save(usersRequired);
-        usersOptionalRepository.save(usersOptional);
     }
 }

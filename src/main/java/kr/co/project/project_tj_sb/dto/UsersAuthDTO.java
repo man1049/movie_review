@@ -23,13 +23,6 @@ public class UsersAuthDTO extends User{
     private boolean user_gender;
     private LocalDate user_birthday;
     /////////////////////////////////
-    private String user_photo;
-    private String user_area1;
-    private String user_area2;
-    private String user_area3;
-    private String user_like1;
-    private String user_like2;
-    private String user_like3;
     private boolean user_email_check;
 
 
