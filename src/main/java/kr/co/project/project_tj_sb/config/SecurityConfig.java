@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/join/authentication").permitAll()
                 .antMatchers("/pwchange").permitAll()
                 .antMatchers("/main").hasRole("USER")
+                .antMatchers("/main/**").hasRole("USER")
                 .antMatchers("/images/**").hasRole("USER")
                 .antMatchers("/css/**").hasRole("USER")
                 .antMatchers("/js/**").hasRole("USER")

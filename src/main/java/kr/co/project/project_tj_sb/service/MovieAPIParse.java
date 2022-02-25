@@ -172,4 +172,44 @@ public class MovieAPIParse {
             return null;
         }
     }
+
+    public List<String> movieList(String num){
+        try{
+            // 인증키
+            String serviceKey = "ceabdcb6d52d7eb5709bbb09dc253b97";
+
+            String urlStr = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
+            urlStr += "?"+ URLEncoder.encode("key","UTF-8") +"=" + serviceKey;
+            urlStr += "&"+ URLEncoder.encode("curPage","UTF-8")+"=" + num;
+
+            URL url = new URL(urlStr);
+
+            String line = "";
+            String result = "";
+
+            BufferedReader br;
+            br = new BufferedReader(new InputStreamReader(url.openStream()));
+            while ((line = br.readLine()) != null) {
+                result = result.concat(line);
+                log.info(line);
+            }
+            List<String> list = new ArrayList<>();
+            // JSON parser 만들어 문자열 데이터를 객체화한다.
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject)parser.parse(result);
+
+            JSONObject jsonObject = (JSONObject)obj.get("movieListResult");
+            JSONArray jsonArray = (JSONArray)jsonObject.get("movieList");
+
+            for(int i = 0; i < jsonArray.size(); i++){
+                JSONObject movieList = (JSONObject) jsonArray.get(i);
+
+
+            }
+            return null;
+        } catch (Exception e) {
+            log.info("디테일 파싱익셉션 : "+e.getLocalizedMessage());
+            return null;
+        }
+    }
 }
