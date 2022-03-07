@@ -56,25 +56,4 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-jib {
-    from {
-        allowInsecureRegistries = true
-        auth {
-            username = "man1049"
-            password = "@Tt8211043"
-        }
-    }
-    to {
-        image = 'man1049/tjproject'
-        auth {
-            username = "man1049"
-            password = "@Tt8211043"
-        }
-        tags = ["0.0.1"]
-    }
-    container {
-        jvmFlags = ['-XX:+UnlockExperimentalVMOptions', '-XX:+UseCGroupMemoryLimitForHeap', '-Dserver.port=8080']
-        ports = ['8080']
-        creationTime = "USE_CURRENT_TIMESTAMP"
-    }
-}
+

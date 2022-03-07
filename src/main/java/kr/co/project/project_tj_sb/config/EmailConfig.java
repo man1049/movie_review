@@ -54,9 +54,4 @@ public class EmailConfig {
         return pt;
 
     }
-
-
-
-
-
 }
