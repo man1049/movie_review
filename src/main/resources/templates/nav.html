@@ -1,8 +1,17 @@
 <link rel="stylesheet" href="/resources/css/main/nav.css">
+
 <nav>
-    <div class="nav-rinks">
-        <a href="/main">홈</a>
-        <a href="/main/korean">한국영화</a>
-        <a href="/main/overseas">해외영화</a>
+    <div class="nav-title">
+        <a class="nav-title-a" href="/main">영화는 영화다</a>
+    </div>
+    <div class="nav-container">
+        <div class="nav-rinks">
+            <a href="/korean">한국영화</a>
+            <a href="/overseas">해외영화</a>
+        </div>
+    </div>
+    <div class="nav-userinfo">
+        <span th:text="${#authentication.principal.user_nickname}"></span><span>님 반갑습니다.</span>
+        <a href="/logout">로그아웃</a>
     </div>
 </nav>

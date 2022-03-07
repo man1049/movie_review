@@ -1,0 +1,28 @@
+main{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    flex-direction: row;
+}
+.list{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list-table{
+    width: 100%;
+}
+.page-table-tr > td:hover:not(.page-table-tr > td[class="nowpage"]){
+    color: #555555;
+}
+.page{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nowpage{
+    color: #999999;
+}

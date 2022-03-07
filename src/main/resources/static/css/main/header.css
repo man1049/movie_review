@@ -1,12 +1,14 @@
+/*
 @charset "UTF-8";
 header {
     width: 100%;
     height: 100px;
-    background-color: #ffffff;
+    background-color: #ffc50f;
     margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+
 }
 .header-title{
     font-size: x-large;
@@ -21,6 +23,7 @@ header {
     height: 20px;
     display: flex;
     justify-content: right;
+    color: black;
 }
 .header-userinfo > a{
     text-decoration: none;
@@ -28,5 +31,6 @@ header {
     margin-left: 10px;
 }
 .header-userinfo > a:hover{
-    color: #bbbbbb;
+    color: papayawhip;
 }
+*/

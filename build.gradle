@@ -1,18 +1,25 @@
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
+    id 'com.google.cloud.tools.jib' version '3.2.0'
 }
 
 group = 'kr.co.project'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '0.0.1'
+sourceCompatibility = '1.8'
 
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+
 }
 
 repositories {
@@ -37,8 +44,37 @@ dependencies {
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    implementation 'javax.activation:activation:1.1.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-core:3.0.1'
+    implementation 'com.sun.xml.ws:rt:3.0.1'
+    implementation 'com.sun.xml.ws:jaxws-rt:3.0.1'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jib {
+    from {
+        allowInsecureRegistries = true
+        auth {
+            username = "man1049"
+            password = "@Tt8211043"
+        }
+    }
+    to {
+        image = 'man1049/tjproject'
+        auth {
+            username = "man1049"
+            password = "@Tt8211043"
+        }
+        tags = ["0.0.1"]
+    }
+    container {
+        jvmFlags = ['-XX:+UnlockExperimentalVMOptions', '-XX:+UseCGroupMemoryLimitForHeap', '-Dserver.port=8080']
+        ports = ['8080']
+        creationTime = "USE_CURRENT_TIMESTAMP"
+    }
 }

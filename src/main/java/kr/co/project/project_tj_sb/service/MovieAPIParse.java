@@ -19,7 +19,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class MovieAPIParse {
-    
+    /*
     // 영화진흥위원회 오픈API 일일박스오피스 파싱
     public JSONArray movieTop10(){
         try{
@@ -212,4 +212,5 @@ public class MovieAPIParse {
             return null;
         }
     }
+    */
 }

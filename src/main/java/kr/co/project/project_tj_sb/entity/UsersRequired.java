@@ -55,16 +55,13 @@ public class UsersRequired{
     }
 
 /*
-    @OneToMany(mappedBy = "required")
-    private List<UsersResHistory> usersResHistory;
+    @OneToMany(mappedBy = "users_review")
+    private List<> usersResHistory;
 */
-
-    /*
+/*
     @OneToOne(mappedBy = "required", fetch = FetchType.LAZY)
-    private UsersOptional usersOptional;
-    */
-
-
+    private MovieComment movieComment;
+*/
     @Builder.Default
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<UsersRole> roleSet = new HashSet<>();

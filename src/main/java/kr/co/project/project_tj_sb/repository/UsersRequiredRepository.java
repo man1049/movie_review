@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
+@Repository
 public interface UsersRequiredRepository extends JpaRepository<UsersRequired, String> {
 
     //기본키인 이메일을 이용해서 데이터 불러오기

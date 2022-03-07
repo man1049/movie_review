@@ -38,29 +38,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity)throws Exception{
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/logingo").permitAll()
-                .antMatchers("/join/authentication").permitAll()
-                .antMatchers("/pwchange").permitAll()
-                .antMatchers("/main").hasRole("USER")
-                .antMatchers("/main/**").hasRole("USER")
-                .antMatchers("/images/**").hasRole("USER")
-                .antMatchers("/css/**").hasRole("USER")
-                .antMatchers("/js/**").hasRole("USER")
-                .antMatchers("/video/**").permitAll()
+                    .antMatchers("/logingo").permitAll()
+                    .antMatchers("/join/authentication").permitAll()
+                    .antMatchers("/pwchange").permitAll()
+                    .antMatchers("/main").hasRole("USER")
+                    .antMatchers("/detaile").hasRole("USER")
+                    .antMatchers("/korean").hasRole("USER")
+                    .antMatchers("/main/**").hasRole("USER")
+                    .antMatchers("/images/**").hasRole("USER")
+                    .antMatchers("/css/**").hasRole("USER")
+                    .antMatchers("/js/**").hasRole("USER")
+                    .antMatchers("/video/**").permitAll()
                 .and()
-                .formLogin().loginPage("/logingo").permitAll().loginProcessingUrl("/login")
-                .usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/main")
-                .failureHandler(loginFilureHandler) // 로그인 실패 시 진행될 Handler
+                .formLogin()
+                    .loginPage("/logingo").permitAll().loginProcessingUrl("/login")
+                    .usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/main")
+                    .failureHandler(loginFilureHandler) // 로그인 실패 시 진행될 Handler
                 //.successHandler() // 로그인 성공 시 진행될 Handler
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
                 .and()
-                .csrf().disable();
+                    .csrf().disable();
+        /*
+        httpSecurity
+                .sessionManagement()
+                .maximumSessions(1) // 최대 허용 가능 세션 수
+                .maxSessionsPreventsLogin(true) // 동시 로그인 차단
+                .expiredUrl("/");
 
-
-
+         */
     }
 }
 

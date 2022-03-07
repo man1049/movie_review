@@ -1,6 +1,7 @@
 package kr.co.project.project_tj_sb.service;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
+import kr.co.project.project_tj_sb.config.EmailConfig;
 import kr.co.project.project_tj_sb.dto.UserDTO;
 //import kr.co.project.project_tj_sb.entity.UsersOptional;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
@@ -13,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +29,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
 
     private final UsersRequiredRepository usersRequiredRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JavaMailSender emailSender;
+    private final EmailConfig emailConfig;
     
     //비밀번호 변경
     @Override
@@ -95,7 +98,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
 
         if(check > 0){
             try{
-                MimeMessage message = emailSender.createMimeMessage();
+                MimeMessage message = emailConfig.javaMailService().createMimeMessage();
 
                 message.addRecipients(Message.RecipientType.TO, user_email);//받는사람
                 message.setSubject("도전점심 비밀번호 변경");//제목
@@ -106,7 +109,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
                 msgg+= "<br>";
                 msgg+= "<p>아래 버튼을 클릭하여 비밀번호를 변경해주세요.<p>";
                 msgg+= "<br>";
-                msgg+= "<form method=\"get\" action=\"http://localhost:8080/pwchange\">"+
+                msgg+= "<form method=\"get\" action=\"http://118.32.35.166:1029/pwchange\">"+
                         "<input type=\"hidden\" name=\"code\" value=\""+user_emailEncorder3+"\">"+
                         "<input type=\"submit\" value=\"비밀번호 변경하기\">"+
                         "</form><br>";
@@ -114,7 +117,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
                 message.setText(msgg, "utf-8", "html");//내용
                 message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","도전점심"));//보내는 사람
 
-                emailSender.send(message);
+                emailConfig.javaMailService().send(message);
 
             }catch (Exception e){
                 log.info("인증메일 전송 exception : "+e.getLocalizedMessage());
@@ -216,7 +219,8 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
         UsersRequired usersRequired = dtoToEntity(userDTO);
 
         try{
-            MimeMessage message = emailSender.createMimeMessage();
+            MimeMessage message = emailConfig.javaMailService().createMimeMessage();
+
 
             message.addRecipients(Message.RecipientType.TO, usersRequired.getUser_email());//받는사람
             message.setSubject("영화는 영화다 회원가입 이메일 인증");//제목
@@ -227,7 +231,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
             msgg+= "<br>";
             msgg+= "<p>아래 버튼을 클릭하여 이메일 인증을 해주세요<p>";
             msgg+= "<br>";
-            msgg+= "<form method=\"post\" action=\"http://localhost:8080/join/authentication\">"+
+            msgg+= "<form method=\"post\" action=\"http://118.32.35.166:1029/join/authentication\">"+
                     "<input type=\"hidden\" name=\"user_email\" value=\""+usersRequired.getUser_email()+"\">"+
                     "<input type=\"submit\" value=\"인증확인\">"+
                     "</form><br>";
@@ -236,12 +240,13 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
             message.setText(msgg, "utf-8", "html");//내용
             message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","영화는 영화다"));//보내는 사람
 
-            emailSender.send(message);
+            emailConfig.javaMailService().send(message);
 
         }catch (Exception e){
             log.info("인증메일 전송 exception : "+e.getLocalizedMessage());
             throw new IllegalArgumentException();
         }
+
         usersRequiredRepository.save(usersRequired);
     }
 }

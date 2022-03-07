@@ -1,161 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="script">
     <link rel="stylesheet" href="/resources/css/main/default.css">
+    <link rel="stylesheet" href="/resources/css/main/main.css">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="/resources/js/plugin/splide.min.js"></script>
+    <script src='/resources/js/plugin/dragScroll.min.js'></script>
+    <link rel="stylesheet" href="/resources/css/main/splide.min.css">
     <meta charset="UTF-8">
     <title>영화는 영화다</title>
 </head>
-
-<STYLE>
-    main{
-        margin-top: 10px;
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-    }
-    .div-list{
-        border: 1px solid #bbbbbb;
-        border-bottom: 1px solid black;
-        width: 90%;
-        height: 300px;
-        margin: 0px 5% 10px;
-        text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-
-    .div-list-title{
-        border-bottom: 1px solid #bbbbbb;
-        height: 10%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .div-list-container{
-        width: 100%;
-        height: 90%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-
-    .div-list-container-detaile, .div-list-container-ranks{
-        width: 50%;
-        height: 100%;
-    }
-
-
-    .div-list-container-item>img {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-    }
-
-    .div-reviews{
-        display: flex;
-        width: 100%;
-        height: 200px;
-    }
-    .div-reviews-best{
-        margin-left: 5%;
-        margin-right: 1%;
-    }
-    .div-reviews-worst{
-        margin-right: 5%;
-        margin-left: 1%;
-    }
-    .div-reviews-best, .div-reviews-worst{
-        width: 44%;
-        height: 100%;
-        display: flex;
-        flex-flow: row;
-        border: 1px solid #bbbbbb;
-    }
-    .div-reviews-best-image, .div-reviews-worst-image{
-        width: 40%;
-        height: 100%;
-    }
-    .div-reviews-best-image > a > img, .div-reviews-worst-image > a > img{
-        width: 100%;
-        height: 100%;
-    }
-    .div-reviews-best-comment, .div-reviews-worst-comment{
-        font-size: medium;
-        overflow: hidden;
-        height: 90%;
-        width: 100%;
-    }
-
-    .div-reviews-best-star, .div-reviews-worst-star{
-        display: flex;
-        flex-wrap: nowrap;
-        flex-flow: row;
-        margin-bottom: 5px;
-        border-bottom: 1px solid #bbbbbb;
-        width: 100%;
-        height: 10%;
-    }
-
-    .div-reviews-starbest-star, .div-reviews-starworst-star{
-        width: 100%;
-        height: 90%;
-        margin-left: 1%;
-    }
-    .div-list-container-detaile{
-        width: 50%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-    .detaile-img{
-        width: 50%;
-        height: 100%;
-    }
-    .detaile-img > img{
-        width: 100%;
-        height: 100%;
-    }
-    .detaile-contents{
-        width: 49%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        border-right: 1px solid #bbbbbb;
-    }
-    .detaile-contents-title{
-        width: 100%;
-        height: 15%;
-        margin-bottom: 10px;
-    }
-    .detaile-contents-top, .detaile-contents-middle, .detaile-contents-bottom{
-        width: 100%;
-        height: 20%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-    .top-title, .middle-title, .bottom-title{
-        width: 30%;
-        height: 5%;
-        font-size: xx-small;
-    }
-    .top-contents, .middle-contents, .bottom-contents{
-        width: 70%;
-        height: 5%;
-        font-size: xx-small;
-    }
-</STYLE>
 <body>
-    <header th:replace="/header.html">
-    </header>
     <nav th:replace="/nav.html">
     </nav>
     <main>
+        <div class="banner">
+            <div class="banner-slide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><img class="banner-img" src="/resources/images/banner/banner-1.jpg"></li>
+                        <li class="splide__slide"><img class="banner-img" src="/resources/images/banner/banner-2.jpg"></li>
+                        <li class="splide__slide"><img class="banner-img" src="/resources/images/banner/banner-3.jpg"></li>
+                    </ul>
+                </div>
+                <div class="splide__progress">
+                    <div class="splide__progress__bar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="today">
+            <div class="today-title">
+                금일 박스오피스
+            </div>
+            <div class="today-slide">
+                <div class="splide__track">
+                    <ul class="splide__list today-top10"></ul>
+                </div>
+            </div>
+            <!--<div class="today-top10"></div>-->
+        </div>
+
+        <div class="week">
+            <div class="week-title">
+                주간 박스오피스
+            </div>
+            <div class="week-slide">
+                <div class="splide__track">
+                    <ul class="splide__list week-top10">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--
         <div class="div-list">
             <div class="div-list-title">오늘의 박스오피스</div>
             <div class="div-list-container">
@@ -171,163 +70,11 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div class="div-reviews">
-            <div class="div-reviews-best">
-                <div class="div-reviews-best-image">
-                    <a href="#"><img th:src="@{resources/images/movieposter/1.jpg}"></a>
-                </div>
-                <div class="div-reviews-starbest-star">
-                    <div class="div-reviews-best-star">
-                        <div>
-                            평점
-                        </div>
-                        <div>
-                            *****
-                        </div>
-                    </div>
-                    <div class="div-reviews-best-comment">
-                        개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                        꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼개꿀잼
-                    </div>
-                </div>
-            </div>
-            <div class="div-reviews-worst">
-                <div class="div-reviews-worst-image">
-                    <a href="#"><img th:src="@{resources/images/movieposter/1.jpg}"></a>
-                </div>
-                <div class="div-reviews-starworst-star">
-                    <div class="div-reviews-worst-star">
-                        <div>
-                            평점
-                        </div>
-                        <div>
-                            *
-                        </div>
-
-                    </div>
-                    <div class="div-reviews-worst-comment">
-                        개노잼
-                    </div>
-                </div>
-            </div>
-        </div>
         -->
     </main>
     <footer>
 
     </footer>
 </body>
-<script>
-    // ajax로 json 데이터파싱해서 보여주기
-    let todayBoxOffice
-    let data
-    $(function () {
-        let today = new Date();
-
-        let year = today.getFullYear();
-        let month = ('0' + (today.getMonth() + 1)).slice(-2);
-        let day = ('0' + today.getDate()).slice(-2)-1;
-
-        let dateString = year + month + day;
-        $.ajax({
-            type: "GET",
-            url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
-            data: {
-                key: "ceabdcb6d52d7eb5709bbb09dc253b97",
-                targetDt: dateString
-            },
-            dataType: "json",
-            success:function (today) {
-                todayBoxOffice = today
-                for(let i = 0; i<10; i++) {
-                    $('.div-list-container-ranks-table')
-                        .append("<tr onclick='rankDetaile("+i+")'>" +
-                            "<td>" + (today.boxOfficeResult.dailyBoxOfficeList[i].rank) + "</td>" +
-                            "<td>" + (today.boxOfficeResult.dailyBoxOfficeList[i].movieNm) + "</td>" +
-                            "<td>" + (today.boxOfficeResult.dailyBoxOfficeList[i].audiCnt) + "</td>"
-                            + "</tr>")
-                    console.log(today.boxOfficeResult.dailyBoxOfficeList[i].movieNm)
-                    console.log(today.boxOfficeResult.dailyBoxOfficeList[i].movieCd)
-                }
-
-                rankDetaile(0);
-            }
-        });
-
-    });
-    function rankDetaile(i) {
-        $.ajax({
-            type: "GET",
-            url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
-            data: {
-                key: "ceabdcb6d52d7eb5709bbb09dc253b97",
-                movieCd: todayBoxOffice.boxOfficeResult.dailyBoxOfficeList[i].movieCd
-            },
-            dataType: "json",
-            success:function (detaile) {
-
-                data = detaile.movieInfoResult.movieInfo
-                let min
-                let hour
-                if(data.showTm/60 > 0){
-                    hour = Math.floor(data.showTm/60);
-                    min = data.showTm-(hour*60);
-                }
-
-                try{
-                    director = data.directors[0].peopleNm
-                }catch (e) {
-                    director = "정보없음"
-                }
-
-                $('.div-list-container-detaile').html(
-                    "<div class='detaile-img'>\n" +
-                    "                        <img src='resources/images/movieposter/"+data.movieCd+".png'>\n" +
-                    "                    </div>\n" +
-                    "                <div class='detaile-contents'>\n" +
-                    "                    <div class='detaile-contents-title'>\n" +
-                    "                        <div class='title-kor'>"+data.movieNm+"</div>\n" +
-                    "                        <div class='title-en'>"+data.movieNmEn+"</div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class='detaile-contents-top'>\n" +
-                    "                        <div class='top-title'>개봉일</div>\n" +
-                    "                        <div class='top-contents'>"+data.openDt+"</div>\n" +
-                    "\n" +
-                    "                        <div class='top-title'>제작상태</div>\n" +
-                    "                        <div class='top-contents'>"+data.prdtStatNm+"</div>\n" +
-                    "\n" +
-                    "                        <div class='top-title'>영화구분</div>\n" +
-                    "                        <div class='top-contents'>"+data.typeNm+"</div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class='detaile-contents-middle'>\n" +
-                    "                        <div class='middle-title'>관람등급</div>\n" +
-                    "                        <div class='middle-contents'>"+data.audits[0].watchGradeNm+"</div>\n" +
-                    "\n" +
-                    "                        <div class='middle-title'>상영시간</div>\n" +
-                    "                        <div class='middle-contents'>"+ (hour > 0 ? (hour+'시간'+min+'분'): (min+'분')) + "</div>\n" +
-                    "\n" +
-                    "                        <div class='middle-title'>제작국가</div>\n" +
-                    "                        <div class='middle-contents'>"+(data.nations[0].nationNm == null? ("정보없음"):(data.nations[0].nationNm)) +"</div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class='detaile-contents-bottom'>\n" +
-                    "                        <div class='bottom-title'>감독</div>\n" +
-                    "                        <div class='bottom-contents'>"+director+"</div>\n" +
-                    "\n" +
-                    "                        <div class='bottom-title'>장르</div>\n" +
-                    "                        <div class='bottom-contents'>"+data.genres[0].genreNm+"</div>\n" +
-                    "\n" +
-                    "                    </div>\n" +
-                    "                </div>"
-
-                )
-            }
-        })
-    }
-</script>
+<script src="resources/js/main/main.js"></script>
 </html>
