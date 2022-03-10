@@ -25,24 +25,24 @@
     background-color: #bbbbbb;
 }
 
-.today{
+.todaybox {
     margin-top: 2.5vw;
     width: 97%;
     height: 35vw;
 }
 
-.week {
+.weekbox, .todayindie, .weekindie {
     margin-top: 5vw;
     width: 97%;
     height: 35vw;
 }
 
-.today-slide, .week-slide {
+.todaybox-slide, .weekbox-slide, .todayindie-slide, .weekindie-slide {
     width: 100%;
     height: 100%;
 }
 
-.today-title, .week-title{
+.todaybox-title, .weekbox-title, .todayindie-title, .weekindie-title{
     width: 100%;
     height: 3vw;
     font-size: 2.4vw;
@@ -60,16 +60,16 @@
     overflow: auto;
 }
 */
-.today-top10-posters, .week-top10-posters{
+.todaybox-top10-posters, .weekbox-top10-posters, .todayindie-top10-posters, .weekindie-top10-posters {
     height: 100%;
     display: flex;
-    justify-items: left;
+    justify-items: center;
     align-items: center;
     flex-wrap: nowrap;
     flex-direction: column;
     cursor: pointer;
 }
-.today-top10-posters-img, .week-top10-posters-img{
+.todaybox-top10-posters-img, .weekbox-top10-posters-img, .todayindie-top10-posters-img, .weekindie-top10-posters-img{
     width: 21vw;
     height: 90%;
     background-color: #f8ba00;
@@ -85,7 +85,7 @@
     flex-direction: row;
 }
 */
-.today-top10-posters-title, .week-top10-posters-title {
+.todaybox-top10-posters-title, .weekbox-top10-posters-title, .todayindie-top10-posters-title, .weekindie-top10-posters-title {
     width: 21vw;
     height: 10%;
     display: flex;
@@ -93,7 +93,7 @@
     align-items: center;
     font-size: 2.5vw;
 }
-.today-top10-posters-title > span, .week-top10-posters-title > span{
+.todaybox-top10-posters-title > span, .weekbox-top10-posters-title > span, .todayindie-top10-posters-title > span, .weekindie-top10-posters-title > span{
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;

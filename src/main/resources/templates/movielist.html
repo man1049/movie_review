@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/resources/css/main/default.css">
-    <link rel="stylesheet" href="/resources/css/main/korean.css">
+    <link rel="stylesheet" href="/resources/css/main/movielist.css">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,16 +11,11 @@
 <body>
     <nav th:replace="nav.html"></nav>
     <main>
-        <div class="list">
-            <table class="list-table">
-                <th>이름</th>
-                <th>장르</th>
-                <th>감독</th>
-                <th>개봉일</th>
-                <th>제작상태</th>
-                <th>제작국가</th>
-            </table>
+        <div style="height: 180vw">
+            <div class="movielist">
+            </div>
         </div>
+
         <div class="page">
             <table class="page-table">
                 <tr class="page-table-tr">
@@ -35,10 +31,12 @@
                     <td onclick="pageNum(10)">10</td>
                 </tr>
             </table>
-            <input type="text" class="search">
-            <button onclick="search()">검색</button>
+            <div class="search">
+                <input type="text" class="search-input">
+                <button onclick="search()" class="search-button">검색</button>
+            </div>
         </div>
     </main>
 </body>
-<script src="/resources/js/main/korean.js"></script>
+<script src="/resources/js/main/movielist.js"></script>
 </html>

@@ -1,0 +1,474 @@
+@charset "utf-8";
+
+
+
+.detaile-container{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.detaile-container-top{
+    width: 100%;
+    height: 15vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.detaile-container-top-img{
+    width: 11vw;
+    height: 100%;
+    background-color: #ff7d0f;
+}
+.detaile-container-top-moviedetaile{
+    width: 81vw;
+    height: 100%;
+    background-color: #ffab36;
+    font-size: x-large;
+}
+.detaile-table{
+    width: 100%;
+    height: 100%;
+}
+.table-tr {
+    width: 100%;
+    height: 25%;
+}
+td{
+    padding: 0px;
+    font-size: 2vw;
+}
+.table-td-title{
+    width: 15%;
+    height: 25%;
+    text-align: center;
+}
+
+.table-td-content{
+    width: 35%;
+    height: 25%;
+}
+.detaile-container-director, .detaile-container-actor{
+    width: 45vw;
+    height: 15vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+.detaile-container-director{
+    margin-right: 2%;
+}
+.detaile-container-director-title, .detaile-container-actor-title{
+    width: 100%;
+    height: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+.detaile-container-director-movies, .detaile-container-actor-staffs{
+    width: 100vw;
+    height: 14vw;
+    background-color: black;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto;
+}
+.movies-container, .staffs-container{
+    height: 100%;
+    margin-right: 5px;
+}
+.movies-container-img, .staffs-container-img{
+    width: 7.5vw;
+    height: 9vw;
+    background-color: white;
+}
+.movies-container-title, .staffs-container-title{
+    width: 7.5vw;
+    height: 4vw;
+    background-color: #ffab36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.staffs-container-title > div, .movies-container-title > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+}
+.staffs-container-title > div > span, .movies-container-title > div > span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1vw;
+}
+.detaile-comments {
+    margin-top: 3vw;
+    width: 100%;
+    height: 25vw;
+    background-color: #ffab36;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.comments-container{
+    width: 100%;
+    height: 21vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #1113;
+    overflow: auto;
+}
+.comments-container-write{
+    width: 100%;
+    height: 4.5vw;
+    background-color: #ffb54a;
+}
+.comments-container-write > form{
+    height: 100%;
+    width: 100%;
+}
+.write-text{
+    width: 89vw;
+    height: 80%;
+    border: 2px solid #1113;
+    padding: 0;
+    font-size: 1.5vw;
+}
+.form-submit{
+    width: 9vw;
+    height: 85%;
+    border: 0;
+    padding: 0;
+    margin-left: 5px;
+    background-color: white;
+    font-size: 1.5vw;
+}
+.write-hidden-nickname, .write-hidden-code{
+    width: 0;
+    height: 0;
+}
+.star{
+    border: 1px;
+    padding: 0px;
+}
+.write-star{
+    height: 50%;
+    font-size: 2vw;
+    margin-left: 0.5vw;
+}
+.write{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.comments-container-contents{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+    font-size: 1.5vw;
+}
+
+.comment{
+    width: 100%;
+    height: 2.5vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.comment-nickname{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbf76;
+}
+.comment-star{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffa516;
+
+}
+
+.comment-text{
+    width: 59%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #ffb54a;
+    padding-left: 1%;
+
+}
+
+.comments-container-scroll{
+    width: 100%;
+}
+
+.detaile-userinfo{
+    width: 100%;
+    height: 15vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    justify-content: center;
+}
+.detaile-userinfo-gender, .detaile-userinfo-age, .detaile-userinfo-star{
+    width: 31vw;
+    height: 100%;
+}
+.detaile-userinfo-gender{
+    margin: 0px 2vw;
+}
+
+.detaile-userinfo-title{
+    margin-top: 2vw;
+    width: 100vw;
+    height: 3vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.detaile-userinfo-title-left, .detaile-userinfo-title-center, .detaile-userinfo-title-right{
+    width: 31vw;
+    height: 2vw;
+    background-color: #ffab36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+}
+
+.detaile-userinfo-title-center{
+    margin: 0px 2%;
+}
+
+@media screen and (max-width: 1280px) {
+    .detaile-container{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .detaile-container-top{
+        width: 100%;
+        height: 25vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .detaile-container-top-img {
+        width: 18vw;
+        height: 100%;
+        background-color: #ff7d0f;
+    }
+
+    td{
+        padding: 0px;
+        font-size: 3vw;
+    }
+
+    .detaile-container-director{
+        width: 95vw;
+        height: 27vw;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 3vw;
+    }
+
+    .detaile-container-actor {
+        width: 95vw;
+        height: 27vw;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 6vw;
+    }
+
+    .detaile-container-director-title, .detaile-container-actor-title {
+        width: 100%;
+        height: 4vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+    }
+
+    .detaile-container-director-movies, .detaile-container-actor-staffs {
+        width: 100vw;
+        height: 27vw;
+        background-color: black;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+
+    .movies-container-img, .staffs-container-img {
+        width: 15vw;
+        height: 18vw;
+        background-color: white;
+    }
+
+    .movies-container-title, .staffs-container-title {
+        width: 15vw;
+        height: 8vw;
+        background-color: #ffab36;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .detaile-userinfo-title {
+        margin-top: 6vw;
+        width: 100vw;
+        height: 4vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .detaile-userinfo-title-left, .detaile-userinfo-title-center {
+        width: 47vw;
+        height: 4vw;
+        background-color: #ffab36;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4vw;
+    }
+
+    .detaile-userinfo-title-right{
+        display: none;
+    }
+
+    .detaile-userinfo-title-center{
+        margin: 0 0 0 4vw;
+    }
+
+    .staffs-container-title > div > span, .movies-container-title > div > span{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 2.5vw;
+    }
+
+    .detaile-userinfo {
+        width: 100%;
+        height: 47vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .detaile-userinfo-star{
+        display: none;
+    }
+
+    .detaile-userinfo-gender, .detaile-userinfo-age, .detaile-userinfo-star {
+        width: 47vw;
+        height: 47vw;
+    }
+
+    .detaile-userinfo-gender {
+        margin: 0 0 0 4vw;
+    }
+
+    .detaile-comments {
+        margin-top: 8vw;
+        width: 100%;
+        height: 39vw;
+        background-color: #ffab36;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .comments-container {
+        width: 100%;
+        height: 30vw;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        background-color: #1113;
+        overflow: auto;
+    }
+
+    .comments-container-contents {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 2px;
+        font-size: 3.4vw;
+    }
+
+    .comment {
+        width: 100%;
+        height: 5vw;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .comments-container-write{
+        width: 97vw;
+        height: 9vw;
+    }
+
+    .write-star {
+        height: 50%;
+        font-size: 3vw;
+        margin-left: 0.5vw;
+        display: flex;
+        align-items: center;
+    }
+
+    .write-text {
+        width: 86vw;
+        height: 80%;
+        border: 2px solid #1113;
+        padding: 0;
+        font-size: 3vw;
+    }
+
+    .form-submit {
+        font-size: 2.5vw;
+        width: 9vw;
+        height: 85%;
+        border: 0;
+        padding: 0;
+        margin-left: 0.2vw;
+        background-color: white;
+    }
+
+
+}

@@ -1,28 +1,18 @@
 package kr.co.project.project_tj_sb.controller;
 
-import kr.co.project.project_tj_sb.dto.UserDTO;
-import kr.co.project.project_tj_sb.dto.UsersAuthDTO;
-import kr.co.project.project_tj_sb.entity.MovieComment;
-import kr.co.project.project_tj_sb.service.MovieAPIParse;
 import kr.co.project.project_tj_sb.service.MovieDetaileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Controller
@@ -61,6 +51,7 @@ public class PageController {
     }
 
     @GetMapping("/logingo")
+    @CacheEvict(allEntries = true) // 캐시를 전부 제거함
     public void login(){}
 
     @GetMapping("/main")
@@ -68,14 +59,15 @@ public class PageController {
         //model.addAttribute("top10",movieAPIParse.movieTop10());
     }
 
-    @GetMapping("/korean")
+    @GetMapping("/movielist")
     public String korean(){
-        return "korean";
+        return "movielist";
     }
 
     @GetMapping("/detaile")
     public void detaileReview(HttpServletRequest request,Model model, Principal principal){
         boolean isAlreayComment = movieDetaileService.isAlreadyCommentWrite(request,principal);
+
         model.addAttribute("alreadyComment",isAlreayComment);
     }
 

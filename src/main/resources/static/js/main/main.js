@@ -37,6 +37,8 @@ $(function () {
 
     let weekdateString = year + month + day;
 
+    localStorage.removeItem("movielist")
+
     new Splide( '.banner-slide',{
         type: 'loop', // 페이지 끝에 도달시 처음으로
         autoplay: 'paused', // 자동페이지 넘김
@@ -71,11 +73,11 @@ $(function () {
             list = today.boxOfficeResult.dailyBoxOfficeList;
 
             for(let i = 0; i<10; i++) {
-                $('.today-top10').append(
+                $('.todaybox-top10').append(
                     "<li class=\"splide__slide\">"+
-                    "   <div class=\"today-top10-posters\">\n" +
-                    "       <img class=\"today-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
-                    "       <div class=\"today-top10-posters-title\">" +
+                    "   <div class=\"todaybox-top10-posters\">\n" +
+                    "       <img class=\"todaybox-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <div class=\"todaybox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
                     "   </div>"+
@@ -84,7 +86,7 @@ $(function () {
 
             }
 
-            new Splide( '.today-slide', {
+            new Splide( '.todaybox-slide', {
                 type: 'loop',
                 perPage: 4,
                 perMove: 1,
@@ -107,11 +109,11 @@ $(function () {
             weekBoxOffice = week;
             list = week.boxOfficeResult.weeklyBoxOfficeList;
             for(let i = 0; i<10; i++) {
-                $('.week-top10').append(
+                $('.weekbox-top10').append(
                     "<li class=\"splide__slide\">"+
-                    "   <div class=\"week-top10-posters\">\n" +
-                    "       <img class=\"week-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
-                    "       <div class=\"week-top10-posters-title\">" +
+                    "   <div class=\"weekbox-top10-posters\">\n" +
+                    "       <img class=\"weekbox-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <div class=\"weekbox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
                     "   </div>"+
@@ -119,7 +121,82 @@ $(function () {
                 )
 
             }
-            new Splide( '.week-slide', {
+            new Splide( '.weekbox-slide', {
+                type: 'loop',
+                perPage: 4,
+                perMove: 1,
+                pagination: false,
+                arrows: false
+            }).mount();
+            //rankDetaile(0);
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+        data: {
+            key: "ceabdcb6d52d7eb5709bbb09dc253b97",
+            targetDt: nowdateString,
+            multiMovieYn: "Y"
+        },
+        dataType: "json",
+        success:function (today) {
+            todayBoxOffice = today;
+            list = today.boxOfficeResult.dailyBoxOfficeList;
+
+            for(let i = 0; i<10; i++) {
+                $('.todayindie-top10').append(
+                    "<li class=\"splide__slide\">"+
+                    "   <div class=\"todayindie-top10-posters\">\n" +
+                    "       <img class=\"todayindie-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <div class=\"todayindie-top10-posters-title\">" +
+                    "           <span>"+list[i].movieNm+"</span>" +
+                    "       </div>\n" +
+                    "   </div>"+
+                    "</li>"
+                )
+
+            }
+
+            new Splide( '.todayindie-slide', {
+                type: 'loop',
+                perPage: 4,
+                perMove: 1,
+                pagination: false,
+                arrows: false
+            }).mount();
+            //rankDetaile(0);
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json",
+        data: {
+            key: "ceabdcb6d52d7eb5709bbb09dc253b97",
+            targetDt: weekdateString,
+            multiMovieYn: "Y"
+
+        },
+        dataType: "json",
+        success:function (week) {
+            weekBoxOffice = week;
+            list = week.boxOfficeResult.weeklyBoxOfficeList;
+            for(let i = 0; i<10; i++) {
+                $('.weekindie-top10').append(
+                    "<li class=\"splide__slide\">"+
+                    "   <div class=\"weekindie-top10-posters\">\n" +
+                    "       <img class=\"weekindie-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <div class=\"weekindie-top10-posters-title\">" +
+                    "           <span>"+list[i].movieNm+"</span>" +
+                    "       </div>\n" +
+                    "   </div>"+
+                    "</li>"
+                )
+
+            }
+            new Splide( '.weekindie-slide', {
                 type: 'loop',
                 perPage: 4,
                 perMove: 1,
