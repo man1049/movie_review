@@ -84,6 +84,9 @@ $(function (e) {
     let star_avg = 0.0
 
 
+    $('.detaile-container-top-img').html(
+        "<img class=\"detaile-container-top-img\" src=\"resources/images/movieposter/"+param+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >"
+    )
 
     $.ajax({
         type: 'GET',
@@ -114,6 +117,12 @@ $(function (e) {
             }catch (e) {
                 watchGrade = "정보없음"
             }
+            let genres
+            try{
+                genres = mv.genres[0].genreNm
+            }catch (e){
+                genres = "정보없음"
+            }
 
             let min
             let hour
@@ -124,6 +133,8 @@ $(function (e) {
 
 
             //$('.detaile-container-top-img').html('<img src="'+code+'.png">')
+
+
 
             $('.detaile-table').html("<tr class=\"table-tr\">\n" +
                 "                        <td class=\"table-td-title\">영화명</td>\n" +
@@ -139,7 +150,7 @@ $(function (e) {
                 "                    </tr>\n" +
                 "                    <tr class=\"table-tr\">\n" +
                 "                        <td class=\"table-td-title\">장르명</td>\n" +
-                "                        <td class=\"table-td-content\">"+mv.genres[0].genreNm+"</td>\n" +
+                "                        <td class=\"table-td-content\">"+genres+"</td>\n" +
                 "                        <td class=\"table-td-title\">상영시간</td>\n" +
                 "                        <td class=\"table-td-content\">"+(min == null ? "정보없음" : (hour > 0 ? (hour+'시간'+min+'분'): (min+'분'))) + "</td>\n" +
                 "                    </tr>\n" +
@@ -163,46 +174,59 @@ $(function (e) {
                 if(window.innerWidth > 1280){
                     $('.detaile-container-actor').css({
                         'width':'45vw',
-                        'height':'15vw',
-                        'display':'flex',
-                        'flex-wrap':'wrap',
+                        'height':'17vw',
                         'margin-top': '2vw',
                     })
 
                 }else{
                     $('.detaile-container-actor').css({
                         'width':'95vw',
-                        'height': '27vw',
-                        'display': 'flex',
-                        'flex-wrap': 'wrap',
-                        'margin-top': '6vw'
+                        'height': '35vw',
+                        'margin-top': '3vw'
                     })
                 }
 
                 $('.detaile-container-actor').append(
-                    "<div class=\"detaile-container-actor-title\">\n" +
-                    "                배우\n" +
-                    "            </div>\n" +
-                    "            <div class=\"detaile-container-actor-staffs\"></div>"
+                    "<div class=\"detaile-container-actor-title\">배우</div>\n"+
+                    /*"            <div class=\"detaile-container-actor-staffs\"></div>"*/
+                    "<div class=\"actor-slide\">" +
+                    "      <div class=\"splide__track\">" +
+                    "           <ul class=\"splide__list actor-slide-list\"></ul>" +
+                    "      </div>" +
+                    "</div>"
                 )
+
+
                 for(let i = 0 ; i < Object.keys(actor).length; i++){
-                    $('.detaile-container-actor-staffs')
+                    $('.actor-slide-list')
                         .append(
+                            "<li class='splide__slide'>"+
                             "<div class=\"staffs-container\">"+
-                            "<div class=\"staffs-container-img\">\n" +
-                            ""+
-                            "                    </div>\n" +
-                            "                    <div class=\"staffs-container-title\">\n" +
-                            "                        <div><span>"+actor[i].peopleNm+"</span></div>\n" +
-                            "                        <div><span>"+actor[i].cast+"</span></div>\n" +
-                            "                    </div>"+
-                            "</div>"
+                            "   <div class=\"staffs-container-img\">\n" +
+                            "       <img class=\"staffs-container-img\" src=\"resources/images/movieposter/"+actor[i].peopleNmEn+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >"+
+                            "   </div>\n" +
+                            "   <div class=\"staffs-container-title\">\n" +
+                            "       <div><span>"+actor[i].peopleNm+"</span></div>\n" +
+                            "       <div><span>"+actor[i].cast+"</span></div>\n" +
+                            "   </div>"+
+                            "</div>"+
+                            "</li>"
                         );
                 }
 
+                new Splide( '.actor-slide', {
+                    type: 'slide',
+                    perPage: 5,
+                    perMove: 1,
+                    pagination: false,
+                    arrows: false
+                }).mount();
+/*
                 var $container = $(".detaile-container-actor-staffs");
                 var $scroller = $(".detaile-container-actor-staffs");
                 bindDragScroll($container, $scroller);
+
+ */
             }
 
 
@@ -229,73 +253,96 @@ $(function (e) {
                         if(actor_flag === false && window.innerWidth > 1280) {
                             $('.detaile-container-actor').css({
                                 'width': '95vw',
-                                'height': '15vw',
-                                'display': 'flex',
-                                'flex-wrap': 'wrap',
+                                'height': '17vw',
                                 'margin-top': '2vw'
                             })
-                        }else {
+                        }else if(actor_flag === true && window.innerWidth > 1280){
+                            $('.detaile-container-actor').html('')
+                            $('.detaile-container-actor').css({
+                                'width':'0px',
+                                'height':'0px'
+                            })
+                        }else if(actor_flag === false && window.innerWidth <= 1280){
                             $('.detaile-container-actor').css({
                                 'width': '95vw',
-                                'height': '27vw',
-                                'display': 'flex',
-                                'flex-wrap': 'wrap',
-                                'margin-top': '6vw'
+                                'height': '35vw',
+                                'margin-top': '3vw'
+                            })
+                        }else if(actor_flag === true && window.innerWidth <= 1280) {
+                            $('.detaile-container-actor').html('')
+                            $('.detaile-container-actor').css({
+                                'width': '0px',
+                                'height': '0px'
                             })
                         }
-
                     }else{
                         if(actor_flag === true  && window.innerWidth > 1280){
+                            $('.detaile-container-actor').html('')
+                            $('.detaile-container-actor').css({
+                                'width':'0px',
+                                'height':'0px'
+                            })
 
                             $('.detaile-container-director').css({
                                 'width':'95vw',
-                                'height':'15vw',
-                                'display':'flex',
-                                'flex-wrap':'wrap',
+                                'height':'17vw',
                                 'margin-top': '2vw'
                             })
                         }else if(actor_flag === false && window.innerWidth > 1280){
                             $('.detaile-container-director').css({
                                 'width':'45vw',
-                                'height':'15vw',
-                                'display':'flex',
-                                'flex-wrap':'wrap',
+                                'height':'17vw',
                                 'margin-top': '2vw',
                                 'margin-right': '2%'
                             })
                         }else{
                             $('.detaile-container-director').css({
                                 'width':'95vw',
-                                'height':'27vw',
-                                'display':'flex',
-                                'flex-wrap':'wrap',
-                                'margin-top': '6vw'
+                                'height':'35vw',
+                                'margin-top': '3vw'
                             })
                         }
 
                         $('.detaile-container-director').append(
-                            "<div class=\"detaile-container-director-title\">\n" +
-                            "                감독의 영화\n" +
-                            "            </div>\n" +
-                            "            <div class=\"detaile-container-director-movies\"></div>"
+                            "<div class=\"detaile-container-director-title\">감독의 영화</div>" +
+                            /*"            <div class=\"detaile-container-director-movies\"></div>"*/
+                            "<div class=\"director-slide\">" +
+                            "      <div class=\"splide__track\">" +
+                            "           <ul class=\"splide__list director-slide-list\"></ul>" +
+                            "      </div>" +
+                            "</div>"
                         )
+
+
                         for(let i = 0; i < Object.keys(dir).length; i++){
-                            $(".detaile-container-director-movies")
+                            $(".director-slide-list")
                                 .append(
-                                    "<div class=\"movies-container\">\n" +
-                                    "                    <div class=\"movies-container-img\">\n" +
-                                    "" +
-                                    "                    </div>\n" +
-                                    "                    <div class=\"movies-container-title\">\n" +
-                                    "                        <div class='movies-name'><span>"+dir[i].movieNm+"</span></div>\n" +
-                                    "                        <div class='movies-year'><span>("+dir[i].prdtYear+")</span></div>\n" +
-                                    "                    </div>" +
-                                    "</div>"
+                                    "<li class='splide__slide'>"+
+                                        "<div class=\"movies-container\" onclick='dirMovie("+dir[i].movieCd+")' >\n" +
+                                        "                    <div class=\"movies-container-img\">\n" +
+                                        "                           <img class=\"movies-container-img\" src=\"resources/images/movieposter/"+dir[i].movieCd+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >" +
+                                        "                    </div>\n" +
+                                        "                    <div class=\"movies-container-title\">\n" +
+                                        "                        <div class='movies-name'><span>"+dir[i].movieNm+"</span></div>\n" +
+                                        "                        <div class='movies-year'><span>("+dir[i].prdtYear+")</span></div>\n" +
+                                        "                    </div>" +
+                                        "</div>"+
+                                    "</li>"
                                 )
                         }
+                        new Splide( '.director-slide', {
+                            type: 'slide',
+                            perPage: 5,
+                            perMove: 1,
+                            pagination: false,
+                            arrows: false
+                        }).mount();
+
+                        /*
                         var $container = $(".detaile-container-director-movies");
                         var $scroller = $(".detaile-container-director-movies");
                         bindDragScroll($container, $scroller);
+                        */
                     }
                 }
             })
@@ -455,18 +502,14 @@ $(window).resize(function (e) {
             if(actor_flag === false){
                 $('.detaile-container-director').css({
                     'width':'45vw',
-                    'height':'15vw',
-                    'display':'flex',
-                    'flex-wrap':'wrap',
+                    'height':'17vw',
                     'margin-top': '2vw',
                     'margin-right': '2%'
                 })
             }else{
                 $('.detaile-container-director').css({
                     'width':'95vw',
-                    'height':'15vw',
-                    'display':'flex',
-                    'flex-wrap':'wrap',
+                    'height':'17vw',
                     'margin-top': '2vw',
                     'margin-right': '0'
                 })
@@ -483,17 +526,13 @@ $(window).resize(function (e) {
             if(dir_flag === false){
                 $('.detaile-container-actor').css({
                     'width':'45vw',
-                    'height':'15vw',
-                    'display':'flex',
-                    'flex-wrap':'wrap',
+                    'height':'17vw',
                     'margin-top': '2vw',
                 })
             }else{
                 $('.detaile-container-actor').css({
                     'width':'95vw',
-                    'height':'15vw',
-                    'display':'flex',
-                    'flex-wrap':'wrap',
+                    'height':'17vw',
                     'margin-top': '2vw',
                 })
             }
@@ -509,9 +548,7 @@ $(window).resize(function (e) {
         if(dir_flag === false){
             $('.detaile-container-director').css({
                 'width':'95vw',
-                'height':'27vw',
-                'display':'flex',
-                'flex-wrap':'wrap',
+                'height':'35vw',
                 'margin-top': '3vw',
                 'margin-right': '0'
             })
@@ -525,9 +562,7 @@ $(window).resize(function (e) {
         if(actor_flag === false){
             $('.detaile-container-actor').css({
                 'width':'95vw',
-                'height':'27vw',
-                'display':'flex',
-                'flex-wrap':'wrap',
+                'height':'35vw',
                 'margin-top': '6vw',
             })
         }else{
@@ -658,3 +693,7 @@ $(window).resize(function (e) {
         }
     }
 })
+
+function dirMovie(code) {
+    location.href = "/detaile?code="+code
+}

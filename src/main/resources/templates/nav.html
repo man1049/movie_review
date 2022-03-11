@@ -1,17 +1,33 @@
 <link rel="stylesheet" href="/resources/css/main/nav.css">
+<script src="/resources/js/main/nav.js"></script>
 
 <nav>
     <div class="nav-title">
         <a class="nav-title-a" href="/main">영화는 영화다</a>
     </div>
+    <div class="nav-button-container">
+    <img class="nav-button" src="/resources/images/menu_button.png" onclick="navbutton()">
+    </div>
+    <!--
     <div class="nav-container">
         <div class="nav-rinks">
-            <a href="/movielist">영화목록</a>
+            <a href="#">이벤트</a>
+            <a href="/movielist" class="nav-rinks-margin">영화목록</a>
+            <a href="#">리뷰</a>
         </div>
     </div>
+    -->
     <div class="nav-userinfo">
         <span th:text="${#authentication.principal.user_nickname}"></span><span>님 반갑습니다.</span>
         <a href="/logout">로그아웃</a>
     </div>
 </nav>
+<div class="nav-button-menu" id="nav-menu">
+    <div class="nav-button-menu-blank"></div>
+    <ul>
+        <li><a href="#">이벤트</a></li>
+        <li><a href="/movielist">영화목록</a></li>
+        <li><a href="#">리뷰</a></li>
+    </ul>
+</div>
 

@@ -71,12 +71,16 @@ $(function () {
         success:function (today) {
             todayBoxOffice = today;
             list = today.boxOfficeResult.dailyBoxOfficeList;
-
             for(let i = 0; i<10; i++) {
+                /*
+                console.log("금일 박스오피스")
+                console.log(list[i].movieNm)
+                console.log(list[i].movieCd)
+                 */
                 $('.todaybox-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"todaybox-top10-posters\">\n" +
-                    "       <img class=\"todaybox-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"todaybox-top10-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
                     "       <div class=\"todaybox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -108,11 +112,12 @@ $(function () {
         success:function (week) {
             weekBoxOffice = week;
             list = week.boxOfficeResult.weeklyBoxOfficeList;
+
             for(let i = 0; i<10; i++) {
                 $('.weekbox-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"weekbox-top10-posters\">\n" +
-                    "       <img class=\"weekbox-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"weekbox-top10-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
                     "       <div class=\"weekbox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -146,10 +151,13 @@ $(function () {
             list = today.boxOfficeResult.dailyBoxOfficeList;
 
             for(let i = 0; i<10; i++) {
+                console.log("금일 독립영화 박스오피스")
+                console.log(list[i].movieNm)
+                console.log(list[i].movieCd)
                 $('.todayindie-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"todayindie-top10-posters\">\n" +
-                    "       <img class=\"todayindie-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"todayindie-top10-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
                     "       <div class=\"todayindie-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -187,7 +195,7 @@ $(function () {
                 $('.weekindie-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"weekindie-top10-posters\">\n" +
-                    "       <img class=\"weekindie-top10-posters-img\" src=\"resources/images/movieposter/default.png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"weekindie-top10-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
                     "       <div class=\"weekindie-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +

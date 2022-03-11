@@ -162,7 +162,7 @@ function movieListPage() {
                     $('.movielist')
                         .append(
                             "<div class=\"movielist-posters\" onclick='detail_view("+list[i].movieCd+")'\">\n" +
-                            "   <img class=\"movielist-posters-img\" src=\"resources/images/movieposter/default.png\">\n" +
+                            "   <img class=\"movielist-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onerror=\"this.src='resources/images/movieposter/default.png'\">\n" +
                             "   <div class=\"movielist-posters-title\">\n" +
                             "       <span>"+list[i].movieNm+"</span>\n" +
                             "   </div>\n" +
