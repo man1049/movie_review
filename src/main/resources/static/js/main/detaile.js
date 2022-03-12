@@ -1,5 +1,6 @@
-let url = location.search
-let param = new URLSearchParams(url).get('code')
+let param = $(".code").val()
+let nickname = $(".nickname").val()
+
 let director
 var windowWidth
 let dir_flag = false
@@ -26,16 +27,15 @@ $('.comments-container').scroll(function (e) {
     if(scrollTop == contentHeight - scrollHeight){
         $.ajax({
             type: "GET",
-            url: "detaile/comments/page",
+            url: "/detaile/comments/page",
             data: {
                 code: param,
                 page: commentPage,
-                size: commentSize
-
+                size: commentSize,
+                nickname: nickname
             },
             dataType: "json",
             success: function (list) {
-
                 for(let i = 0; i<list.length; i++){
                     let star = "";
                     for(let x = 0; x<list[i].star; x++){
@@ -55,11 +55,19 @@ $('.comments-container').scroll(function (e) {
                             "                            <div class=\"comment-star\">" +
                             "                                "+star +
                             "                            </div>" +
+                            (list[i].mycomment === true ?
+                                "<div class='comment-delete'>" +
+                                "<span onclick='commentDelete("+list[i].id+")'>X</span>"+
+                                "</div>"
+                                :
+                                "<div class='comment-delete'></div>")+
                             "                        </div>" +
                             "                    </div>"
                         );
                 }
-                commentPage++;
+                if(list.length > 0){
+                    commentPage++;
+                }
             }
         })
 
@@ -83,10 +91,12 @@ $(function (e) {
     $('.write-hidden-code').val(param)
     let star_avg = 0.0
 
-
+/*
     $('.detaile-container-top-img').html(
-        "<img class=\"detaile-container-top-img\" src=\"resources/images/movieposter/"+param+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >"
+        "<div class='detaile-container-top-img'><img th:src='@{/detaile/poster(code=${"+param+"})}' class='detaile-container-top-img'></div>"
     )
+*/
+    $('.modify-mvcode').val(param)
 
     $.ajax({
         type: 'GET',
@@ -203,7 +213,7 @@ $(function (e) {
                             "<li class='splide__slide'>"+
                             "<div class=\"staffs-container\">"+
                             "   <div class=\"staffs-container-img\">\n" +
-                            "       <img class=\"staffs-container-img\" src=\"resources/images/movieposter/"+actor[i].peopleNmEn+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >"+
+                            "       <img class=\"staffs-container-img\" src=\"/actor/"+(actor[i].peopleNmEn === '' ? '1' : actor[i].peopleNmEn)+"\" >"+
                             "   </div>\n" +
                             "   <div class=\"staffs-container-title\">\n" +
                             "       <div><span>"+actor[i].peopleNm+"</span></div>\n" +
@@ -213,20 +223,6 @@ $(function (e) {
                             "</li>"
                         );
                 }
-
-                new Splide( '.actor-slide', {
-                    type: 'slide',
-                    perPage: 5,
-                    perMove: 1,
-                    pagination: false,
-                    arrows: false
-                }).mount();
-/*
-                var $container = $(".detaile-container-actor-staffs");
-                var $scroller = $(".detaile-container-actor-staffs");
-                bindDragScroll($container, $scroller);
-
- */
             }
 
 
@@ -320,7 +316,7 @@ $(function (e) {
                                     "<li class='splide__slide'>"+
                                         "<div class=\"movies-container\" onclick='dirMovie("+dir[i].movieCd+")' >\n" +
                                         "                    <div class=\"movies-container-img\">\n" +
-                                        "                           <img class=\"movies-container-img\" src=\"resources/images/movieposter/"+dir[i].movieCd+".png\" onError=\"this.src='resources/images/movieposter/default.png'\" >" +
+                                        "                           <img class=\"movies-container-img\" src=\"/poster/"+dir[i].movieCd+"\">" +
                                         "                    </div>\n" +
                                         "                    <div class=\"movies-container-title\">\n" +
                                         "                        <div class='movies-name'><span>"+dir[i].movieNm+"</span></div>\n" +
@@ -330,13 +326,36 @@ $(function (e) {
                                     "</li>"
                                 )
                         }
-                        new Splide( '.director-slide', {
-                            type: 'slide',
-                            perPage: 5,
-                            perMove: 1,
-                            pagination: false,
-                            arrows: false
-                        }).mount();
+                        let width = window.innerWidth
+                        let actorPerPage
+                        let dirPerPage
+
+                        switch (width > 1280) {
+                            case !actor_flag && dir_flag : actorPerPage = 10; break;
+                            case actor_flag && !dir_flag : dirPerPage = 10; break;
+                        }
+                        if(width < 1281){
+                            actorPerPage = 5;
+                            dirPerPage = 5;
+                        }
+                        if(!actor_flag) {
+                            new Splide('.actor-slide', {
+                                type: 'slide',
+                                perPage: actorPerPage,
+                                perMove: 1,
+                                pagination: false,
+                                arrows: false
+                            }).mount();
+                        }
+                        if(!dir_flag) {
+                            new Splide('.director-slide', {
+                                type: 'slide',
+                                perPage: dirPerPage,
+                                perMove: 1,
+                                pagination: false,
+                                arrows: false
+                            }).mount();
+                        }
 
                         /*
                         var $container = $(".detaile-container-director-movies");
@@ -351,16 +370,16 @@ $(function (e) {
 
     $.ajax({
         type: "GET",
-        url: "detaile/comments/info",
+        url: "/detaile/comments/info",
         data: {
-            code: param
+            code: param,
+            nickname: nickname
         },
         dataType: "json",
         success: function (comments) {
             commentChart = comments
             comments.star_avg == 'NaN'? star_avg = 0 : star_avg = comments.star_avg
             let list = comments.comments
-            console.log(comments)
             $('.table-td-content-star').text(star_avg+'★');
             while(true){
                 if(list.length === 0){
@@ -379,7 +398,7 @@ $(function (e) {
 
                     $('.comments-container-scroll')
                         .append(
-                            "<div class=\"comments-container-contents\">" +
+                            "                   <div class=\"comments-container-contents\">" +
                             "                        <div class=\"comment\">" +
                             "                            <div class=\"comment-nickname\">" +
                             "                                "+ list[i].nickname +
@@ -390,9 +409,16 @@ $(function (e) {
                             "                            <div class=\"comment-star\">" +
                             "                                "+star +
                             "                            </div>" +
+                            (list[i].mycomment === true ?
+                                "<div class='comment-delete'>" +
+                                "<span onclick='commentDelete("+list[i].id+")'>X</span>"+
+                                "</div>"
+                                :
+                                "<div class='comment-delete'></div>")+
                             "                        </div>" +
                             "                    </div>"
                         );
+
                 }
                 commentPage++;
 
@@ -496,6 +522,38 @@ $(function (e) {
 $(window).resize(function (e) {
     var comments = commentChart
     windowWidth = window.innerWidth
+
+    let actorPerPage = 5
+    let dirPerPage = 5
+
+    switch (windowWidth > 1280) {
+        case !actor_flag && dir_flag : actorPerPage = 10; break;
+        case actor_flag && !dir_flag : dirPerPage = 10; break;
+    }
+    if(windowWidth < 1281){
+        actorPerPage = 5;
+        dirPerPage = 5;
+    }
+    if(!actor_flag){
+        new Splide( '.actor-slide', {
+            type: 'slide',
+            perPage: actorPerPage,
+            perMove: 1,
+            pagination: false,
+            arrows: false
+        }).mount();
+    }
+
+    if(!dir_flag){
+        new Splide( '.director-slide', {
+            type: 'slide',
+            perPage: dirPerPage,
+            perMove: 1,
+            pagination: false,
+            arrows: false
+        }).mount();
+    }
+
 
     if(windowWidth > 1280){
         if(dir_flag === false){
@@ -695,5 +753,36 @@ $(window).resize(function (e) {
 })
 
 function dirMovie(code) {
-    location.href = "/detaile?code="+code
+    location.href = "/detaile/"+code
+}
+
+function commentDelete(id) {
+    var conf = confirm("삭제하시겠습니까?")
+    if(conf){
+        $.ajax({
+            type: "GET",
+            url: "/detaile/comment/delete",
+            data: {
+                id: id,
+                code: param
+            },
+            success: function () {
+                alert("한줄리뷰가 삭제되었습니다.")
+                location.href = "/detaile/"+param
+            }
+        })
+    }
+}
+function lengthCheck() {
+    let commentLength = $(".write-text").val().length
+    if(commentLength > 23){
+        alert("23자까지만 작성 가능합니다.")
+        return false;
+    }else if(commentLength === 0){
+        alert("리뷰를 입력해주세요")
+        return false;
+    }else{
+        return true;
+    }
+
 }

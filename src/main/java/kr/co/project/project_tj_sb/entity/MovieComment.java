@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "required")
 @Table(name = "movie_comment")
 public class MovieComment {
 

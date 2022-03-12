@@ -9,7 +9,6 @@ let $sinput = $('.search-input')
 
 
 $(function () {
-    console.log(page)
     pageNum();
 })
 $sinput.keypress(function (e) {
@@ -32,7 +31,6 @@ function search() {
 // 페이지 번호
 function pageNum(pageNum) {
     page = pageNum != null ? pageNum : page
-    console.log(page)
     localStorage.setItem("movielist",page)
 
     if(page === 1){
@@ -162,7 +160,7 @@ function movieListPage() {
                     $('.movielist')
                         .append(
                             "<div class=\"movielist-posters\" onclick='detail_view("+list[i].movieCd+")'\">\n" +
-                            "   <img class=\"movielist-posters-img\" src=\"resources/images/movieposter/"+list[i].movieCd+".png\" onerror=\"this.src='resources/images/movieposter/default.png'\">\n" +
+                            "   <img class=\"movielist-posters-img\" src=\"/poster/"+list[i].movieCd+"\">\n" +
                             "   <div class=\"movielist-posters-title\">\n" +
                             "       <span>"+list[i].movieNm+"</span>\n" +
                             "   </div>\n" +
@@ -175,5 +173,5 @@ function movieListPage() {
 }
 
 function detail_view(code) {
-    location.href = ('detaile?code='+code);
+    location.href = 'detaile/'+code;
 }

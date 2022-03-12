@@ -17,13 +17,21 @@
 <body>
 <nav th:replace="nav.html"></nav>
 <main>
-
+    <input type="hidden" th:value="${code}" class="code">
+    <input type="hidden" th:value="${#authentication.principal.user_nickname}" class="nickname">
     <div class="detaile-container">
         <div class="detaile-container-top">
-            <div class="detaile-container-top-img"><img src="/"></div>
+            <div class="detaile-container-top-img"><img th:src="@{/poster/} + ${code}" class="detaile-container-top-img"></div>
             <div class="detaile-container-top-moviedetaile">
                 <table class="detaile-table"></table>
             </div>
+        </div>
+        <div th:if="${role}" class="detaile-container-top-img-modify">
+            <form method="post" action="/detaile/modifyposterimg" enctype="multipart/form-data">
+                <input type="file" name="image" multiple="multiple" class="modify-poster">
+                <input type="hidden" name="code" th:value="${code}" class="modify-mvcode">
+                <input type="submit" value="포스터변경" class="modify-submit">
+            </form>
         </div>
         <div class="detaile-container-director">
             <!--
@@ -69,7 +77,7 @@
             </div>
 
             <div th:if="${alreadyComment} == false" class="comments-container-write">
-                <form method="post" action="/detaile/write">
+                <form method="post" action="/detaile/comment/write" onsubmit="return lengthCheck()">
 
                     <div class="write-star">
                         <label><input type="radio" name="star" value="1" class="star"> ★</label>
@@ -80,9 +88,9 @@
                     </div>
 
                     <div class="write">
-                        <input class="write-text" type="text" name="comment"/>
+                        <input class="write-text" type="text" name="comment" placeholder="23자까지 작성 가능합니다."/>
                         <input class="form-submit" type="submit" value="작성"/>
-                        <input class="write-hidden-code" type="hidden" value="" name="code"/>
+                        <input class="write-hidden-code" type="hidden" th:value="${code}" name="code"/>
                         <inpit class="write-hidden-nickname" type="hidden" th:value="${#authentication.principal.user_nickname}" name="nickname"/>
                     </div>
 

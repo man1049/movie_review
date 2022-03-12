@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieDetaileRepository extends JpaRepository<MovieComment,String> {
+public interface MovieDetaileRepository extends JpaRepository<MovieComment,Integer> {
     @Query("select mc from MovieComment mc where mc.movie_code = :movie_code order by mc.id asc ")
     List<MovieComment> findByMovie_codeOrderByIdAsc(String movie_code);
 
@@ -21,6 +21,6 @@ public interface MovieDetaileRepository extends JpaRepository<MovieComment,Strin
     List<MovieComment> findByMovie_codeOrderByIdAsc(String movie_code, @PageableDefault Pageable pageable);
 
     @Query("select count(mc) from MovieComment mc where mc.user_nickname = :user_nickname and mc.movie_code = :movie_code")
-    int countByUser_email(String user_nickname, String movie_code);
+    int countByUser_nickname(String user_nickname, String movie_code);
 
 }

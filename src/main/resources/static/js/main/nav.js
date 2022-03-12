@@ -3,9 +3,6 @@ let menuheight
 let menuToggle = false
 $(function () {
     menuheight = $('.nav-button-menu').innerHeight();
-
-    console.log(menuheight)
-
     $('.nav-button-menu').css({
         'top':menuheight*(-1)
     })

@@ -29,6 +29,21 @@
     background-color: #ffab36;
     font-size: x-large;
 }
+
+.detaile-container-top-img-modify{
+    width: 100%;
+    margin: 0 0 0 3.8vw;
+}
+
+.modify-poster{
+    width: 30vw;
+    font-size: 1.5vw;
+}
+
+.modify-submit{
+    font-size: 1.5vw
+}
+
 .detaile-table{
     width: 100%;
     height: 100%;
@@ -59,7 +74,7 @@ td{
 
 .director-slide, .actor-slide{
     width: 100%;
-    height: 100%;
+    height: 15vw;
 }
 
 .splide__track{
@@ -121,7 +136,7 @@ td{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1vw;
+    font-size: 1.5vw;
 }
 .detaile-comments {
     margin-top: 3vw;
@@ -205,9 +220,10 @@ td{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-content: center;
 }
 .comment-nickname{
-    width: 20%;
+    width: 13%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -215,27 +231,41 @@ td{
     background-color: #ffbf76;
 }
 .comment-star{
-    width: 20%;
+    width: 8%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #ffa516;
-
 }
 
 .comment-text{
-    width: 59%;
+    width: 76%;
     height: 100%;
     display: flex;
     align-items: center;
     background-color: #ffb54a;
     padding-left: 1%;
-
 }
 
-.comments-container-scroll{
+.comment-delete{
+    height: 100%;
+    width: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffa516;
+}
+.comment-delete > span{
+    cursor: pointer;
+}
+
+.comments-container-scroll {
+    display: flex;
     width: 100%;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: nowrap;
 }
 
 .detaile-userinfo{
@@ -277,6 +307,8 @@ td{
     margin: 0px 2%;
 }
 
+
+
 @media screen and (max-width: 1280px) {
     .detaile-container{
         margin-top: 20px;
@@ -300,6 +332,11 @@ td{
         width: 18vw;
         height: 100%;
         background-color: #ff7d0f;
+    }
+
+    .detaile-container-top-img-modify{
+        width: 100%;
+        margin: 0;
     }
 
     td{
@@ -425,6 +462,8 @@ td{
         flex-wrap: wrap;
         margin-bottom: 2px;
         font-size: 3.4vw;
+        text-overflow: ellipsis;
+
     }
 
     .comment {
@@ -433,6 +472,41 @@ td{
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
+    }
+
+    .comment-text {
+        width: 67vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background-color: #ffb54a;
+        padding-left: 1%;
+    }
+
+    .comment-nickname {
+        width: 13vw;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffbf76;
+    }
+
+    .comment-star {
+        width: 15vw;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffa516;
+    }
+
+    .comment-delete {
+        height: 100%;
+        width: 2.9vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .comments-container-write{
@@ -466,5 +540,9 @@ td{
         background-color: white;
     }
 
+    .director-slide, .actor-slide{
+        width: 100%;
+        height: 31vw;
+    }
 
 }

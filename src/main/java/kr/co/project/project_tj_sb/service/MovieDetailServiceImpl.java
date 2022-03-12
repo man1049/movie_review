@@ -1,5 +1,6 @@
 package kr.co.project.project_tj_sb.service;
 
+import kr.co.project.project_tj_sb.dto.UsersAuthDTO;
 import kr.co.project.project_tj_sb.entity.MovieComment;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
 import kr.co.project.project_tj_sb.repository.MovieDetaileRepository;
@@ -16,11 +17,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.io.File;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -74,12 +79,14 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
     }
 
     @Override
-    public JSONObject getCommentsInfo(HttpServletRequest request) {
-        log.info("================ getComments ================");
+    public JSONObject getCommentsInfo(HttpServletRequest request, UsersAuthDTO usersAuthDTO) {
+        // log.info("================ getComments ================");
         String code = request.getParameter("code");
-        log.info("code="+code);
+        // log.info("code="+code);
         List<MovieComment> list = detaileRepository.findByMovie_codeOrderByIdAsc(code);
-        log.info(list.toString());
+        // log.info(list.toString());
+        String nickname = request.getParameter("nickname");
+        // log.info(nickname);
 
         JSONObject comments_info = new JSONObject();
         JSONArray comments = new JSONArray();
@@ -132,7 +139,7 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
                 case 5 : star_5++; break;
             }
 
-            if(mc.isUser_gender() == false){
+            if(!mc.isUser_gender()){
                 man++;
             }else{
                 woman++;
@@ -155,8 +162,17 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
         for(MovieComment mc : list){
             JSONObject comment = new JSONObject();
             comment.put("text",mc.getMovie_comment());
+            // log.info(mc.getMovie_comment());
             comment.put("nickname",mc.getUser_nickname());
             comment.put("star",mc.getMovie_star());
+            boolean myCommentFlag = mc.getUser_nickname().equals(nickname);
+            if(myCommentFlag || usersAuthDTO.getAuthorities().size() > 1){
+                comment.put("mycomment",true);
+                comment.put("id",mc.getId());
+            }else{
+                comment.put("mycomment",false);
+            }
+
 
             comments.add(comment);
             count++;
@@ -180,34 +196,39 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
         comments_info.put("fifties_later",fifties_later);
         */
 
-        log.info(comments_info);
+        // log.info(comments_info);
 
         return comments_info;
     }
 
     @Override
-    public boolean isAlreadyCommentWrite(HttpServletRequest request,Principal principal) {
+    public boolean isAlreadyCommentWrite(String code,Principal principal) {
 
         UsersRequired required = requiredRepository.findByEmail(principal.getName());
         String user_nickname = required.getUser_nickname();
-        String movie_code = request.getParameter("code");
 
-        int count = detaileRepository.countByUser_email(user_nickname, movie_code);
+        int count = detaileRepository.countByUser_nickname(user_nickname, code);
+/*
+        log.info("isAlreadyCommentWrite 확인 -----------------------------");
+        log.info("유저 닉네임 : "+user_nickname);
+        log.info("카운트 : "+count);
+
+ */
 
         if (count > 0) {
-            log.info("true입니다");
+            // log.info("true입니다");
             return true;
         } else {
-            log.info("false입니다");
+            // log.info("false입니다");
             return false;
         }
-
     }
 
     @Override
-    public JSONArray getCommentsPage(HttpServletRequest request) {
+    public JSONArray getCommentsPage(HttpServletRequest request, UsersAuthDTO usersAuthDTO) {
         int page = Integer.parseInt(request.getParameter("page"));
         int size = Integer.parseInt(request.getParameter("size"));
+        String nickname = request.getParameter("nickname");
         String code = request.getParameter("code");
 
         Pageable pageable = PageRequest.of(page,size);
@@ -221,12 +242,94 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
             jsonObject.put("star",comment.getMovie_star());
             jsonObject.put("comment",comment.getMovie_comment());
             jsonObject.put("nickname",comment.getUser_nickname());
+            boolean myCommentFlag = comment.getUser_nickname().equals(nickname);
+            if(myCommentFlag || usersAuthDTO.getAuthorities().size() > 1){
+                jsonObject.put("mycomment",true);
+                jsonObject.put("id",comment.getId());
+            }else{
+                jsonObject.put("mycomment",false);
+            }
 
             jsonArray.add(jsonObject);
         }
 
-        log.info(jsonArray);
-
         return jsonArray;
     }
+
+    @Override
+    public boolean isPosterImgUpload(String code,MultipartFile img) {
+
+        if(img.isEmpty()){
+            return true;
+        }
+
+        String absolutePath = new File("\\movieposter").getAbsolutePath() + "\\";
+
+        File file = new File(absolutePath);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+
+        if(!img.isEmpty()){
+            String contentType = img.getContentType();
+            if(!ObjectUtils.isEmpty(contentType)){
+                if(!contentType.contains("image/png") && !contentType.contains("image/jpeg")){
+                    return true;
+                }
+            }
+        }
+
+        String imgName = code+".png";
+        file = new File(absolutePath+"/"+imgName);
+
+        try {
+            img.transferTo(file);
+        }catch (Exception e){
+            log.info(e.getLocalizedMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isActorImgUpload(String code,MultipartFile img) {
+
+        if(img.isEmpty()){
+            return true;
+        }
+
+        String absolutePath = new File("\\movieactor").getAbsolutePath() + "\\";
+
+        File file = new File(absolutePath);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+
+        if(!img.isEmpty()){
+            String contentType = img.getContentType();
+            if(!ObjectUtils.isEmpty(contentType)){
+                if(!contentType.contains("image/png") && !contentType.contains("image/jpeg")){
+                    return true;
+                }
+            }
+        }
+
+        String imgName = code+".png";
+        file = new File(absolutePath+"/"+imgName);
+
+        try {
+            img.transferTo(file);
+        }catch (Exception e){
+            log.info(e.getLocalizedMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public void deleteComment(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        detaileRepository.deleteById(id);
+    }
+
 }

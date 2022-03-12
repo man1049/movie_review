@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class MovieDetaileDTO {
 
     private String movie_code;

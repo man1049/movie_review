@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import java.beans.BeanProperty;
 import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class UserDTO {
     private String user_email;
     private String user_password;

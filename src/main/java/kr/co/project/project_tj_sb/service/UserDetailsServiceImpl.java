@@ -1,5 +1,6 @@
 package kr.co.project.project_tj_sb.service;
 
+import kr.co.project.project_tj_sb.dto.UserDTO;
 import kr.co.project.project_tj_sb.dto.UsersAuthDTO;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
 import kr.co.project.project_tj_sb.repository.UsersRequiredRepository;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
