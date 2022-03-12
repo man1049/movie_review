@@ -327,8 +327,8 @@ $(function (e) {
                                 )
                         }
                         let width = window.innerWidth
-                        let actorPerPage
-                        let dirPerPage
+                        let actorPerPage = 5
+                        let dirPerPage = 5
 
                         switch (width > 1280) {
                             case !actor_flag && dir_flag : actorPerPage = 10; break;
@@ -338,8 +338,8 @@ $(function (e) {
                             actorPerPage = 5;
                             dirPerPage = 5;
                         }
-                        if(!actor_flag) {
-                            new Splide('.actor-slide', {
+                        if(!actor_flag){
+                            new Splide( '.actor-slide', {
                                 type: 'slide',
                                 perPage: actorPerPage,
                                 perMove: 1,
@@ -347,8 +347,9 @@ $(function (e) {
                                 arrows: false
                             }).mount();
                         }
-                        if(!dir_flag) {
-                            new Splide('.director-slide', {
+
+                        if(!dir_flag){
+                            new Splide( '.director-slide', {
                                 type: 'slide',
                                 perPage: dirPerPage,
                                 perMove: 1,
