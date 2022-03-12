@@ -45,6 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/detaile").hasRole("USER")
                     .antMatchers("/detaile/**").hasRole("USER")
                     .antMatchers("/movielist").hasRole("USER")
+
+                    .antMatchers("/actor/**").hasRole("USER")
+                    .antMatchers("/movieactor/**").hasRole("USER")
+
+                    .antMatchers("/poster/**").hasRole("USER")
+                    .antMatchers("/movieposter/**").hasRole("USER")
+
                     .antMatchers("/main/**").hasRole("USER")
                     .antMatchers("/images/**").hasRole("USER")
                     .antMatchers("/css/**").hasRole("USER")

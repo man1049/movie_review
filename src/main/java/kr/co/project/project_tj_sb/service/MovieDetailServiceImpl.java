@@ -263,10 +263,13 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
             return true;
         }
 
-        String absolutePath = new File("\\movieposter").getAbsolutePath() + "\\";
+        String absolutePath = new File("/movieposter").getAbsolutePath();
+        log.info("업로드=============================================");
+        log.info(absolutePath);
 
         File file = new File(absolutePath);
         if(!file.exists()){
+            log.info("movieposter 폴더가 없습니다");
             file.mkdirs();
         }
 
