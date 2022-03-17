@@ -1,24 +1,14 @@
 package kr.co.project.project_tj_sb.controller;
 
-import kr.co.project.project_tj_sb.dto.UserDTO;
-import kr.co.project.project_tj_sb.dto.UsersAuthDTO;
-import kr.co.project.project_tj_sb.entity.UsersRequired;
-import kr.co.project.project_tj_sb.service.MovieDetaileService;
+import kr.co.project.project_tj_sb.service.MovieDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 
 @Controller
@@ -27,7 +17,7 @@ import java.security.Principal;
 public class PageController {
 
     //private final MovieAPIParse movieAPIParse;
-    private final MovieDetaileService movieDetaileService;
+    private final MovieDetailService movieDetailService;
     
     @GetMapping("/")
     public String get(RedirectAttributes attributes,HttpServletRequest request){
@@ -64,25 +54,10 @@ public class PageController {
     public void main(/*Model model, @AuthenticationPrincipal UsersAuthDTO usersAuthDTO*/){}
 
     @GetMapping("/movielist")
-    public String korean(){
+    public String movieList(){
         return "movielist";
     }
 
-    @GetMapping("/detaile/{code}")
-    public String detaileReview(HttpServletRequest request,Model model, Principal principal, @AuthenticationPrincipal UsersAuthDTO usersAuthDTO, @PathVariable(required = false) String code){
-        boolean isAlreayComment = movieDetaileService.isAlreadyCommentWrite(code,principal);
 
-        boolean admin = usersAuthDTO.getAuthorities().size() == 2;
-        log.info("디테일 페이지 접근");
-        log.info("어드민 : "+admin);
-        log.info(usersAuthDTO.getAuthorities());
-        log.info(code);
-        log.info(isAlreayComment);
-        model.addAttribute("role",admin);
-        model.addAttribute("alreadyComment",isAlreayComment);
-        model.addAttribute("code",code);
-        log.info("code 모델값 : "+model.getAttribute("code"));
-        return "detaile";
-    }
 
 }

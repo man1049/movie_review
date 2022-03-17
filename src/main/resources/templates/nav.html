@@ -8,15 +8,6 @@
     <div class="nav-button-container">
     <img class="nav-button" src="/resources/images/menu_button.png" onclick="navbutton()">
     </div>
-    <!--
-    <div class="nav-container">
-        <div class="nav-rinks">
-            <a href="#">이벤트</a>
-            <a href="/movielist" class="nav-rinks-margin">영화목록</a>
-            <a href="#">리뷰</a>
-        </div>
-    </div>
-    -->
     <div class="nav-userinfo">
         <span th:text="${#authentication.principal.user_nickname}"></span><span>님 반갑습니다.</span>
         <a href="/logout">로그아웃</a>
@@ -27,7 +18,7 @@
     <ul>
         <li><a href="#">이벤트</a></li>
         <li><a href="/movielist">영화목록</a></li>
-        <li><a href="#">리뷰</a></li>
+        <li><a href="/reviewlist">리뷰</a></li>
     </ul>
 </div>
 

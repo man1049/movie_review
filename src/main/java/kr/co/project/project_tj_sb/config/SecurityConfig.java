@@ -42,13 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/join/authentication").permitAll()
                     .antMatchers("/pwchange").permitAll()
                     .antMatchers("/main").hasRole("USER")
-                    .antMatchers("/detaile").hasRole("USER")
-                    .antMatchers("/detaile/**").hasRole("USER")
+                    .antMatchers("/detail").hasRole("USER")
+                    .antMatchers("/detail/**").hasRole("USER")
                     .antMatchers("/movielist").hasRole("USER")
+                    .antMatchers("/reviewlist").hasRole("USER")
+                    .antMatchers("/review/**").hasRole("USER")
 
                     .antMatchers("/actor/**").hasRole("USER")
                     .antMatchers("/movieactor/**").hasRole("USER")
-
                     .antMatchers("/poster/**").hasRole("USER")
                     .antMatchers("/movieposter/**").hasRole("USER")
 

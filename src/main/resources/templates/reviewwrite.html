@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="/resources/css/plugin/summernote-lite.css" rel="stylesheet">
+    <link href="/resources/css/review/reviewwrite.css" rel="stylesheet">
+    <script src="/resources/js/plugin/summernote-lite.js"></script>
+    <script src="/resources/js/plugin/summernote-ko-KR.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/default.css">
+
+    <meta charset="UTF-8">
+    <title>리뷰 작성</title>
+</head>
+<body>
+<input type="hidden" th:value="${code}" id="code">
+    <main>
+        <div class="form-container">
+            <form th:action="@{/review/write/} + ${code}" method="post" onsubmit="return checkInput()" enctype="multipart/form-data">
+                <input type="hidden" th:value="${moviename}" name="moviename">
+                <input type="text" placeholder="제목(최대 17자)" name="title" class="title" maxlength="17">
+                <textarea id="summernote" name="editordata"></textarea>
+                <div class="upload-container">
+                    <input class="filename" value="" placeholder="썸네일 업로드" readonly="readonly">
+                    <label for="file">파일선택</label>
+                    <input type="file" id="file" placeholder="썸네일" name="thumbnail" multiple="multiple" class="thumbnail">
+                </div>
+                <div class="write-star">
+                    <label><input type="radio" name="star" value="1" class="star"> ★</label>
+                    <label><input type="radio" name="star" value="2" class="star"> ★★</label>
+                    <label><input type="radio" name="star" value="3" class="star"> ★★★</label>
+                    <label><input type="radio" name="star" value="4" class="star"> ★★★★</label>
+                    <label><input type="radio" name="star" value="5" checked="checked" class="star"> ★★★★★</label>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="작성" class="submit">
+                    <input type="button" value="취소" class="cancle">
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+<script src="/resources/js/review/reviewwrite.js"></script>
+</html>

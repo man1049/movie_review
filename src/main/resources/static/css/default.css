@@ -2,9 +2,9 @@
 
 @font-face {
     font-family: "font";
-    src: url("../font/NanumGothic.eot") format("embedded-opentype");
-    src: url("../font/NanumGothic.woff") format("woff");
-    src: url("../font/BMJUA.ttf") format("opentype");
+    src: url("font/NanumGothic.eot") format("embedded-opentype");
+    src: url("font/NanumGothic.woff") format("woff");
+    src: url("font/BMJUA.ttf") format("opentype");
     font-style: normal;
     font-weight: normal;
 }

@@ -173,5 +173,5 @@ function movieListPage() {
 }
 
 function detail_view(code) {
-    location.href = 'detaile/'+code;
+    location.href = 'detail/'+code;
 }

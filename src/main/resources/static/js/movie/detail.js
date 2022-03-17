@@ -1,5 +1,6 @@
 let param = $(".code").val()
 let nickname = $(".nickname").val()
+let movieName
 
 let director
 var windowWidth
@@ -27,7 +28,7 @@ $('.comments-container').scroll(function (e) {
     if(scrollTop == contentHeight - scrollHeight){
         $.ajax({
             type: "GET",
-            url: "/detaile/comments/page",
+            url: "/detail/comments/page",
             data: {
                 code: param,
                 page: commentPage,
@@ -78,22 +79,30 @@ $(function (e) {
 
     /*
     // 좌우 스크롤입니다
-    $(".detaile-container-director-movies").mousewheel(function(event, delta) {
+    $(".detail-container-director-movies").mousewheel(function(event, delta) {
         this.scrollLeft -= (delta * 100);
         event.preventDefault();
     });
-    $(".detaile-container-actor-staffs").mousewheel(function(event, delta) {
+    $(".detail-container-actor-staffs").mousewheel(function(event, delta) {
         this.scrollLeft -= (delta * 100);
         event.preventDefault();
     });
     */
+/*
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        $('.review-writebutton, .review-writebutton-writealread').css({
+            'display':'inline-block'
+        });
+    }
+
+ */
 
     $('.write-hidden-code').val(param)
     let star_avg = 0.0
 
 /*
-    $('.detaile-container-top-img').html(
-        "<div class='detaile-container-top-img'><img th:src='@{/detaile/poster(code=${"+param+"})}' class='detaile-container-top-img'></div>"
+    $('.detail-container-top-img').html(
+        "<div class='detail-container-top-img'><img th:src='@{/detail/poster(code=${"+param+"})}' class='detail-container-top-img'></div>"
     )
 */
     $('.modify-mvcode').val(param)
@@ -108,6 +117,7 @@ $(function (e) {
         dataType: "json",
         success: function (data) {
             let mv = data.movieInfoResult.movieInfo
+            movieName = mv.movieNm
 
             try{
                 director = mv.directors[0].peopleNm
@@ -142,24 +152,24 @@ $(function (e) {
             }
 
 
-            //$('.detaile-container-top-img').html('<img src="'+code+'.png">')
+            //$('.detail-container-top-img').html('<img src="'+code+'.png">')
 
 
 
-            $('.detaile-table').html("<tr class=\"table-tr\">\n" +
+            $('.detail-table').html("<tr class=\"table-tr\">\n" +
                 "                        <td class=\"table-td-title\">영화명</td>\n" +
                 "                        <td class=\"table-td-content\">"+mv.movieNm+"</td>\n" +
                 "                        <td class=\"table-td-title\">개봉연도</td>\n" +
                 "                        <td class=\"table-td-content\">"+mv.openDt+"("+mv.prdtStatNm+")"+"</td>\n" +
                 "                    </tr>\n" +
                 "                    <tr class=\"table-tr\">\n" +
-                "                        <td class=\"table-td-title\">감독명</td>\n" +
+                "                        <td class=\"table-td-title\">감독</td>\n" +
                 "                        <td class=\"table-td-content\">"+director+"</td>\n" +
                 "                        <td class=\"table-td-title\">제작국가</td>\n" +
                 "                        <td class=\"table-td-content\">"+nation+"</td>\n" +
                 "                    </tr>\n" +
                 "                    <tr class=\"table-tr\">\n" +
-                "                        <td class=\"table-td-title\">장르명</td>\n" +
+                "                        <td class=\"table-td-title\">장르</td>\n" +
                 "                        <td class=\"table-td-content\">"+genres+"</td>\n" +
                 "                        <td class=\"table-td-title\">상영시간</td>\n" +
                 "                        <td class=\"table-td-content\">"+(min == null ? "정보없음" : (hour > 0 ? (hour+'시간'+min+'분'): (min+'분'))) + "</td>\n" +
@@ -174,31 +184,31 @@ $(function (e) {
 
 
             if(actor.length === 0){
-                $('.detaile-container-actor').html('')
-                $('.detaile-container-actor').css({
+                $('.detail-container-actor').html('')
+                $('.detail-container-actor').css({
                     'width':'0px',
                     'height':'0px'
                 })
                 actor_flag = true;
             }else{
                 if(window.innerWidth > 1280){
-                    $('.detaile-container-actor').css({
+                    $('.detail-container-actor').css({
                         'width':'45vw',
                         'height':'17vw',
                         'margin-top': '2vw',
                     })
 
                 }else{
-                    $('.detaile-container-actor').css({
+                    $('.detail-container-actor').css({
                         'width':'95vw',
                         'height': '35vw',
                         'margin-top': '3vw'
                     })
                 }
 
-                $('.detaile-container-actor').append(
-                    "<div class=\"detaile-container-actor-title\">배우</div>\n"+
-                    /*"            <div class=\"detaile-container-actor-staffs\"></div>"*/
+                $('.detail-container-actor').append(
+                    "<div class=\"detail-container-actor-title\">배우</div>\n"+
+                    /*"            <div class=\"detail-container-actor-staffs\"></div>"*/
                     "<div class=\"actor-slide\">" +
                     "      <div class=\"splide__track\">" +
                     "           <ul class=\"splide__list actor-slide-list\"></ul>" +
@@ -241,67 +251,67 @@ $(function (e) {
 
                     if(dir.length === 0){
                         dir_flag = true
-                        $('.detaile-container-director').html('')
-                        $('.detaile-container-director').css({
+                        $('.detail-container-director').html('')
+                        $('.detail-container-director').css({
                             'width':'0px',
                             'height':'0px'
                         })
                         if(actor_flag === false && window.innerWidth > 1280) {
-                            $('.detaile-container-actor').css({
+                            $('.detail-container-actor').css({
                                 'width': '95vw',
                                 'height': '17vw',
                                 'margin-top': '2vw'
                             })
                         }else if(actor_flag === true && window.innerWidth > 1280){
-                            $('.detaile-container-actor').html('')
-                            $('.detaile-container-actor').css({
+                            $('.detail-container-actor').html('')
+                            $('.detail-container-actor').css({
                                 'width':'0px',
                                 'height':'0px'
                             })
                         }else if(actor_flag === false && window.innerWidth <= 1280){
-                            $('.detaile-container-actor').css({
+                            $('.detail-container-actor').css({
                                 'width': '95vw',
                                 'height': '35vw',
                                 'margin-top': '3vw'
                             })
                         }else if(actor_flag === true && window.innerWidth <= 1280) {
-                            $('.detaile-container-actor').html('')
-                            $('.detaile-container-actor').css({
+                            $('.detail-container-actor').html('')
+                            $('.detail-container-actor').css({
                                 'width': '0px',
                                 'height': '0px'
                             })
                         }
                     }else{
                         if(actor_flag === true  && window.innerWidth > 1280){
-                            $('.detaile-container-actor').html('')
-                            $('.detaile-container-actor').css({
+                            $('.detail-container-actor').html('')
+                            $('.detail-container-actor').css({
                                 'width':'0px',
                                 'height':'0px'
                             })
 
-                            $('.detaile-container-director').css({
+                            $('.detail-container-director').css({
                                 'width':'95vw',
                                 'height':'17vw',
                                 'margin-top': '2vw'
                             })
                         }else if(actor_flag === false && window.innerWidth > 1280){
-                            $('.detaile-container-director').css({
+                            $('.detail-container-director').css({
                                 'width':'45vw',
                                 'height':'17vw',
                                 'margin-top': '2vw',
                                 'margin-right': '2%'
                             })
                         }else{
-                            $('.detaile-container-director').css({
+                            $('.detail-container-director').css({
                                 'width':'95vw',
                                 'height':'35vw',
                                 'margin-top': '3vw'
                             })
                         }
 
-                        $('.detaile-container-director').append(
-                            "<div class=\"detaile-container-director-title\">감독의 영화</div>" +
-                            /*"            <div class=\"detaile-container-director-movies\"></div>"*/
+                        $('.detail-container-director').append(
+                            "<div class=\"detail-container-director-title\">감독의 영화</div>" +
+                            /*"            <div class=\"detail-container-director-movies\"></div>"*/
                             "<div class=\"director-slide\">" +
                             "      <div class=\"splide__track\">" +
                             "           <ul class=\"splide__list director-slide-list\"></ul>" +
@@ -359,8 +369,8 @@ $(function (e) {
                         }
 
                         /*
-                        var $container = $(".detaile-container-director-movies");
-                        var $scroller = $(".detaile-container-director-movies");
+                        var $container = $(".detail-container-director-movies");
+                        var $scroller = $(".detail-container-director-movies");
                         bindDragScroll($container, $scroller);
                         */
                     }
@@ -371,7 +381,7 @@ $(function (e) {
 
     $.ajax({
         type: "GET",
-        url: "/detaile/comments/info",
+        url: "/detail/comments/info",
         data: {
             code: param,
             nickname: nickname
@@ -384,10 +394,10 @@ $(function (e) {
             $('.table-td-content-star').text(star_avg+'★');
             while(true){
                 if(list.length === 0){
-                    $('.detaile-userinfo').html('');
-                    $('.detaile-userinfo').css({'height':'0px','margin-top':'0'});
-                    $('.detaile-userinfo-title').html('');
-                    $('.detaile-userinfo-title').css({'height':'0px','margin-top':'0'})
+                    $('.detail-userinfo').html('');
+                    $('.detail-userinfo').css({'height':'0px','margin-top':'0'});
+                    $('.detail-userinfo-title').html('');
+                    $('.detail-userinfo-title').css({'height':'0px','margin-top':'0'})
                     chart_flag = true;
                     break;
                 }
@@ -559,14 +569,14 @@ $(window).resize(function (e) {
     if(windowWidth > 1280){
         if(dir_flag === false){
             if(actor_flag === false){
-                $('.detaile-container-director').css({
+                $('.detail-container-director').css({
                     'width':'45vw',
                     'height':'17vw',
                     'margin-top': '2vw',
                     'margin-right': '2%'
                 })
             }else{
-                $('.detaile-container-director').css({
+                $('.detail-container-director').css({
                     'width':'95vw',
                     'height':'17vw',
                     'margin-top': '2vw',
@@ -575,7 +585,7 @@ $(window).resize(function (e) {
             }
 
         }else{
-            $('.detaile-container-director').css({
+            $('.detail-container-director').css({
                 'width':'0px',
                 'height':'0px'
             })
@@ -583,13 +593,13 @@ $(window).resize(function (e) {
 
         if(actor_flag === false){
             if(dir_flag === false){
-                $('.detaile-container-actor').css({
+                $('.detail-container-actor').css({
                     'width':'45vw',
                     'height':'17vw',
                     'margin-top': '2vw',
                 })
             }else{
-                $('.detaile-container-actor').css({
+                $('.detail-container-actor').css({
                     'width':'95vw',
                     'height':'17vw',
                     'margin-top': '2vw',
@@ -597,7 +607,7 @@ $(window).resize(function (e) {
             }
 
         }else{
-            $('.detaile-container-actor').css({
+            $('.detail-container-actor').css({
                 'width':'0px',
                 'height':'0px'
             })
@@ -605,27 +615,27 @@ $(window).resize(function (e) {
     }else{
 
         if(dir_flag === false){
-            $('.detaile-container-director').css({
+            $('.detail-container-director').css({
                 'width':'95vw',
                 'height':'35vw',
                 'margin-top': '3vw',
                 'margin-right': '0'
             })
         }else{
-            $('.detaile-container-director').css({
+            $('.detail-container-director').css({
                 'width':'0px',
                 'height':'0px'
             })
         }
 
         if(actor_flag === false){
-            $('.detaile-container-actor').css({
+            $('.detail-container-actor').css({
                 'width':'95vw',
                 'height':'35vw',
                 'margin-top': '6vw',
             })
         }else{
-            $('.detaile-container-actor').css({
+            $('.detail-container-actor').css({
                 'width':'0px',
                 'height':'0px'
             })
@@ -754,7 +764,7 @@ $(window).resize(function (e) {
 })
 
 function dirMovie(code) {
-    location.href = "/detaile/"+code
+    location.href = "/detail/"+code
 }
 
 function commentDelete(id) {
@@ -762,14 +772,14 @@ function commentDelete(id) {
     if(conf){
         $.ajax({
             type: "GET",
-            url: "/detaile/comment/delete",
+            url: "/detail/comment/delete",
             data: {
                 id: id,
                 code: param
             },
             success: function () {
-                alert("한줄리뷰가 삭제되었습니다.")
-                location.href = "/detaile/"+param
+                alert("댓글이 삭제되었습니다.")
+                location.href = "/detail/"+param
             }
         })
     }
@@ -780,10 +790,14 @@ function lengthCheck() {
         alert("23자까지만 작성 가능합니다.")
         return false;
     }else if(commentLength === 0){
-        alert("리뷰를 입력해주세요")
+        alert("댓글을 입력해주세요")
         return false;
     }else{
         return true;
     }
 
 }
+
+$('.review-writebutton, .review-writebutton-writealread').on('click', function () {
+    window.open("/review/write/"+param+"/"+movieName, '리뷰 작성', 'menubar=no, resizable=no, scrollbars=no');
+})

@@ -3,8 +3,8 @@
 <head>
 
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="/resources/css/main/default.css">
-    <link rel="stylesheet" href="/resources/css/main/detaile.css">
+    <link rel="stylesheet" href="/resources/css/default.css">
+    <link rel="stylesheet" href="/resources/css/movie/detail.css">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src='/resources/js/plugin/mousewheel.min.js'></script>
     <script src='/resources/js/plugin/dragScroll.min.js'></script>
@@ -12,28 +12,28 @@
     <link rel="stylesheet" href="/resources/css/main/splide.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>영화는 영화다</title>
 </head>
 <body>
 <nav th:replace="nav.html"></nav>
 <main>
     <input type="hidden" th:value="${code}" class="code">
     <input type="hidden" th:value="${#authentication.principal.user_nickname}" class="nickname">
-    <div class="detaile-container">
-        <div class="detaile-container-top">
-            <div class="detaile-container-top-img"><img th:src="@{/poster/} + ${code}" class="detaile-container-top-img"></div>
-            <div class="detaile-container-top-moviedetaile">
-                <table class="detaile-table"></table>
+    <div class="detail-container">
+        <div class="detail-container-top">
+            <div class="detail-container-top-img"><img th:src="@{/poster/} + ${code}" class="detail-container-top-img"></div>
+            <div class="detail-container-top-moviedetail">
+                <table class="detail-table"></table>
             </div>
         </div>
-        <div th:if="${role}" class="detaile-container-top-img-modify">
-            <form method="post" action="/detaile/modifyposterimg" enctype="multipart/form-data">
+        <div th:if="${role}" class="detail-container-top-img-modify">
+            <form method="post" action="/detail/modifyposterimg" enctype="multipart/form-data">
                 <input type="file" name="image" multiple="multiple" class="modify-poster">
                 <input type="hidden" name="code" th:value="${code}" class="modify-mvcode">
                 <input type="submit" value="포스터변경" class="modify-submit">
             </form>
         </div>
-        <div class="detaile-container-director">
+        <div class="detail-container-director">
             <!--
             <div class="director-slide">
                 <div class="splide__track">
@@ -45,7 +45,7 @@
             </div>
             -->
         </div>
-        <div class="detaile-container-actor">
+        <div class="detail-container-actor">
             <!--
             <div class="actor-slide">
                 <div class="splide__track">
@@ -57,27 +57,27 @@
             </div>
             -->
         </div>
-        <div class="detaile-userinfo-title">
-            <div class="detaile-userinfo-title-left">연령대</div>
-            <div class="detaile-userinfo-title-center">성별</div>
-            <div class="detaile-userinfo-title-right">평점</div>
+        <div class="detail-userinfo-title">
+            <div class="detail-userinfo-title-left">연령대</div>
+            <div class="detail-userinfo-title-center">성별</div>
+            <div class="detail-userinfo-title-right">평점</div>
         </div>
-        <div class="detaile-userinfo">
+        <div class="detail-userinfo">
             <!-- 댓글 이용자 성별, 영화 총 별점, 별점 분포, 연령 분포 -->
-            <div class="detaile-userinfo-age" id="age"></div>
-            <div class="detaile-userinfo-gender" id="gender"></div>
-            <div class="detaile-userinfo-star" id="star"></div>
+            <div class="detail-userinfo-age" id="age"></div>
+            <div class="detail-userinfo-gender" id="gender"></div>
+            <div class="detail-userinfo-star" id="star"></div>
         </div>
 
         <!-- 한줄댓글시작 -->
-        <div class="detaile-comments">
+        <div class="detail-comments">
 
             <div class="comments-container">
                 <div class="comments-container-scroll"></div>
             </div>
 
             <div th:if="${alreadyComment} == false" class="comments-container-write">
-                <form method="post" action="/detaile/comment/write" onsubmit="return lengthCheck()">
+                <form method="post" action="/detail/comment/write" onsubmit="return lengthCheck()">
 
                     <div class="write-star">
                         <label><input type="radio" name="star" value="1" class="star"> ★</label>
@@ -85,25 +85,27 @@
                         <label><input type="radio" name="star" value="3" class="star"> ★★★</label>
                         <label><input type="radio" name="star" value="4" class="star"> ★★★★</label>
                         <label><input type="radio" name="star" value="5" checked="checked" class="star"> ★★★★★</label>
+                        <input type="button" value="리뷰작성" class="review-writebutton">
                     </div>
 
                     <div class="write">
-                        <input class="write-text" type="text" name="comment" placeholder="23자까지 작성 가능합니다."/>
-                        <input class="form-submit" type="submit" value="작성"/>
+                        <input class="write-text" type="text" name="comment" placeholder="23자까지 작성 가능합니다." maxlength="23"/>
+                        <input class="form-submit" type="submit" value="댓글작성"/>
                         <input class="write-hidden-code" type="hidden" th:value="${code}" name="code"/>
-                        <inpit class="write-hidden-nickname" type="hidden" th:value="${#authentication.principal.user_nickname}" name="nickname"/>
+                        <input class="write-hidden-nickname" type="hidden" th:value="${#authentication.principal.user_nickname}" name="nickname"/>
                     </div>
 
                 </form>
             </div>
 
             <div th:if="${alreadyComment} == true" class="comments-container-writealready">
-                <span>이미 한줄리뷰를 작성했습니다.</span>
+                <span>이미 댓글을 작성했습니다.</span>
+                <input type="button" value="리뷰작성하기" class="review-writebutton-writealread">
             </div>
 
         </div>
     </div>
 </main>
 </body>
-<script src="/resources/js/main/detaile.js"></script>
+<script src="/resources/js/movie/detail.js"></script>
 </html>

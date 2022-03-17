@@ -3,43 +3,33 @@ package kr.co.project.project_tj_sb.service;
 import kr.co.project.project_tj_sb.dto.UsersAuthDTO;
 import kr.co.project.project_tj_sb.entity.MovieComment;
 import kr.co.project.project_tj_sb.entity.UsersRequired;
-import kr.co.project.project_tj_sb.repository.MovieDetaileRepository;
+import kr.co.project.project_tj_sb.repository.MovieDetailRepository;
 import kr.co.project.project_tj_sb.repository.UsersRequiredRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import java.io.File;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class MovieDetailServiceImpl implements MovieDetaileService {
+public class MovieDetailServiceImpl implements MovieDetailService {
 
-    private final MovieDetaileRepository detaileRepository;
+    private final MovieDetailRepository detailRepository;
     private final UsersRequiredRepository requiredRepository;
 
     @Override
@@ -51,7 +41,6 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
         String email = principal.getName();
 
         UsersRequired required = requiredRepository.findByEmail(email);
-        String nickname = required.getUser_nickname();
         
         // 현재 년도를 가져오기
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -69,12 +58,11 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
                 .movie_code(code)
                 .movie_comment(comment)
                 .movie_star(star)
-                .user_gender(required.isUser_gender())
-                .user_nickname(nickname)
+                .usersRequired(required)
                 .user_age(age)
                 .build();
 
-        detaileRepository.save(mc);
+        detailRepository.save(mc);
 
     }
 
@@ -83,7 +71,7 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
         // log.info("================ getComments ================");
         String code = request.getParameter("code");
         // log.info("code="+code);
-        List<MovieComment> list = detaileRepository.findByMovie_codeOrderByIdAsc(code);
+        List<MovieComment> list = detailRepository.findByMovie_codeOrderByIdAsc(code);
         // log.info(list.toString());
         String nickname = request.getParameter("nickname");
         // log.info(nickname);
@@ -139,7 +127,7 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
                 case 5 : star_5++; break;
             }
 
-            if(!mc.isUser_gender()){
+            if(!mc.getUsersRequired().isUser_gender()){
                 man++;
             }else{
                 woman++;
@@ -158,14 +146,15 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
         stars.put("s4",star_4);
         stars.put("s5",star_5);
 
-
         for(MovieComment mc : list){
             JSONObject comment = new JSONObject();
+            UsersRequired usersRequired = mc.getUsersRequired();
+
             comment.put("text",mc.getMovie_comment());
             // log.info(mc.getMovie_comment());
-            comment.put("nickname",mc.getUser_nickname());
+            comment.put("nickname",usersRequired.getUser_nickname());
             comment.put("star",mc.getMovie_star());
-            boolean myCommentFlag = mc.getUser_nickname().equals(nickname);
+            boolean myCommentFlag = usersRequired.equals(nickname);
             if(myCommentFlag || usersAuthDTO.getAuthorities().size() > 1){
                 comment.put("mycomment",true);
                 comment.put("id",mc.getId());
@@ -205,9 +194,8 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
     public boolean isAlreadyCommentWrite(String code,Principal principal) {
 
         UsersRequired required = requiredRepository.findByEmail(principal.getName());
-        String user_nickname = required.getUser_nickname();
 
-        int count = detaileRepository.countByUser_nickname(user_nickname, code);
+        int count = detailRepository.countByUser_nickname(required, code);
 /*
         log.info("isAlreadyCommentWrite 확인 -----------------------------");
         log.info("유저 닉네임 : "+user_nickname);
@@ -233,16 +221,18 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
 
         Pageable pageable = PageRequest.of(page,size);
 
-        List<MovieComment> list = detaileRepository.findByMovie_codeOrderByIdAsc(code,pageable);
+        List<MovieComment> list = detailRepository.findByMovie_codeOrderByIdAsc(code,pageable);
 
         JSONArray jsonArray = new JSONArray();
 
         for (MovieComment comment : list){
             JSONObject jsonObject = new JSONObject();
+            UsersRequired usersRequired = comment.getUsersRequired();
+
             jsonObject.put("star",comment.getMovie_star());
             jsonObject.put("comment",comment.getMovie_comment());
-            jsonObject.put("nickname",comment.getUser_nickname());
-            boolean myCommentFlag = comment.getUser_nickname().equals(nickname);
+            jsonObject.put("nickname",usersRequired.getUser_nickname());
+            boolean myCommentFlag = usersRequired.getUser_nickname().equals(nickname);
             if(myCommentFlag || usersAuthDTO.getAuthorities().size() > 1){
                 jsonObject.put("mycomment",true);
                 jsonObject.put("id",comment.getId());
@@ -332,7 +322,7 @@ public class MovieDetailServiceImpl implements MovieDetaileService {
     @Override
     public void deleteComment(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        detaileRepository.deleteById(id);
+        detailRepository.deleteById(id);
     }
 
 }

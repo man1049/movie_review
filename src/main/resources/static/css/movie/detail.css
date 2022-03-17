@@ -2,7 +2,7 @@
 
 
 
-.detaile-container{
+.detail-container{
     margin-top: 20px;
     width: 100%;
     display: flex;
@@ -10,7 +10,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
-.detaile-container-top{
+.detail-container-top{
     width: 100%;
     height: 15vw;
     display: flex;
@@ -18,19 +18,19 @@
     justify-content: center;
     align-items: center;
 }
-.detaile-container-top-img{
+.detail-container-top-img{
     width: 11vw;
     height: 100%;
     background-color: #ff7d0f;
 }
-.detaile-container-top-moviedetaile{
+.detail-container-top-moviedetail{
     width: 81vw;
     height: 100%;
     background-color: #ffab36;
     font-size: x-large;
 }
 
-.detaile-container-top-img-modify{
+.detail-container-top-img-modify{
     width: 100%;
     margin: 0 0 0 3.8vw;
 }
@@ -44,7 +44,7 @@
     font-size: 1.5vw
 }
 
-.detaile-table{
+.detail-table{
     width: 100%;
     height: 100%;
 }
@@ -66,7 +66,7 @@ td{
     width: 35%;
     height: 25%;
 }
-.detaile-container-director, .detaile-container-actor{
+.detail-container-director, .detail-container-actor{
     width: 45vw;
     height: 15vw;
     margin-top: 5px;
@@ -82,7 +82,7 @@ td{
     height: 100%;
 }
 
-.detaile-container-director-title, .detaile-container-actor-title{
+.detail-container-director-title, .detail-container-actor-title{
     width: 100%;
     height: 2vw;
     display: flex;
@@ -91,7 +91,7 @@ td{
     font-size: 2vw;
 }
 
-.detaile-container-director-movies, .detaile-container-actor-staffs{
+.detail-container-director-movies, .detail-container-actor-staffs{
     width: 100vw;
     height: 14vw;
     background-color: black;
@@ -138,7 +138,7 @@ td{
     white-space: nowrap;
     font-size: 1.5vw;
 }
-.detaile-comments {
+.detail-comments {
     margin-top: 3vw;
     width: 100%;
     height: 25vw;
@@ -239,6 +239,19 @@ td{
     background-color: #ffa516;
 }
 
+.review-writebutton{
+    position: absolute;
+    right: 0.68vw;
+    margin-top: 0.2vw;
+    width: 9vw;
+    height: 2vw;
+    font-size: 1.5vw;
+    padding: 0;
+    border: 0;
+    background-color: white;
+    // display: none;
+}
+
 .comment-text{
     width: 76%;
     height: 100%;
@@ -268,7 +281,7 @@ td{
     flex-wrap: nowrap;
 }
 
-.detaile-userinfo{
+.detail-userinfo{
     width: 100%;
     height: 15vw;
     display: flex;
@@ -276,15 +289,15 @@ td{
     margin-top: 5px;
     justify-content: center;
 }
-.detaile-userinfo-gender, .detaile-userinfo-age, .detaile-userinfo-star{
+.detail-userinfo-gender, .detail-userinfo-age, .detail-userinfo-star{
     width: 31vw;
     height: 100%;
 }
-.detaile-userinfo-gender{
+.detail-userinfo-gender{
     margin: 0px 2vw;
 }
 
-.detaile-userinfo-title{
+.detail-userinfo-title{
     margin-top: 2vw;
     width: 100vw;
     height: 3vw;
@@ -293,7 +306,7 @@ td{
     justify-content: center;
 }
 
-.detaile-userinfo-title-left, .detaile-userinfo-title-center, .detaile-userinfo-title-right{
+.detail-userinfo-title-left, .detail-userinfo-title-center, .detail-userinfo-title-right{
     width: 31vw;
     height: 2vw;
     background-color: #ffab36;
@@ -303,14 +316,16 @@ td{
     font-size: 2vw;
 }
 
-.detaile-userinfo-title-center{
+.detail-userinfo-title-center{
     margin: 0px 2%;
 }
 
-
+.review-writebutton-writealread{
+    font-size: 1vw;
+}
 
 @media screen and (max-width: 1280px) {
-    .detaile-container{
+    .detail-container{
         margin-top: 20px;
         width: 100%;
         display: flex;
@@ -319,7 +334,7 @@ td{
         flex-wrap: wrap;
     }
 
-    .detaile-container-top{
+    .detail-container-top{
         width: 100%;
         height: 25vw;
         display: flex;
@@ -328,13 +343,13 @@ td{
         align-items: center;
     }
 
-    .detaile-container-top-img {
+    .detail-container-top-img {
         width: 18vw;
         height: 100%;
         background-color: #ff7d0f;
     }
 
-    .detaile-container-top-img-modify{
+    .detail-container-top-img-modify{
         width: 100%;
         margin: 0;
     }
@@ -344,7 +359,7 @@ td{
         font-size: 3vw;
     }
 
-    .detaile-container-director-title, .detaile-container-actor-title {
+    .detail-container-director-title, .detail-container-actor-title {
         width: 100%;
         height: 4vw;
         display: flex;
@@ -353,7 +368,7 @@ td{
         font-size: 4vw;
     }
 
-    .detaile-container-director-movies, .detaile-container-actor-staffs {
+    .detail-container-director-movies, .detail-container-actor-staffs {
         width: 100vw;
         height: 27vw;
         background-color: black;
@@ -378,7 +393,7 @@ td{
         flex-wrap: wrap;
     }
 
-    .detaile-userinfo-title {
+    .detail-userinfo-title {
         margin-top: 6vw;
         width: 100vw;
         height: 4vw;
@@ -387,7 +402,7 @@ td{
         justify-content: center;
     }
 
-    .detaile-userinfo-title-left, .detaile-userinfo-title-center {
+    .detail-userinfo-title-left, .detail-userinfo-title-center {
         width: 47vw;
         height: 4vw;
         background-color: #ffab36;
@@ -397,11 +412,11 @@ td{
         font-size: 4vw;
     }
 
-    .detaile-userinfo-title-right{
+    .detail-userinfo-title-right{
         display: none;
     }
 
-    .detaile-userinfo-title-center{
+    .detail-userinfo-title-center{
         margin: 0 0 0 4vw;
     }
 
@@ -412,7 +427,7 @@ td{
         font-size: 2.5vw;
     }
 
-    .detaile-userinfo {
+    .detail-userinfo {
         width: 100%;
         height: 47vw;
         display: flex;
@@ -420,20 +435,20 @@ td{
         justify-content: center;
     }
 
-    .detaile-userinfo-star{
+    .detail-userinfo-star{
         display: none;
     }
 
-    .detaile-userinfo-gender, .detaile-userinfo-age, .detaile-userinfo-star {
+    .detail-userinfo-gender, .detail-userinfo-age, .detail-userinfo-star {
         width: 47vw;
         height: 47vw;
     }
 
-    .detaile-userinfo-gender {
+    .detail-userinfo-gender {
         margin: 0 0 0 4vw;
     }
 
-    .detaile-comments {
+    .detail-comments {
         margin-top: 8vw;
         width: 100%;
         height: 39vw;
@@ -510,7 +525,7 @@ td{
     }
 
     .comments-container-write{
-        width: 97vw;
+        width: 100vw;
         height: 9vw;
     }
 
@@ -532,7 +547,7 @@ td{
 
     .form-submit {
         font-size: 2.5vw;
-        width: 9vw;
+        width: 13vw;
         height: 85%;
         border: 0;
         padding: 0;
@@ -545,4 +560,39 @@ td{
         height: 31vw;
     }
 
+    .review-writebutton {
+        position: absolute;
+        right: 0.1vw;
+        margin-top: 0.2vw;
+        width: 13vw;
+        height: 4vw;
+        font-size: 2.5vw;
+        padding: 0;
+        border: 0;
+        background-color: white;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    .write-text {
+        width: 85vw;
+        height: 80%;
+        border: 2px solid #1113;
+        padding: 0;
+        font-size: 3vw;
+    }
+
+    .review-writebutton {
+        position: absolute;
+        right: 0.5vw;
+        margin-top: 0.2vw;
+        width: 13vw;
+        height: 4vw;
+        font-size: 2.5vw;
+        padding: 0;
+        border: 0;
+        background-color: white;
+    }
 }

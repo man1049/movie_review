@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/resources/css/default.css">
+    <link rel="stylesheet" href="/resources/css/review/review.css">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link href="/resources/css/plugin/summernote-lite.css" rel="stylesheet">
+    <script src="/resources/js/plugin/summernote-lite.js"></script>
+    <script src="/resources/js/plugin/summernote-ko-KR.min.js"></script>
+    <meta charset="UTF-8">
+    <title>영화는 영화다</title>
+</head>
+<body>
+    <nav th:replace="nav.html"></nav>
+    <input type="hidden" th:value="${data.movie.moviecode}" id="code">
+    <input type="hidden" th:value="${data.review.getId()}" id="review_code">
+    <input type="hidden" th:value="${data.nickname} + ${data.auth}" id="nickname">
+    <main>
+        <div class="review-container">
+            <div class="date">
+                <div class="title" th:text="${data.review.getReview_title()}"></div>
+                <div class="date-container">
+                    <sapn class="star" th:if="${data.review.getReview_star()} == 5">★★★★★</sapn>
+                    <sapn class="star" th:if="${data.review.getReview_star()} == 4">★★★★</sapn>
+                    <sapn class="star" th:if="${data.review.getReview_star()} == 3">★★★</sapn>
+                    <sapn class="star" th:if="${data.review.getReview_star()} == 2">★★</sapn>
+                    <sapn class="star" th:if="${data.review.getReview_star()} == 1">★</sapn>
+
+                    <span class="review-writer" th:text="'작성자 : ' + ${data.review.getUsersRequired().getUser_nickname()}"></span>
+
+                    <span class="regdate" th:text="'작성일 : ' + ${data.review.getRegdate()}"></span>
+                    <span class="moddate" th:if="${data.review.getModdate()} != null" th:text="'수정일 :' + ${data.review.getModdate()}"></span>
+                </div>
+                <div class="modanddelete-container">
+                    <div class="review-modify-container" th:if="${data.nickname} == ${data.review.getUsersRequired().getUser_nickname()} or ${data.auth}">
+                        <span class="modify-container-on">수정하기</span>
+                    </div>
+                    <span class="review-delete" th:if="${data.nickname} == ${data.review.getUsersRequired().getUser_nickname()} or ${data.auth}">리뷰삭제</span>
+                </div>
+            </div>
+            <div class="movies-container">
+                <img th:src="@{/poster/} + ${data.movie.moviecode}" >
+                <div class="movies-container-info">
+                    <span class="info-title">영화명</span>
+                    <span class="info-content" th:text="${data.movie.moviename}"></span>
+                    <span class="info-title">감독</span>
+                    <span class="info-content" th:text="${data.movie.director}"></span>
+                    <span class="info-title">장르</span>
+                    <span class="info-content" th:text="${data.movie.genres}"></span>
+                    <span class="info-title">심의정보</span>
+                    <span class="info-content" th:text="${data.movie.watchgrade}"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="contents" th:utext="${data.review.getReview_content()}"></div>
+
+            <div class="updown-container">
+                <div class="updown-container-up">
+                    <span id="up_count" th:text="${data.review.getReview_up}"></span>
+                    <span class="up">추천</span>
+                </div>
+                <div class="updown-container-down">
+                    <span id="down_count" th:text="${data.review.getReview_down}"></span>
+                    <span class="down">비추천</span>
+                </div>
+            </div>
+
+            <div class="review-comments">
+                <div class="comments-container">
+                    <div class="comments-container-scroll"></div>
+                </div>
+
+                <div class="comments-container-write">
+                    <form method="post" action="/review/comment/write" onsubmit="return lengthCheck()">
+                        <div class="write">
+                            <input class="write-text" type="text" name="comment" placeholder="23자까지 작성 가능합니다." maxlength="23"/>
+                            <input class="form-submit" type="submit" value="댓글작성"/>
+                            <input class="write-hidden-code" type="hidden" th:value="${data.review.getId()}" name="code"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="review-menubox">
+        <span id="pageup">up</span>
+        <span id="pagedown">down</span>
+    </div>
+
+</body>
+<script src="/resources/js/review/review.js"></script>
+</html>

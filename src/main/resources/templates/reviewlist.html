@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/resources/css/default.css">
+    <link rel="stylesheet" href="/resources/css/review/reviewlist.css">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <meta charset="UTF-8">
+    <title>영화는 영화다</title>
+</head>
+<style>
+
+</style>
+<body>
+<nav th:replace="nav.html"></nav>
+<main>
+    <div class="reviewlist">
+        <div class="reviewlist-review" th:onclick="'review_view(' + ${review.num} +')'" th:each="review : ${reviews}">
+            <img class="reviewlist-review-img" th:src="${review.thumbnail}">
+            <div class="reviewlist-review-container">
+                <span class="reviewlist-review-container-title" th:text="${review.title}"></span>
+                <div class="reviewlist-review-container-detail">
+                    <div class="detail-title">평점</div>
+                    <div class="detail-content" th:if="${review.star} == 5">★★★★★</div>
+                    <div class="detail-content" th:if="${review.star} == 4">★★★★</div>
+                    <div class="detail-content" th:if="${review.star} == 3">★★★</div>
+                    <div class="detail-content" th:if="${review.star} == 2">★★</div>
+                    <div class="detail-content" th:if="${review.star} == 1">★</div>
+
+                    <div class="detail-title">추천수</div>
+                    <div class="detail-content" th:text="${review.up}"></div>
+
+                    <div class="detail-title">닉네임</div>
+                    <div class="detail-content" th:text="${review.nickname}"></div>
+
+                    <div class="detail-title">영화명</div>
+                    <div class="detail-content"><span th:text="${review.moviename}"></span></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="reviewlist-review-void" th:if="${reviews.size()%2 != 0}" ></div>
+    </div>
+<!--
+    <div class="page">
+        <table class="page-table">
+            <tr class="page-table-tr">
+                <td class="nowpage">1</td>
+                <td onclick="pageNum(2)">2</td>
+                <td onclick="pageNum(3)">3</td>
+                <td onclick="pageNum(4)">4</td>
+                <td onclick="pageNum(5)">5</td>
+                <td onclick="pageNum(6)">6</td>
+                <td onclick="pageNum(7)">7</td>
+                <td onclick="pageNum(8)">8</td>
+                <td onclick="pageNum(9)">9</td>
+                <td onclick="pageNum(10)">10</td>
+            </tr>
+        </table>
+        <div class="search">
+            <input type="text" class="search-input">
+            <button onclick="search()" class="search-button">검색</button>
+        </div>
+    </div>
+    -->
+</main>
+</body>
+<script src="/resources/js/review/reviewlist.js"></script>
+</html>

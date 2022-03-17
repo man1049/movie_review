@@ -75,7 +75,7 @@ $(function () {
                 $('.todaybox-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"todaybox-top10-posters\">\n" +
-                    "       <img class=\"todaybox-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"todaybox-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detail("+list[i].movieCd+")\">\n" +
                     "       <div class=\"todaybox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -92,7 +92,7 @@ $(function () {
                 pagination: false,
                 arrows: false
             }).mount();
-            //rankDetaile(0);
+            //rankdetail(0);
         }
     });
 
@@ -112,7 +112,7 @@ $(function () {
                 $('.weekbox-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"weekbox-top10-posters\">\n" +
-                    "       <img class=\"weekbox-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"weekbox-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detail("+list[i].movieCd+")\">\n" +
                     "       <div class=\"weekbox-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -128,7 +128,7 @@ $(function () {
                 pagination: false,
                 arrows: false
             }).mount();
-            //rankDetaile(0);
+            //rankdetail(0);
         }
     });
 
@@ -149,7 +149,7 @@ $(function () {
                 $('.todayindie-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"todayindie-top10-posters\">\n" +
-                    "       <img class=\"todayindie-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"todayindie-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detail("+list[i].movieCd+")\">\n" +
                     "       <div class=\"todayindie-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -166,7 +166,7 @@ $(function () {
                 pagination: false,
                 arrows: false
             }).mount();
-            //rankDetaile(0);
+            //rankdetail(0);
         }
     });
 
@@ -187,7 +187,7 @@ $(function () {
                 $('.weekindie-top10').append(
                     "<li class=\"splide__slide\">"+
                     "   <div class=\"weekindie-top10-posters\">\n" +
-                    "       <img class=\"weekindie-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detaile("+list[i].movieCd+")\">\n" +
+                    "       <img class=\"weekindie-top10-posters-img\" src=\"/poster/"+list[i].movieCd+"\" onclick=\"detail("+list[i].movieCd+")\">\n" +
                     "       <div class=\"weekindie-top10-posters-title\">" +
                     "           <span>"+list[i].movieNm+"</span>" +
                     "       </div>\n" +
@@ -203,17 +203,17 @@ $(function () {
                 pagination: false,
                 arrows: false
             }).mount();
-            //rankDetaile(0);
+            //rankdetail(0);
         }
     });
 
 });
 
-function detaile(code) {
-    location.href="detaile/"+code
+function detail(code) {
+    location.href="detail/"+code
 }
 /*
-function rankDetaile(i) {
+function rankdetail(i) {
     $.ajax({
         type: "GET",
         url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
@@ -222,9 +222,9 @@ function rankDetaile(i) {
             movieCd: todayBoxOffice.boxOfficeResult.dailyBoxOfficeList[i].movieCd
         },
         dataType: "json",
-        success:function (detaile) {
+        success:function (detail) {
 
-            data = detaile.movieInfoResult.movieInfo
+            data = detail.movieInfoResult.movieInfo
             let min
             let hour
             if(data.showTm/60 > 0){
@@ -238,16 +238,16 @@ function rankDetaile(i) {
                 director = "정보없음"
             }
 
-            $('.div-list-container-detaile').html(
-                "<div class='detaile-img'>\n" +
+            $('.div-list-container-detail').html(
+                "<div class='detail-img'>\n" +
                 "                        <img src='resources/images/movieposter/"+data.movieCd+".png'>\n" +
                 "                    </div>\n" +
-                "                <div class='detaile-contents'>\n" +
-                "                    <div class='detaile-contents-title'>\n" +
+                "                <div class='detail-contents'>\n" +
+                "                    <div class='detail-contents-title'>\n" +
                 "                        <div class='title-kor'>"+data.movieNm+"</div>\n" +
                 "                        <div class='title-en'>"+data.movieNmEn+"</div>\n" +
                 "                    </div>\n" +
-                "                    <div class='detaile-contents-top'>\n" +
+                "                    <div class='detail-contents-top'>\n" +
                 "                        <div class='top-title'>개봉일</div>\n" +
                 "                        <div class='top-contents'>"+data.openDt+"</div>\n" +
                 "\n" +
@@ -257,7 +257,7 @@ function rankDetaile(i) {
                 "                        <div class='top-title'>영화구분</div>\n" +
                 "                        <div class='top-contents'>"+data.typeNm+"</div>\n" +
                 "                    </div>\n" +
-                "                    <div class='detaile-contents-middle'>\n" +
+                "                    <div class='detail-contents-middle'>\n" +
                 "                        <div class='middle-title'>관람등급</div>\n" +
                 "                        <div class='middle-contents'>"+data.audits[0].watchGradeNm+"</div>\n" +
                 "\n" +
@@ -267,7 +267,7 @@ function rankDetaile(i) {
                 "                        <div class='middle-title'>제작국가</div>\n" +
                 "                        <div class='middle-contents'>"+(data.nations[0].nationNm == null? ("정보없음"):(data.nations[0].nationNm)) +"</div>\n" +
                 "                    </div>\n" +
-                "                    <div class='detaile-contents-bottom'>\n" +
+                "                    <div class='detail-contents-bottom'>\n" +
                 "                        <div class='bottom-title'>감독</div>\n" +
                 "                        <div class='bottom-contents'>"+director+"</div>\n" +
                 "\n" +

@@ -65,16 +65,16 @@ public class MovieAPIParse {
                 movies.put("movieNm",(String) top10json.get("movieNm"));    // 영화이름(한글)
                 movies.put("openDt",(String) top10json.get("openDt"));     // 영화 개봉일
                 movies.put("audiCnt",(String) top10json.get("audiCnt"));    // 당일 관객수
-                List<String> detaile = movieDetaile((String)top10json.get("movieCd"));
-                movies.put("movieCd",detaile.get(0));
-                movies.put("movieNm",detaile.get(1));
-                movies.put("movieNmEn",detaile.get(2));
-                movies.put("showTm",detaile.get(3));
-                movies.put("openDt",detaile.get(4));
-                movies.put("prdStatNm",detaile.get(5));
-                movies.put("genreNm",detaile.get(6));
-                movies.put("peopleNm",detaile.get(7));
-                movies.put("watchGradeNm",detaile.get(8));
+                List<String> detail = moviedetail((String)top10json.get("movieCd"));
+                movies.put("movieCd",detail.get(0));
+                movies.put("movieNm",detail.get(1));
+                movies.put("movieNmEn",detail.get(2));
+                movies.put("showTm",detail.get(3));
+                movies.put("openDt",detail.get(4));
+                movies.put("prdStatNm",detail.get(5));
+                movies.put("genreNm",detail.get(6));
+                movies.put("peopleNm",detail.get(7));
+                movies.put("watchGradeNm",detail.get(8));
 
                 top10.add(movies);
             }
@@ -86,7 +86,7 @@ public class MovieAPIParse {
         }
     }
 
-    public List<String> movieDetaile(String movieCd){
+    public List<String> moviedetail(String movieCd){
         try{
             // 인증키
             String serviceKey = "ceabdcb6d52d7eb5709bbb09dc253b97";
@@ -112,27 +112,27 @@ public class MovieAPIParse {
             JSONObject obj = (JSONObject)parser.parse(result);
 
             JSONObject jsonObject = (JSONObject)obj.get("movieInfoResult");
-            JSONObject detaile = (JSONObject) jsonObject.get("movieInfo");
+            JSONObject detail = (JSONObject) jsonObject.get("movieInfo");
 
-            list.add((String) detaile.get("movieCd"));   // 영화 코드
-            list.add((String) detaile.get("movieNm"));    // 영화이름(한글)
-            list.add((String) detaile.get("movieNmEn"));    // 영화이름(영어)
+            list.add((String) detail.get("movieCd"));   // 영화 코드
+            list.add((String) detail.get("movieNm"));    // 영화이름(한글)
+            list.add((String) detail.get("movieNmEn"));    // 영화이름(영어)
 
-            int time = Integer.parseInt((String) detaile.get("showTm"));    // 상영시간
+            int time = Integer.parseInt((String) detail.get("showTm"));    // 상영시간
             if(time >= 60){
                 list.add((time/60)+"시간 "+(time%60)+"분");
             }else{
                 list.add((time%60)+"분");
             }
             try {
-                list.add((String) detaile.get("openDt"));     // 개봉일
+                list.add((String) detail.get("openDt"));     // 개봉일
             }catch (Exception e){
                 list.add("정보 없음");
             }
-            list.add((String) detaile.get("prdtStatNm")); // 제작상태
+            list.add((String) detail.get("prdtStatNm")); // 제작상태
 
             try {
-                JSONArray genres = (JSONArray) detaile.get("genres"); // 장르 - 배열로 되어있음
+                JSONArray genres = (JSONArray) detail.get("genres"); // 장르 - 배열로 되어있음
                 JSONObject genreNm = (JSONObject) genres.get(0);
                 list.add((String) genreNm.get("genreNm"));    // 장르
             }catch (Exception e){
@@ -140,7 +140,7 @@ public class MovieAPIParse {
             }
 
             try {
-                JSONArray nations = (JSONArray) detaile.get("nations"); // 제작국가 - 배열로 되어있음
+                JSONArray nations = (JSONArray) detail.get("nations"); // 제작국가 - 배열로 되어있음
                 JSONObject nationNm = (JSONObject) nations.get(0);
                 list.add((String) nationNm.get("nationNm"));   // 제작국가
             }catch (Exception e){
@@ -148,21 +148,21 @@ public class MovieAPIParse {
             }
 
             try {
-                JSONArray directors = (JSONArray) detaile.get("directors"); // 감독 정보 - 배열로 되어있음
+                JSONArray directors = (JSONArray) detail.get("directors"); // 감독 정보 - 배열로 되어있음
                 JSONObject peopleNm = (JSONObject) directors.get(0);
                 list.add((String) peopleNm.get("peopleNm"));    // 감독
             }catch (Exception e){
                 list.add("정보 없음");
             }
             try {
-                JSONArray audits = (JSONArray) detaile.get("audits"); // 심의 정보 - 배열로 되어있음
+                JSONArray audits = (JSONArray) detail.get("audits"); // 심의 정보 - 배열로 되어있음
                 JSONObject watchGradeNm = (JSONObject) audits.get(0);
                 list.add((String) watchGradeNm.get("watchGradeNm"));    // 심의 정보
             }catch (Exception e){
                 list.add("정보 없음");
             }
 
-            log.info("디테일 : "+detaile.toString());
+            log.info("디테일 : "+detail.toString());
             String miseType = "";
             log.info("리스트"+list.toString());
             br.close();

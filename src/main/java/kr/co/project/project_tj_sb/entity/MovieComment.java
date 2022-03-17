@@ -10,8 +10,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString(exclude = "user_nickname")
 @Table(name = "movie_comment")
-public class MovieComment {
+public class MovieComment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +23,9 @@ public class MovieComment {
     @JoinColumn(name = "user_email")
     private UsersRequired required;
 */
-    @Column(name = "user_nickname")
-    private String user_nickname;
 
-    @Column(name = "user_gender", nullable = false)
-    private boolean user_gender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UsersRequired usersRequired;
 
     @Column(name = "user_age", nullable = false)
     private int user_age;
@@ -40,12 +39,4 @@ public class MovieComment {
     @Column(name = "movie_star", nullable = false)
     private double movie_star;
 
-    @Column(name = "movie_comment_date")
-    private LocalDate movie_comment_date;
-
-    @PrePersist
-    public void defaultData(){
-        LocalDate localDate = LocalDate.now();
-        this.movie_comment_date = this.movie_comment_date == null ? localDate : this.movie_comment_date;
-    }
 }
