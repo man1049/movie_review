@@ -10,7 +10,7 @@ plugins {
     id 'war'
 }
 
-group = 'kr.co.project'
+group = 'com.naver.man10_49'
 version = '0.0.1'
 sourceCompatibility = '11'
 
