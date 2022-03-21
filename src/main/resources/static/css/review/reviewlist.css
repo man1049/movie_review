@@ -103,6 +103,28 @@
     white-space: nowrap;
 }
 
+.search-conteiner{
+    width: 84vw;
+    margin-top: 1vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+#keyword{
+    width: 69vw;
+    height: 2.5vw;
+    font-size: 2vw;
+}
+#search{
+    width: 10vw;
+    font-size: 1.5vw;
+}
+#search_button{
+    width: 5vw;
+    font-size: 1.5vw;
+}
+
 @media screen and (max-width: 1000px) {
 
     .reviewlist {
@@ -170,6 +192,29 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .search-conteiner{
+        width: 100%;
+        margin-top: 1vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    #keyword{
+        width: 75vw;
+        height: 4vw;
+        font-size: 3.5vw;
+    }
+    #search{
+        width: 15vw;
+        font-size: 2.5vw;
+    }
+    #search_button{
+        width: 10vw;
+        font-size: 1.5vw;
     }
 
 }
