@@ -84,12 +84,21 @@ main{
 .nowpage{
     color: #999999;
 }
+
+.search{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .search-input{
-    width: 10vw;
+    width: 20vw;
     height: 2vw;
+    font-size: 1.5vw;
     padding: 0;
     border: 0;
-    font-size: 1.5vw;
+
 }
 .search-button{
     width: 5vw;
@@ -99,3 +108,36 @@ main{
     font-size: 1.5vw;
 }
 
+@media screen and (max-width: 1000px){
+
+    .page{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .search{
+        width: 87vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-right: 1vw;
+    }
+
+    .search-input{
+        width: 77vw;
+        height: 5vw;
+        font-size: 4.5vw;
+    }
+    .search-button{
+        width: 10vw;
+        height: 5vw;
+        margin: 0;
+        padding: 0;
+        font-size: 3vw;
+    }
+}
