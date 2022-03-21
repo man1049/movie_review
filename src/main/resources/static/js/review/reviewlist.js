@@ -103,6 +103,7 @@ function search() {
 // 검색기능
 
 function search() {
+    reviewListPage = 0;
     $keywordValue = $keyword.val()
     $searchValue = $('#search').val()
     isScrollLoadingBreak = false
@@ -158,23 +159,13 @@ function search() {
     })
 }
 
-function keyword_check() {
-    $keywordValue = $keyword.val()
-    if($keywordValue == null || $keywordValue === ""){
-        alert("검색어를 입력해주세요");
-    }else {
-        reviewListPage = 0;
-        search();
-    }
-}
-
 $("#search_button").on("click", function () {
-    keyword_check()
+    search();
 })
 
 $keyword.keypress(function (e) {
     if(e.keyCode === 13) {
-        keyword_check()
+        search();
     }
 })
 
