@@ -572,6 +572,14 @@ td{
         background-color: white;
     }
 
+    .review-writebutton-writealread{
+        font-size: 2vw;
+    }
+
+    .comments-container-writealready > span {
+        font-size: 2.5vw;
+    }
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -594,5 +602,9 @@ td{
         padding: 0;
         border: 0;
         background-color: white;
+    }
+
+    .comments-container-writealready > span {
+        font-size: 4vw;
     }
 }

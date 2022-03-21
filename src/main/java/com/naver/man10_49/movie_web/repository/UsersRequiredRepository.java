@@ -19,6 +19,9 @@ public interface UsersRequiredRepository extends JpaRepository<UsersRequired, St
     @Query("select ur from UsersRequired ur where ur.user_email = :email")
     UsersRequired findByEmail(String email);
 
+    @Query("select ur from UsersRequired ur where ur.user_nickname = :nickname")
+    UsersRequired searchByUser_nickname(String nickname);
+
     
     //이메일 중복 체크
     @Query("select count(ur) from UsersRequired ur where ur.user_email = :email")

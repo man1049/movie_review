@@ -94,6 +94,8 @@ $('.join-close').on('click',function(){
 ////////////////////////////////////////////////////////////////////////////
 /*여기서 부터 로그인 페이지입니다*/
 
+let isLogin = false
+
 //자동 로그인
 $(".login-border-contents-form").submit(function () {
 	let user_email = document.getElementById("login_user_email").value
@@ -109,6 +111,16 @@ $(".login-border-contents-form").submit(function () {
 		localStorage.removeItem("user_autologin")
 	}
 })
+
+function loginSend() {
+	if(isLogin){
+		alert("로그인중입니다.")
+		return false
+	}else{
+		isLogin = true
+		return true
+	}
+}
 
 /*여기까지 로그인 페이지입니다*/
 ////////////////////////////////////////////////////////////////////////////
@@ -129,6 +141,8 @@ let yearmonthday_check = false
 let gender_check = false
 let user_question_check = false
 let user_answer_check = false
+
+let isJoinSumbit = false
 
 // 이메일
 function emailChecking() {
@@ -460,6 +474,16 @@ function join_submit_notready_alert() {
 	answerChecking()
 }
 
+function submitAlready() {
+	if(isJoinSumbit){
+		alert("데이터를 전송중입니다.")
+		return false
+	}else{
+		isJoinSumbit = true
+		return true
+	}
+}
+
 function joinReturnToLogin() {
 	setTimeout(function () {
 		document.getElementById("join_user_email").value = ""
@@ -486,3 +510,29 @@ function joinReturnToLogin() {
 
 /*여기까지 회원가입 페이지입니다.*/
 /////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////
+/*여기서부터 비밀번호 찾기 페이지입니다.*/
+let isFindPasswordSend = false
+
+function findPassword() {
+	let email = $("#findpw_email").val()
+	let question = $("#findpw_question").val()
+	let answer = $("#findpw_answer").val()
+
+	if(email === ""){
+		alert("이메일을 입력해주세요.")
+		return false
+	}else if(question === ""){
+		alert("질문을 입력해주세요.")
+		return false
+	}else if(answer === ""){
+		alert("답변을 입력해주세요.")
+		return false
+	}else if(isFindPasswordSend){
+		alert("전송중입니다.")
+		return false
+	}else{
+		return true
+	}
+}

@@ -14,6 +14,15 @@
 <body>
 <nav th:replace="nav.html"></nav>
 <main>
+    <div class="search-conteiner">
+        <input type="text" name="keyword" id="keyword">
+        <select id="search">
+            <option value="nickname">닉네임</option>
+            <option value="movie">영화명</option>
+            <option value="title">제목</option>
+        </select>
+        <button id="search_button">검색</button>
+    </div>
     <div class="reviewlist">
         <div class="reviewlist-review" th:onclick="'review_view(' + ${review.num} +')'" th:each="review : ${reviews}">
             <img class="reviewlist-review-img" th:src="${review.thumbnail}">

@@ -19,6 +19,7 @@
 <main>
     <input type="hidden" th:value="${code}" class="code">
     <input type="hidden" th:value="${#authentication.principal.user_nickname}" class="nickname">
+
     <div class="detail-container">
         <div class="detail-container-top">
             <div class="detail-container-top-img"><img th:src="@{/poster/} + ${code}" class="detail-container-top-img"></div>

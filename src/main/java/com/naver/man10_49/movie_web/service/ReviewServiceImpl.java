@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -137,12 +138,45 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public JSONArray reviewListPage(int page) {
+    public JSONArray reviewListSearchPage(int page, String k, String s) {
         int size = 20;
-        Pageable pageable = PageRequest.of(page,size);
-        List<Review> list = reviewRepository.findAllOrderById(pageable);
+        String keyword = k != null ? k : "";
+        String search = s != null ? s : "";
+        boolean isKeyword = !keyword.equals("");
 
         JSONArray jsonArray = new JSONArray();
+        Pageable pageable = PageRequest.of(page,size);
+        List<Review> list;
+
+        log.warn("=====================================");
+        log.warn("키워드 : " + keyword);
+        log.warn("써치 : " + search);
+        log.warn("페이지 : "+ page);
+
+        if(search.equals("nickname") && isKeyword){
+
+            list = reviewRepository.findAllByUsersRequired(pageable ,keyword);
+            if(list.size() == 0){
+                return jsonArray;
+            }
+        }else if(search.equals("movie") && isKeyword){
+            list = reviewRepository.findAllByMovie_name(pageable, keyword);
+            if(list.size() == 0){
+                return jsonArray;
+            }
+        }else if(search.equals("title") && isKeyword){
+            list = reviewRepository.findAllByReview_title(pageable,keyword);
+            if(list.size() == 0){
+                return jsonArray;
+            }
+        }else{
+            list = reviewRepository.findAllOrderById(pageable);
+            if(list.size() == 0){
+                return jsonArray;
+            }
+        }
+
+
 
         for(Review rv : list){
 

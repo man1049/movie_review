@@ -2,6 +2,7 @@ let param = $('#review_code').val();
 let commentPage = 0
 let commentSize = 10
 let nickname = $('#nickname').val();
+let isCommentWriting = false;
 
 $(function () {
     $.ajax({
@@ -164,7 +165,10 @@ function lengthCheck() {
     }else if(commentLength === 0){
         alert("댓글을 입력해주세요")
         return false;
+    }else if(isCommentWriting){
+        alert("댓글을 전송중입니다.")
     }else{
+        isCommentWriting = true
         return true;
     }
 }

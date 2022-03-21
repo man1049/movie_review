@@ -24,7 +24,7 @@
             <div class="login-border-contents-title">영화는 영화다</div><br/>
             <!-- 로그인창에 올 때 마다 문구가 바뀌면 재밌을 것 같아요 -->
             <div class="login-border-contents-subtitle">오늘은 이거다!</div>
-            <form th:action="@{/login}" class="login-border-contents-form" method="post">
+            <form th:action="@{/login}" class="login-border-contents-form" method="post" onsubmit="return loginSend()">
                 <input class="login-border-contents-input" type="text" placeholder="이메일" autofocus="autofocus" name="email" id="login_user_email"/><br/>
                 <input class="login-border-contents-input" type="password" placeholder="비밀번호" name="password" id="login_user_password"/><br/>
                 <div class="login-border-contents-warning" th:text="${loginexception}"></div>
@@ -49,7 +49,7 @@
         <div class="join-border-contents">
             <div class="join-border-contents-title">회원 가입</div>
             <div class="login-border-contents-subtitle"></div>
-            <form th:action="@{join}" class="join-border-contents-form" method="post">
+            <form th:action="@{join}" class="join-border-contents-form" method="post" onsubmit="return submitAlready()">
                 <input class="join-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus" id="join_user_email"><br/>
                 <div class="input-warning-email"></div><br/>
                 <input class="join-border-contents-input" type="password" name="user_password1" placeholder="비밀번호" id="join_user_password1"/><br/>
@@ -88,10 +88,10 @@
         <div class="findpw-border-contents">
             <div class="findpw-border-contents-title">비밀번호 찾기</div>
             <div class="login-border-contents-subtitle">아.. 뭐였지?</div>
-            <form action="/findpw" class="findpw-border-contents-form" method="post">
-                <input class="findpw-border-contents-input" type="email" placeholder="이메일" name="user_email" autofocus="autofocus"/><br/>
-                <input class="findid-border-contents-input" type="text" placeholder="질문" name="user_question"/><br/>
-                <input class="findid-border-contents-input" type="text" placeholder="답변" name="user_answer" /><br/>
+            <form action="/findpw" class="findpw-border-contents-form" method="post" onsubmit="return findPassword()">
+                <input class="findpw-border-contents-input" id="findpw_email" type="email" placeholder="이메일" name="user_email" autofocus="autofocus"/><br/>
+                <input class="findid-border-contents-input" id="findpw_question" type="text" placeholder="질문" name="user_question"/><br/>
+                <input class="findid-border-contents-input" id="findpw_answer" type="text" placeholder="답변" name="user_answer" /><br/>
                 <input type="submit" value="찾기"/>
             </form>
             <div class="join-border-contents-links">

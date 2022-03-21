@@ -48,8 +48,9 @@ public class ReviewController {
 
     @GetMapping("/reviewlist/page")
     @ResponseBody
-    public JSONArray reviewListPage(@RequestParam("page")int page){
-        return reviewService.reviewListPage(page);
+    public JSONArray reviewListPage(
+            @RequestParam("page")int page, @RequestParam("keyword")String keyword, @RequestParam("search")String search){
+        return reviewService.reviewListSearchPage(page, keyword, search);
     }
 
     @GetMapping("/review/write/{code}/{moviename}")

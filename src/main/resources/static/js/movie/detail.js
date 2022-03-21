@@ -8,6 +8,8 @@ let dir_flag = false
 let actor_flag = false
 let chart_flag = false
 
+let isCommentWriting = false
+
 /* 드래그스크롤 입니다. */
 
 var $container = $(".comments-container");
@@ -792,7 +794,11 @@ function lengthCheck() {
     }else if(commentLength === 0){
         alert("댓글을 입력해주세요")
         return false;
+    }else if(isCommentWriting) {
+        alert("댓글을 전송중입니다.")
+        return false;
     }else{
+        isCommentWriting = true
         return true;
     }
 

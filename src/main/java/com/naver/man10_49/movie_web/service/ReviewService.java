@@ -16,7 +16,7 @@ public interface ReviewService {
     public boolean reviewDelete(HttpServletRequest request);
 
     public List<Map<String,Object>> reviewListPage();
-    public JSONArray reviewListPage(int page);
+    public JSONArray reviewListSearchPage(int page, String keyword, String search);
     public long getPage();
     public Map<String,Object> getReview(int id) throws IOException;
 

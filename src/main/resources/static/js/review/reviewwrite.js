@@ -1,4 +1,6 @@
 
+let isWriting = false
+
 $(function () {
     $('#summernote').summernote({
         height: "800",
@@ -71,7 +73,11 @@ function checkInput() {
     }else if(textCount.length> 1500){
         alert("내용의 길이가 너무 깁니다.")
         return false;
+    }else if(isWriting){
+        alert("리뷰를 전송중입니다.")
+        return false;
     }else{
+        isWriting = true
         return true;
     }
 }
