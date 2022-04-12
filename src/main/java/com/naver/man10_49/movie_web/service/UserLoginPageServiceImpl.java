@@ -97,11 +97,11 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
                 MimeMessage message = emailConfig.javaMailService().createMimeMessage();
 
                 message.addRecipients(Message.RecipientType.TO, user_email);//받는사람
-                message.setSubject("도전점심 비밀번호 변경");//제목
+                message.setSubject("영화는 영화다 비밀번호 변경");//제목
 
                 String msgg="";
                 msgg+= "<div style='margin:100px;'>";
-                msgg+= "<h1> 안녕하세요"+user_nickname+"님 도전점심입니다. </h1>";
+                msgg+= "<h1> 안녕하세요 "+user_nickname+"님 영화는 영화다입니다. </h1>";
                 msgg+= "<br>";
                 msgg+= "<p>아래 버튼을 클릭하여 비밀번호를 변경해주세요.<p>";
                 msgg+= "<br>";
@@ -111,7 +111,7 @@ public class UserLoginPageServiceImpl implements UserLoginPageService {
                         "</form><br>";
                 msgg+= "<br>";
                 message.setText(msgg, "utf-8", "html");//내용
-                message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","도전점심"));//보내는 사람
+                message.setFrom(new InternetAddress("tkdalswoals1046@gmail.com","영화는 영화다"));//보내는 사람
 
                 emailConfig.javaMailService().send(message);
 
