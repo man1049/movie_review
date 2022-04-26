@@ -154,7 +154,7 @@ public class MovieDetailServiceImpl implements MovieDetailService {
             // log.info(mc.getMovie_comment());
             comment.put("nickname",usersRequired.getUser_nickname());
             comment.put("star",mc.getMovie_star());
-            boolean myCommentFlag = usersRequired.equals(nickname);
+            boolean myCommentFlag = usersRequired.getUser_nickname().equals(nickname);
             if(myCommentFlag || usersAuthDTO.getAuthorities().size() > 1){
                 comment.put("mycomment",true);
                 comment.put("id",mc.getId());
